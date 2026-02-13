@@ -55,6 +55,7 @@ targets:
         NSExtension:
           NSExtensionPointIdentifier: com.apple.usernotifications.service
           NSExtensionPrincipalClass: $(PRODUCT_MODULE_NAME).NotificationServiceExtension
+          
 
     entitlements:
       path: NSE.entitlements
