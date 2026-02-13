@@ -16,7 +16,7 @@ class LoginScreenViewModel: LoginScreenViewModelType, LoginScreenViewModelProtoc
     private let userIndicatorController: UserIndicatorControllerProtocol
     private let appSettings: AppSettings
     private let analytics: AnalyticsService
-    
+
     private var actionsSubject: PassthroughSubject<LoginScreenViewModelAction, Never> = .init()
     var actions: AnyPublisher<LoginScreenViewModelAction, Never> {
         actionsSubject.eraseToAnyPublisher()
@@ -31,18 +31,18 @@ class LoginScreenViewModel: LoginScreenViewModelType, LoginScreenViewModelProtoc
         self.userIndicatorController = userIndicatorController
         self.appSettings = appSettings
         self.analytics = analytics
-        
+
         let username = switch loginHint {
         case .some(let hint) where hint.hasPrefix("mxid:"): String(hint.dropFirst(5)) // MSC4198
         case .some(let hint): hint
         case .none: ""
         }
-        
+
         let viewState = LoginScreenViewState(homeserver: authenticationService.homeserver.value,
                                              bindings: LoginScreenBindings(username: username))
-        
+
         super.init(initialViewState: viewState)
-        
+
         authenticationService.homeserver
             .receive(on: DispatchQueue.main)
             .weakAssign(to: \.state.homeserver, on: self)
@@ -57,24 +57,24 @@ class LoginScreenViewModel: LoginScreenViewModelType, LoginScreenViewModelProtoc
             login()
         }
     }
-    
+
     func stopLoading() {
         state.isLoading = false
         userIndicatorController.retractIndicatorWithId(Self.loadingIndicatorIdentifier)
     }
-    
+
     // MARK: - Private
-    
+
     /// Parses the specified username and looks up the homeserver when a Matrix ID is entered.
     private func parseUsername() {
         let username = state.bindings.username
-        
+
         guard MatrixEntityRegex.isMatrixUserIdentifier(username) else { return }
-        
+
         let homeserverDomain = String(username.split(separator: ":")[1])
-        
+
         startLoading(isInteractionBlocking: false)
-        
+
         Task {
             switch await authenticationService.configure(for: homeserverDomain, flow: .login) {
             case .success:
@@ -88,29 +88,32 @@ class LoginScreenViewModel: LoginScreenViewModelType, LoginScreenViewModelProtoc
             }
         }
     }
-    
+
     /// Requests the authentication coordinator to log in using the specified credentials.
     private func login() {
         MXLog.info("Starting login with password.")
         startLoading(isInteractionBlocking: true)
-        
+
         Task {
+            analytics.signpost.beginLogin()
             switch await authenticationService.login(username: state.bindings.username,
                                                      password: state.bindings.password,
                                                      initialDeviceName: UIDevice.current.initialDeviceName,
                                                      deviceID: nil) {
             case .success(let userSession):
                 actionsSubject.send(.signedIn(userSession))
+                analytics.signpost.endLogin()
                 stopLoading()
             case .failure(let error):
                 stopLoading()
+                analytics.signpost.endLogin()
                 handleError(error)
             }
         }
     }
-    
+
     private static let loadingIndicatorIdentifier = "\(LoginScreenCoordinatorAction.self)-Loading"
-    
+
     private func startLoading(isInteractionBlocking: Bool) {
         if isInteractionBlocking {
             userIndicatorController.submitIndicator(UserIndicator(id: Self.loadingIndicatorIdentifier,
@@ -121,11 +124,11 @@ class LoginScreenViewModel: LoginScreenViewModelType, LoginScreenViewModelProtoc
             state.isLoading = true
         }
     }
-    
+
     /// Processes an error to either update the flow or display it to the user.
     private func handleError(_ error: AuthenticationServiceError) {
         MXLog.info("Error occurred: \(error)")
-        
+
         switch error {
         case .invalidCredentials:
             state.bindings.alertInfo = AlertInfo(id: .credentialsAlert,
@@ -144,7 +147,7 @@ class LoginScreenViewModel: LoginScreenViewModelType, LoginScreenViewModelProtoc
             state.bindings.alertInfo = AlertInfo(id: .slidingSyncAlert,
                                                  title: L10n.commonServerNotSupported,
                                                  message: L10n.screenChangeServerErrorNoSlidingSyncMessage(nonBreakingAppName))
-            
+
             // Clear out the invalid username to avoid an attempted login to matrix.org
             state.bindings.username = ""
         case .elementProRequired(let serverName):

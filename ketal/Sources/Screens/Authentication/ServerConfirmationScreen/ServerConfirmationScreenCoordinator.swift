@@ -26,29 +26,29 @@ final class ServerConfirmationScreenCoordinator: CoordinatorProtocol {
     private var viewModel: ServerConfirmationScreenViewModelProtocol
     private let actionsSubject: PassthroughSubject<ServerConfirmationScreenCoordinatorAction, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
-    
+
     var actions: AnyPublisher<ServerConfirmationScreenCoordinatorAction, Never> {
         actionsSubject.eraseToAnyPublisher()
     }
-    
+
     init(parameters: ServerConfirmationScreenCoordinatorParameters) {
         let mode = if parameters.appSettings.allowOtherAccountProviders {
             ServerConfirmationScreenMode.confirmation(parameters.authenticationService.homeserver.value.address)
         } else {
             ServerConfirmationScreenMode.picker(parameters.appSettings.accountProviders)
         }
-        
+
         viewModel = ServerConfirmationScreenViewModel(authenticationService: parameters.authenticationService,
                                                       mode: mode,
                                                       authenticationFlow: parameters.authenticationFlow,
                                                       appSettings: parameters.appSettings,
                                                       userIndicatorController: parameters.userIndicatorController)
     }
-    
+
     func start() {
         viewModel.actions.sink { [weak self] action in
             guard let self else { return }
-            
+
             switch action {
             case .continueWithOIDC(let oidcData, let window):
                 actionsSubject.send(.continueWithOIDC(data: oidcData, window: window))
@@ -60,7 +60,7 @@ final class ServerConfirmationScreenCoordinator: CoordinatorProtocol {
         }
         .store(in: &cancellables)
     }
-        
+
     func toPresentable() -> AnyView {
         AnyView(ServerConfirmationScreen(context: viewModel.context))
     }

@@ -13,7 +13,7 @@ enum LoginScreenViewModelAction {
     case configuredForOIDC
     /// Login was successful.
     case signedIn(UserSessionProtocol)
-    
+
     var isConfiguredForOIDC: Bool {
         switch self {
         case .configuredForOIDC: true
@@ -29,17 +29,17 @@ struct LoginScreenViewState: BindableState {
     var isLoading = false
     /// View state that can be bound to from SwiftUI.
     var bindings = LoginScreenBindings()
-    
+
     /// The types of login supported by the homeserver.
     var loginMode: LoginMode {
         homeserver.loginMode
     }
-    
+
     /// `true` if the username and password are ready to be submitted.
     var hasValidCredentials: Bool {
         !bindings.username.isEmpty && !bindings.password.isEmpty
     }
-    
+
     /// `true` when valid credentials have been entered and a homeserver has been loaded.
     var canSubmit: Bool {
         hasValidCredentials && !isLoading

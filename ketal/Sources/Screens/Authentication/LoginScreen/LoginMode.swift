@@ -18,7 +18,7 @@ enum LoginMode: Equatable {
     case password
     /// The homeserver only allows login with unsupported mechanisms. Use fallback instead.
     case unsupported
-    
+
     var supportsOIDCFlow: Bool {
         switch self {
         case .oidc: true

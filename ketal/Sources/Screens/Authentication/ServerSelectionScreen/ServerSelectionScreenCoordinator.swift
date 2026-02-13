@@ -33,11 +33,11 @@ final class ServerSelectionScreenCoordinator: CoordinatorProtocol {
 
     private let actionsSubject: PassthroughSubject<ServerSelectionScreenCoordinatorAction, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
-    
+
     var actions: AnyPublisher<ServerSelectionScreenCoordinatorAction, Never> {
         actionsSubject.eraseToAnyPublisher()
     }
-    
+
     init(parameters: ServerSelectionScreenCoordinatorParameters) {
         self.parameters = parameters
         viewModel = ServerSelectionScreenViewModel(authenticationService: parameters.authenticationService,
@@ -46,14 +46,14 @@ final class ServerSelectionScreenCoordinator: CoordinatorProtocol {
                                                    userIndicatorController: parameters.userIndicatorController)
         userIndicatorController = parameters.userIndicatorController
     }
-    
+
     // MARK: - Public
-    
+
     func start() {
         viewModel.actions
             .sink { [weak self] action in
                 guard let self else { return }
-                
+
                 switch action {
                 case .updated:
                     actionsSubject.send(.updated)
@@ -63,11 +63,11 @@ final class ServerSelectionScreenCoordinator: CoordinatorProtocol {
             }
             .store(in: &cancellables)
     }
-    
+
     func stop() {
         parameters.userIndicatorController.retractAllIndicators()
     }
-    
+
     func toPresentable() -> AnyView {
         AnyView(ServerSelectionScreen(context: viewModel.context))
     }

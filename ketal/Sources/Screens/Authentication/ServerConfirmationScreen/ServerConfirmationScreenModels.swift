@@ -31,9 +31,9 @@ struct ServerConfirmationScreenViewState: BindableState {
     let authenticationFlow: AuthenticationFlow
     /// The presentation anchor used for OIDC authentication.
     var window: UIWindow?
-    
+
     var bindings = ServerConfirmationScreenBindings()
-    
+
     /// The screen's title.
     var title: String {
         switch mode {
@@ -48,7 +48,7 @@ struct ServerConfirmationScreenViewState: BindableState {
             L10n.screenServerConfirmationTitlePickerMode
         }
     }
-    
+
     /// The message shown beneath the title.
     var message: String? {
         guard case let .confirmation(homeserverAddress) = mode else { return nil }

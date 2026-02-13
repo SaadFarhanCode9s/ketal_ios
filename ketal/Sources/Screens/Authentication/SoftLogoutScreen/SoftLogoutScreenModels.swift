@@ -24,7 +24,7 @@ enum SoftLogoutScreenViewModelAction: CustomStringConvertible {
     case clearAllData
     /// Continue using OIDC.
     case continueWithOIDC
-    
+
     /// A string representation of the result, ignoring any associated values that could leak PII.
     var description: String {
         switch self {
@@ -57,7 +57,7 @@ struct SoftLogoutScreenViewState: BindableState {
     var loginMode: LoginMode {
         homeserver.loginMode
     }
-    
+
     /// The presentation anchor used for OIDC authentication.
     var window: UIWindow?
 

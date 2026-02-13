@@ -16,9 +16,9 @@ class ServerConfirmationScreenViewModel: ServerConfirmationScreenViewModelType, 
     let authenticationFlow: AuthenticationFlow
     let appSettings: AppSettings
     let userIndicatorController: UserIndicatorControllerProtocol
-    
+
     private var actionsSubject: PassthroughSubject<ServerConfirmationScreenViewModelAction, Never> = .init()
-    
+
     var actions: AnyPublisher<ServerConfirmationScreenViewModelAction, Never> {
         actionsSubject.eraseToAnyPublisher()
     }
@@ -32,16 +32,16 @@ class ServerConfirmationScreenViewModel: ServerConfirmationScreenViewModelType, 
         self.authenticationFlow = authenticationFlow
         self.appSettings = appSettings
         self.userIndicatorController = userIndicatorController
-        
+
         let pickerSelection: String? = switch mode {
         case .picker(let providers): providers[0]
         case .confirmation: nil
         }
-        
+
         super.init(initialViewState: ServerConfirmationScreenViewState(mode: mode,
                                                                        authenticationFlow: authenticationFlow,
                                                                        bindings: .init(pickerSelection: pickerSelection)))
-        
+
         if case .confirmation = mode {
             authenticationService.homeserver
                 .receive(on: DispatchQueue.main)
@@ -50,7 +50,7 @@ class ServerConfirmationScreenViewModel: ServerConfirmationScreenViewModelType, 
                 .store(in: &cancellables)
         }
     }
-    
+
     override func process(viewAction: ServerConfirmationScreenViewAction) {
         switch viewAction {
         case .updateWindow(let window):
@@ -58,33 +58,31 @@ class ServerConfirmationScreenViewModel: ServerConfirmationScreenViewModelType, 
             Task { state.window = window }
         case .confirm:
             switch state.mode {
-            case .confirmation:
-                startLoading()
-                Task { await confirmServer() }
-            case .picker:
-                startLoading()
-                Task { await pickServer() }
+            case .confirmation: Task { await confirmServer() }
+            case .picker: Task { await pickServer() }
             }
         case .changeServer:
             actionsSubject.send(.changeServer)
         }
     }
-    
+
     // MARK: - Private
-    
+
     private func confirmServer() async {
-        defer { stopLoading() }
-        startLoading()
-        
         let homeserver = authenticationService.homeserver.value
-        
+
         // If the login mode is unknown, the service hasn't been configured and we need to do it now.
         // Otherwise we can continue the flow as server selection has been performed and succeeded.
         guard homeserver.loginMode == .unknown || authenticationService.flow != authenticationFlow else {
             await fetchLoginURLIfNeededAndContinue()
             return
         }
-        
+
+        // Note: We don't show the spinner until now as it isn't needed if the service is already
+        // configured and we're about to use password based login
+        startLoading()
+        defer { stopLoading() }
+
         switch await authenticationService.configure(for: homeserver.address, flow: authenticationFlow) {
         case .success:
             await fetchLoginURLIfNeededAndContinue()
@@ -107,22 +105,24 @@ class ServerConfirmationScreenViewModel: ServerConfirmationScreenViewModelType, 
             }
         }
     }
-    
+
     private func pickServer() async {
-        defer { stopLoading() }
-        startLoading()
-        
         guard let accountProvider = state.bindings.pickerSelection else {
             fatalError("It shouldn't be possible to confirm without a selection.")
         }
-        
+
         // Don't bother reconfiguring the service if it has already been done for the selected server.
         let homeserver = authenticationService.homeserver.value
         guard homeserver.loginMode == .unknown || homeserver.address != accountProvider else {
             await fetchLoginURLIfNeededAndContinue()
             return
         }
-        
+
+        // Note: We don't show the spinner until now as it isn't needed if the service is already
+        // configured and we're about to use password based login
+        startLoading()
+        defer { stopLoading() }
+
         switch await authenticationService.configure(for: accountProvider, flow: authenticationFlow) {
         case .success:
             await fetchLoginURLIfNeededAndContinue()
@@ -131,21 +131,21 @@ class ServerConfirmationScreenViewModel: ServerConfirmationScreenViewModelType, 
             displayError(.unknownError)
         }
     }
-    
+
     private func fetchLoginURLIfNeededAndContinue() async {
         guard authenticationService.homeserver.value.loginMode.supportsOIDCFlow else {
             actionsSubject.send(.continueWithPassword)
             return
         }
-        
+
         guard let window = state.window else {
             displayError(.unknownError)
             return
         }
-        
+
         startLoading() // Uses the same ID, so no need to worry if the indicator already exists
         defer { stopLoading() }
-        
+
         switch await authenticationService.urlForOIDCLogin(loginHint: nil) {
         case .success(let oidcData):
             actionsSubject.send(.continueWithOIDC(data: oidcData, window: window))
@@ -153,20 +153,20 @@ class ServerConfirmationScreenViewModel: ServerConfirmationScreenViewModelType, 
             displayError(.unknownError)
         }
     }
-    
+
     private let loadingIndicatorID = "\(ServerConfirmationScreenViewModel.self)-Loading"
-    
+
     private func startLoading() {
         userIndicatorController.submitIndicator(UserIndicator(id: loadingIndicatorID,
                                                               type: .modal,
                                                               title: L10n.commonLoading,
                                                               persistent: true))
     }
-    
+
     private func stopLoading() {
         userIndicatorController.retractIndicatorWithId(loadingIndicatorID)
     }
-    
+
     private func displayError(_ type: ServerConfirmationScreenAlert) {
         switch type {
         case .homeserverNotFound:

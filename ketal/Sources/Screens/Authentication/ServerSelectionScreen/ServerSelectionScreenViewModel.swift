@@ -16,9 +16,9 @@ class ServerSelectionScreenViewModel: ServerSelectionScreenViewModelType, Server
     private let authenticationFlow: AuthenticationFlow
     private let appSettings: AppSettings
     private let userIndicatorController: UserIndicatorControllerProtocol
-    
+
     private var actionsSubject: PassthroughSubject<ServerSelectionScreenViewModelAction, Never> = .init()
-    
+
     var actions: AnyPublisher<ServerSelectionScreenViewModelAction, Never> {
         actionsSubject.eraseToAnyPublisher()
     }
@@ -31,11 +31,11 @@ class ServerSelectionScreenViewModel: ServerSelectionScreenViewModelType, Server
         self.authenticationFlow = authenticationFlow
         self.appSettings = appSettings
         self.userIndicatorController = userIndicatorController
-        
+
         let bindings = ServerSelectionScreenBindings(homeserverAddress: authenticationService.homeserver.value.address)
         super.init(initialViewState: ServerSelectionScreenViewState(bindings: bindings))
     }
-    
+
     override func process(viewAction: ServerSelectionScreenViewAction) {
         switch viewAction {
         case .confirm:
@@ -46,14 +46,14 @@ class ServerSelectionScreenViewModel: ServerSelectionScreenViewModelType, Server
             clearFooterError()
         }
     }
-    
+
     // MARK: - Private
-    
+
     /// Updates the login flow using the supplied homeserver address, or shows an error when this isn't possible.
     private func configureHomeserver() {
         let homeserverAddress = state.bindings.homeserverAddress
         startLoading()
-        
+
         Task {
             switch await authenticationService.configure(for: homeserverAddress, flow: authenticationFlow) {
             case .success:
@@ -67,17 +67,17 @@ class ServerSelectionScreenViewModel: ServerSelectionScreenViewModelType, Server
             }
         }
     }
-    
+
     private func startLoading(label: String = L10n.commonLoading) {
         userIndicatorController.submitIndicator(UserIndicator(type: .modal,
                                                               title: label,
                                                               persistent: true))
     }
-    
+
     private func stopLoading() {
         userIndicatorController.retractAllIndicators()
     }
-    
+
     /// Processes an error to either update the flow or display it to the user.
     private func handleError(_ error: AuthenticationServiceError) {
         switch error {
@@ -112,14 +112,14 @@ class ServerSelectionScreenViewModel: ServerSelectionScreenViewModelType, Server
             showFooterMessage(L10n.errorUnknown)
         }
     }
-    
+
     /// Set a new error message to be shown in the text field footer.
     private func showFooterMessage(_ message: String) {
         withElementAnimation {
             state.footerErrorMessage = message
         }
     }
-    
+
     /// Clear any errors shown in the text field footer.
     private func clearFooterError() {
         guard state.footerErrorMessage != nil else { return }

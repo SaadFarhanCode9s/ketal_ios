@@ -22,7 +22,7 @@ enum SoftLogoutScreenCoordinatorResult: CustomStringConvertible {
     case signedIn(UserSessionProtocol)
     /// Clear all user data
     case clearAllData
-    
+
     /// A string representation of the result, ignoring any associated values that could leak PII.
     var description: String {
         switch self {
@@ -40,28 +40,28 @@ final class SoftLogoutScreenCoordinator: CoordinatorProtocol {
     private var viewModel: SoftLogoutScreenViewModelProtocol
     private let actionsSubject: PassthroughSubject<SoftLogoutScreenCoordinatorResult, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
-    
+
     private var authenticationService: AuthenticationServiceProtocol {
         parameters.authenticationService
     }
 
     private var oidcPresenter: OIDCAuthenticationPresenter?
-    
+
     var actions: AnyPublisher<SoftLogoutScreenCoordinatorResult, Never> {
         actionsSubject.eraseToAnyPublisher()
     }
-    
+
     @MainActor init(parameters: SoftLogoutScreenCoordinatorParameters) {
         self.parameters = parameters
-        
+
         let homeserver = parameters.authenticationService.homeserver
         viewModel = SoftLogoutScreenViewModel(credentials: parameters.credentials,
                                               homeserver: homeserver.value,
                                               keyBackupNeeded: parameters.keyBackupNeeded)
     }
-    
+
     // MARK: - Public
-    
+
     func start() {
         viewModel.actions
             .sink { [weak self] action in
@@ -81,19 +81,19 @@ final class SoftLogoutScreenCoordinator: CoordinatorProtocol {
             }
             .store(in: &cancellables)
     }
-    
+
     func stop() {
         stopLoading()
     }
-    
+
     func toPresentable() -> AnyView {
         AnyView(SoftLogoutScreen(context: viewModel.context))
     }
-    
+
     // MARK: - Private
-    
+
     private static let loadingIndicatorIdentifier = "\(SoftLogoutScreenCoordinator.self)-Loading"
-    
+
     /// Show an activity indicator whilst loading.
     @MainActor private func startLoading() {
         parameters.userIndicatorController.submitIndicator(UserIndicator(id: Self.loadingIndicatorIdentifier,
@@ -101,7 +101,7 @@ final class SoftLogoutScreenCoordinator: CoordinatorProtocol {
                                                                          title: L10n.commonLoading,
                                                                          persistent: true))
     }
-    
+
     /// Hide the currently displayed activity indicator.
     @MainActor private func stopLoading() {
         parameters.userIndicatorController.retractIndicatorWithId(Self.loadingIndicatorIdentifier)
@@ -135,9 +135,9 @@ final class SoftLogoutScreenCoordinator: CoordinatorProtocol {
 
     private func continueWithOIDC(presentationAnchor: UIWindow?) {
         guard let presentationAnchor else { return }
-        
+
         startLoading()
-        
+
         Task {
             switch await authenticationService.urlForOIDCLogin(loginHint: nil) {
             case .failure(let error):
@@ -145,7 +145,7 @@ final class SoftLogoutScreenCoordinator: CoordinatorProtocol {
                 handleError(error)
             case .success(let oidcData):
                 stopLoading()
-                
+
                 let presenter = OIDCAuthenticationPresenter(authenticationService: parameters.authenticationService,
                                                             oidcRedirectURL: parameters.appSettings.oidcRedirectURL,
                                                             presentationAnchor: presentationAnchor,

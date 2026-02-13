@@ -11,14 +11,14 @@ import SwiftUI
 
 struct ServerSelectionScreen: View {
     @Bindable var context: ServerSelectionScreenViewModel.Context
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
                 header
                     .padding(.top, UIConstants.iconTopPaddingToNavigationBar)
                     .padding(.bottom, 36)
-                
+
                 serverForm
             }
             .readableFrame()
@@ -29,18 +29,18 @@ struct ServerSelectionScreen: View {
         .alert(item: $context.alertInfo)
         .interactiveDismissDisabled()
     }
-    
+
     /// The title, message and icon at the top of the screen.
     var header: some View {
         VStack(spacing: 8) {
             BigIcon(icon: \.host)
                 .padding(.bottom, 8)
-            
+
             Text(L10n.screenChangeServerTitle)
                 .font(.compound.headingMDBold)
                 .multilineTextAlignment(.center)
                 .foregroundColor(.compound.textPrimary)
-            
+
             Text(L10n.screenChangeServerSubtitle)
                 .font(.compound.bodyMD)
                 .multilineTextAlignment(.center)
@@ -48,7 +48,7 @@ struct ServerSelectionScreen: View {
         }
         .padding(.horizontal, 16)
     }
-    
+
     /// The text field and confirm button where the user enters a server URL.
     var serverForm: some View {
         VStack(alignment: .leading, spacing: 24) {
@@ -63,7 +63,7 @@ struct ServerSelectionScreen: View {
                 .onChange(of: context.homeserverAddress) { context.send(viewAction: .clearFooterError) }
                 .submitLabel(.done)
                 .onSubmit(submit)
-            
+
             Button(action: submit) {
                 Text(L10n.actionContinue)
             }
@@ -72,7 +72,7 @@ struct ServerSelectionScreen: View {
             .accessibilityIdentifier(A11yIdentifiers.changeServerScreen.continue)
         }
     }
-    
+
     var toolbar: some ToolbarContent {
         ToolbarItem(placement: .cancellationAction) {
             Button { context.send(viewAction: .dismiss) } label: {
@@ -81,7 +81,7 @@ struct ServerSelectionScreen: View {
             .accessibilityIdentifier(A11yIdentifiers.changeServerScreen.dismiss)
         }
     }
-    
+
     /// Sends the `confirm` view action so long as the text field input is valid.
     func submit() {
         guard !context.viewState.hasValidationError else { return }
@@ -95,25 +95,25 @@ struct ServerSelection_Previews: PreviewProvider, TestablePreview {
     static let matrixViewModel = makeViewModel(for: "https://matrix.org")
     static let emptyViewModel = makeViewModel(for: "")
     static let invalidViewModel = makeViewModel(for: "thisisbad")
-    
+
     static var previews: some View {
         NavigationStack {
             ServerSelectionScreen(context: matrixViewModel.context)
         }
-        
+
         NavigationStack {
             ServerSelectionScreen(context: emptyViewModel.context)
         }
-        
+
         NavigationStack {
             ServerSelectionScreen(context: invalidViewModel.context)
         }
         .snapshotPreferences(expect: invalidViewModel.context.observe(\.viewState.hasValidationError))
     }
-    
+
     static func makeViewModel(for homeserverAddress: String) -> ServerSelectionScreenViewModel {
         let authenticationService = AuthenticationService.mock
-        
+
         let viewModel = ServerSelectionScreenViewModel(authenticationService: authenticationService,
                                                        authenticationFlow: .login,
                                                        appSettings: ServiceLocator.shared.settings,

@@ -13,7 +13,7 @@ typealias SoftLogoutScreenViewModelType = StateStoreViewModelV2<SoftLogoutScreen
 
 class SoftLogoutScreenViewModel: SoftLogoutScreenViewModelType, SoftLogoutScreenViewModelProtocol {
     private var actionsSubject: PassthroughSubject<SoftLogoutScreenViewModelAction, Never> = .init()
-    
+
     var actions: AnyPublisher<SoftLogoutScreenViewModelAction, Never> {
         actionsSubject.eraseToAnyPublisher()
     }
@@ -29,7 +29,7 @@ class SoftLogoutScreenViewModel: SoftLogoutScreenViewModelType, SoftLogoutScreen
                                                   bindings: bindings)
         super.init(initialViewState: viewState)
     }
-    
+
     override func process(viewAction: SoftLogoutScreenViewAction) {
         switch viewAction {
         case .login:

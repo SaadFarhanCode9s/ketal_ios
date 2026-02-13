@@ -15,7 +15,7 @@ struct SoftLogoutScreen: View {
     @FocusState private var isPasswordFocused: Bool
 
     @Bindable var context: SoftLogoutScreenViewModel.Context
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 0) {
