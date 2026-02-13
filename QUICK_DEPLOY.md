@@ -40,6 +40,7 @@ Go to: **GitHub Actions** → **Deploy to TestFlight workflow**
 | P12_PASSWORD | Certificate password |
 | PROVISIONING_PROFILE_BASE64 | `base64 -i main.mobileprovision` |
 | NSE_PROVISIONING_PROFILE_BASE64 | `base64 -i nse.mobileprovision` |
+| SHARE_EXTENSION_PROVISIONING_PROFILE_BASE64 | `base64 -i share.mobileprovision` |
 
 **Set at:** `GitHub Repo` → `Settings` → `Secrets and variables` → `Actions`
 

@@ -363,7 +363,8 @@ lane :deploy_testflight do
     export_options: {
       provisioningProfiles: {
         "io.ketal.app" => "Ketal App Store Profile",
-        "io.ketal.app.nse" => "Ketal NSE App Store Profile"
+        "io.ketal.app.nse" => "Ketal NSE App Store Profile",
+        "io.ketal.app.shareextension" => "Ketal Share Extension App Store Profile"
       }
     }
   )
@@ -402,8 +403,16 @@ private_lane :import_code_signing_assets do
   # Decode and save provisioning profiles
   main_profile_path = "#{cert_dir}/main.mobileprovision"
   nse_profile_path = "#{cert_dir}/nse.mobileprovision"
+  share_profile_path = "#{cert_dir}/share.mobileprovision"
+
   File.write(main_profile_path, Base64.decode64(main_profile_base64))
   File.write(nse_profile_path, Base64.decode64(nse_profile_base64))
+  
+  # Optional share extension profile
+  share_profile_base64 = ENV["SHARE_EXTENSION_PROVISIONING_PROFILE_BASE64"]
+  if share_profile_base64 && !share_profile_base64.empty?
+    File.write(share_profile_path, Base64.decode64(share_profile_base64))
+  end
   
   # Create temporary keychain
   keychain_name = "fastlane_keychain"
@@ -433,6 +442,10 @@ private_lane :import_code_signing_assets do
   # Install provisioning profiles
   install_provisioning_profile(path: main_profile_path)
   install_provisioning_profile(path: nse_profile_path)
+  
+  if share_profile_base64 && !share_profile_base64.empty?
+    install_provisioning_profile(path: share_profile_path)
+  end
   
   UI.success("Successfully imported certificates and provisioning profiles")
 end
