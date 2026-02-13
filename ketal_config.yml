@@ -1,0 +1,52 @@
+# Ketal iOS Configuration
+# This file is protected from upstream changes via .gitattributes
+
+# Domain Configuration (single source of truth)
+domain:
+  base: "ketals.online"
+  matrix: "matrix.ketals.online"
+  auth: "auth.ketals.online"
+
+# Ketal Branding Configuration
+branding:
+  app_name: "ketal"
+  display_name: "ketal"
+  bundle_id_base: "io.ketal.app"
+  app_group: "group.io.ketal"
+  team_id: "7J4U792NQT"
+
+# Authentication Configuration
+authentication:
+  default_homeserver: "${domain.base}"
+  show_create_account: false
+  allow_other_providers: true
+
+# OIDC Configuration
+oidc:
+  enabled: true
+  redirect_uri: "ketal://oidc"
+  client_name: "ketal"
+  use_wellknown: true
+  wellknown_url: "https://${domain.base}/.well-known/matrix/client"
+  whitelisted_domains:
+    - "${domain.base}"
+    - "${domain.matrix}"
+    - "${domain.auth}"
+
+# Element Call Configuration
+element_call:
+  audio_only_default: true
+  start_with_video_disabled: false
+
+# Analytics & Optional Screens
+analytics:
+  enabled: false
+  skip_prompt: true
+  default_consent_state: "optedOut"
+
+# Push Notifications
+push:
+  # Pull from .well-known/matrix/client under 'push_gateway_url' key
+  use_wellknown: true
+  # Fallback if .well-known doesn't provide push gateway
+  fallback_gateway_url: "https://sygnal.${domain.base}"

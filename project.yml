@@ -1,7 +1,6 @@
----
-name: ElementX
+name: ketal
 attributes:
-  ORGANIZATIONNAME: Element
+  ORGANIZATIONNAME: ketal
 
 fileGroups:
 - project.yml
@@ -15,7 +14,7 @@ options:
     macOS: '14.5'
   groupOrdering:
   - order:
-    - ElementX
+    - ketal
     - NSE
     - ShareExtension
     - UnitTests
@@ -27,7 +26,7 @@ options:
     - SDKMocks
     - Secrets
     - Tools
-  - pattern: ElementX
+  - pattern: ketal
     order:
     - Sources
     - Resources
@@ -50,15 +49,15 @@ options:
 settings:
   CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED: true
   ENABLE_BITCODE: false
-  APP_NAME: ElementX
+  APP_NAME: ketal
   KEYCHAIN_ACCESS_GROUP_IDENTIFIER: "$(DEVELOPMENT_TEAM).$(BASE_BUNDLE_IDENTIFIER)"
-  MARKETING_VERSION: 26.02.3
+  MARKETING_VERSION: 26.01.1
   CURRENT_PROJECT_VERSION: 1
   SUPPORTS_MACCATALYST: false
 
 include:
 - path: app.yml
-- path: ElementX/SupportingFiles/target.yml
+- path: ketal/SupportingFiles/target.yml
 - path: NSE/SupportingFiles/target.yml
 - path: ShareExtension/SupportingFiles/target.yml
 - path: SDKMocks/SupportingFiles/target.yml

@@ -1,5 +1,12 @@
-UITests/Sources/__Snapshots__/** filter=lfs diff=lfs merge=lfs -text
-DevelopmentAssets/Media/** filter=lfs diff=lfs merge=lfs -text
-UnitTests/__Snapshots__/** filter=lfs diff=lfs merge=lfs -text
-PreviewTests/Sources/__Snapshots__/** filter=lfs diff=lfs merge=lfs -text
-compound-ios/Tests/CompoundTests/__Snapshots__/** filter=lfs diff=lfs merge=lfs -text
+# Protect Ketal configuration during upstream merges
+ketal_config.yml merge=ours
+app.yml merge=ours
+project.yml merge=union
+vars.yml merge=ours
+AppIcons_ketal/** merge=ours
+fastlane/** merge=ours
+.github/workflows/** merge=ours
+
+# Protect Ketal customizations
+ketal/Sources/Screens/Authentication/OIDC* merge=ours
+ketal/Sources/Application/Settings/AppSettings.swift merge=union
