@@ -49,3 +49,20 @@ Run these commands on your Ubuntu machine where you have the original certificat
 ### Step 4: Re-Run Deployment
 
 Trigger the GitHub Action again. It should now successfully import the certificate.
+
+---
+
+## ❌ "No signing certificate matching team ID with a private key was found"
+
+If you see this error, it means you successfully imported the certificate, but **IT IS MISSING THE PRIVATE KEY**.
+
+### How to Fix:
+
+1.  Open **Keychain Access** on your Mac.
+2.  Find your "Apple Distribution" or "iPhone Distribution" certificate.
+3.  **Click the arrow** next to it to expand.
+4.  Select **BOTH** the certificate AND the private key (nested under it).
+5.  Right-click -> **Export 2 items...**
+6.  Save as `.p12` with a password.
+7.  **Crucial:** If using OpenSSL 3+, remember to convert to **Legacy format** (Step 2 above).
+8.  Base64 encode and update your GitHub Secret.
