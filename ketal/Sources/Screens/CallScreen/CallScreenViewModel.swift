@@ -198,6 +198,14 @@ class CallScreenViewModel: CallScreenViewModelType, CallScreenViewModelProtocol 
                                                 analyticsConfiguration: analyticsConfiguration) {
                 case .success(let url):
                     state.url = url
+                    
+                    // If the app has been instructed to start the next call as audio-only,
+                    // immediately inform the Element Call widget to disable video while
+                    // keeping audio enabled, then clear the flag.
+                    if appSettings.startNextCallWithVideoDisabled {
+                        await setInitialMediaState(audioEnabled: true, videoEnabled: false)
+                        appSettings.startNextCallWithVideoDisabled = false
+                    }
                 case .failure(let error):
                     MXLog.error("Failed starting ElementCall Widget Driver with error: \(error)")
                     state.bindings.alertInfo = .init(id: UUID(),
@@ -254,6 +262,16 @@ class CallScreenViewModel: CallScreenViewModelType, CallScreenViewModelProtocol 
         let message = ElementCallWidgetMessage(direction: .toWidget,
                                                action: .mediaState,
                                                data: .init(audioEnabled: enabled),
+                                               widgetId: widgetDriver.widgetID)
+        await postMessageToWidget(message)
+    }
+    
+    /// Sends an explicit media state to the Element Call widget, allowing the caller to
+    /// control both audio and video at once (used for starting audio-only calls).
+    private func setInitialMediaState(audioEnabled: Bool, videoEnabled: Bool) async {
+        let message = ElementCallWidgetMessage(direction: .toWidget,
+                                               action: .mediaState,
+                                               data: .init(audioEnabled: audioEnabled, videoEnabled: videoEnabled),
                                                widgetId: widgetDriver.widgetID)
         await postMessageToWidget(message)
     }

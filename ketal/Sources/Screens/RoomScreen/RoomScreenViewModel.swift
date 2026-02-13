@@ -102,6 +102,11 @@ class RoomScreenViewModel: RoomScreenViewModelType, RoomScreenViewModelProtocol 
             actionsSubject.send(.displayCall)
             actionsSubject.send(.removeComposerFocus)
             analyticsService.trackInteraction(name: .MobileRoomCallButton)
+        case .displayAudioCall:
+            appSettings.startNextCallWithVideoDisabled = true
+            actionsSubject.send(.displayCall)
+            actionsSubject.send(.removeComposerFocus)
+            analyticsService.trackInteraction(name: .MobileRoomCallButton)
         case .footerViewAction(let action):
             switch action {
             case .resolvePinViolation(let userID):

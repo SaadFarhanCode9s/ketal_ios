@@ -23,7 +23,7 @@ struct LeaveSpaceViewState: BindableState {
     var title: String {
         switch leaveHandle.mode {
         case .spaceNeedsNewOwner(let useTransferOwnershipFlow):
-            useTransferOwnershipFlow ? L10n.leaveRoomAlertSelectNewOwnerTitle : L10n.screenLeaveSpaceTitleLastAdmin(spaceName)
+            useTransferOwnershipFlow ? L10n.screenLeaveSpaceTitleLastOwner : L10n.screenLeaveSpaceTitleLastAdmin(spaceName)
         default: L10n.screenLeaveSpaceTitle(spaceName)
         }
     }
