@@ -23,52 +23,6 @@ struct OIDCWebViewScreen: View {
         self.onCancel = onCancel
     }
 
-
-    // var body: some View {
-    //     ZStack {
-    //         // 1. "Stark white backdrop"
-    //         Color.white.ignoresSafeArea()
-
-    //         GeometryReader { geometry in
-    //             // 2. The "central focus" card
-    //             ZStack(alignment: .topTrailing) {
-    //                 // WebView fills the card area
-    //                 WebView(viewModel: viewModel)
-    //                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-    //                     .opacity(viewModel.isLoading ? 0 : 1)
-    //                     .clipShape(RoundedRectangle(cornerRadius: 36, style: .continuous))
-                    
-    //                 if viewModel.isLoading {
-    //                     ProgressView().scaleEffect(1.5).frame(maxWidth: .infinity, maxHeight: .infinity)
-    //                 }
-
-    //                 // 3. Small, black "X" icon
-    //                 Button(action: onCancel) {
-    //                     Image(systemName: "xmark")
-    //                         .font(.system(size: 20, weight: .light))
-    //                         .foregroundColor(.black)
-    //                         .padding(28) // Inset from the corner
-    //                 }
-    //             }
-    //             .background(Color.white)
-    //             .clipShape(RoundedRectangle(cornerRadius: 36, style: .continuous))
-    //             // 4. "Soft, diffused shadows"
-    //             .shadow(color: .black.opacity(0.06), radius: 30, x: 0, y: 15)
-    //             // Ensures the card "occupies a large portion" but centers it
-    //             .frame(width: geometry.size.width * 0.92, height: geometry.size.height * 0.85)
-    //             .position(x: geometry.size.width / 2, y: geometry.size.height / 2)
-    //         }
-    //     }
-    //     // CRITICAL: Forces the white background to fill behind the notch/status bar
-    //     .ignoresSafeArea() 
-    //     .navigationBarHidden(true)
-    //     .onAppear { viewModel.loadAuthorizationPage() }
-    //     .onChange(of: viewModel.callbackURL) { _, newValue in
-    //         if let callbackURL = newValue { onSuccess(callbackURL) }
-    //     }
-    // }
-
-
     var body: some View {
         VStack(spacing: 0) {
             VStack(spacing: 0) {
@@ -87,6 +41,7 @@ struct OIDCWebViewScreen: View {
                 }
             }
         }
+        .padding(.top, 24)
         .background(Color.white)
         .clipShape(UnevenRoundedRectangle(topLeadingRadius: 36, topTrailingRadius: 36))
         .shadow(color: .black.opacity(0.52), radius: 18, x: 0, y: -4)
