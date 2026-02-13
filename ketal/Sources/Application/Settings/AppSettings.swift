@@ -23,6 +23,8 @@ protocol CommonSettingsProtocol {
     var enableKeyShareOnInvite: Bool { get }
     var threadsEnabled: Bool { get }
     var hideQuietNotificationAlerts: Bool { get }
+    
+    var lastNotificationBootTime: TimeInterval? { get set }
 }
 
 /// Store Element specific app settings.
@@ -77,7 +79,9 @@ final class AppSettings {
         
         // Doug's tweaks 🔧
         case hideUnreadMessagesBadge
+        case hideUnreadMessagesBadge
         case hideQuietNotificationAlerts
+        case lastNotificationBootTime
     }
     
     private static var suiteName: String = InfoPlistReader.main.appGroupIdentifier
@@ -450,6 +454,9 @@ final class AppSettings {
     
     @UserPreference(key: UserDefaultsKeys.developerOptionsEnabled, defaultValue: isDevelopmentBuild, storageType: .userDefaults(store))
     var developerOptionsEnabled
+    
+    @UserPreference(key: UserDefaultsKeys.lastNotificationBootTime, storageType: .userDefaults(store))
+    var lastNotificationBootTime: TimeInterval?
 }
 
 extension AppSettings: CommonSettingsProtocol { }
