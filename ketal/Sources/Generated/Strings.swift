@@ -177,6 +177,9 @@ internal enum L10n {
   /// Deactivate account
   internal static var actionDeactivateAccount: String { return L10n.tr("Localizable", "action_deactivate_account") }
   /// Decline
+  internal static var actionCreateRoom: String { return L10n.tr("Localizable", "action_create_room") }
+  internal static var commonPublic: String { return L10n.tr("Localizable", "common_public") }
+  internal static var commonRemoving: String { return L10n.tr("Localizable", "common_removing") }
   internal static var actionDecline: String { return L10n.tr("Localizable", "action_decline") }
   /// Decline and block
   internal static var actionDeclineAndBlock: String { return L10n.tr("Localizable", "action_decline_and_block") }
@@ -3221,6 +3224,11 @@ internal enum L10n {
   internal static func screenSpaceListParentSpace(_ p1: Any) -> String {
     return L10n.tr("Localizable", "screen_space_list_parent_space", String(describing: p1))
   }
+  /// Spaces
+  internal static var screenSpaceEmptyStateTitle: String { return L10n.tr("Localizable", "screen_space_empty_state_title") }
+  internal static var screenSpaceRemoveRoomsConfirmationContent: String { return L10n.tr("Localizable", "screen_space_remove_rooms_confirmation_content") }
+  internal static func screenSpaceRemoveRoomsConfirmationTitleIos(_ p1: Any, _ p2: Any) -> String { return L10n.tr("Localizable", "screen_space_remove_rooms_confirmation_title_ios", String(describing: p1), String(describing: p2)) }
+  internal static var screenSpaceHomeTitle: String { return L10n.tr("Localizable", "screen_space_home_title") }
   /// Spaces
   internal static var screenSpaceListTitle: String { return L10n.tr("Localizable", "screen_space_list_title") }
   /// View members

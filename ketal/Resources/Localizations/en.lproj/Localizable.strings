@@ -1519,3 +1519,10 @@
 "troubleshoot_notifications_entry_point_push_history_title" = "Push history";
 "troubleshoot_notifications_entry_point_title" = "Troubleshoot notifications";
 "notification_received_while_offline_ios" = "You have notifications that were received while you were offline.";
+
+"common_public" = "Public";
+"screen_space_remove_rooms_confirmation_title_ios" = "Remove %1$@ from %2$@?";
+"screen_space_remove_rooms_confirmation_content" = "This action will remove the selected rooms from the space.";
+"screen_space_empty_state_title" = "No rooms found";
+"action_create_room" = "Create Room";
+"common_removing" = "Removing";
