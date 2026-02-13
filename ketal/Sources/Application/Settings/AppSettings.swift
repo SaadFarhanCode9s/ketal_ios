@@ -79,7 +79,6 @@ final class AppSettings {
         
         // Doug's tweaks 🔧
         case hideUnreadMessagesBadge
-        case hideUnreadMessagesBadge
         case hideQuietNotificationAlerts
         case lastNotificationBootTime
     }
