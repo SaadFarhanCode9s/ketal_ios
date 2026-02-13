@@ -1,6 +1,6 @@
 sources:
   include:
-    - ../../ElementX
+    - ../../ketal
     - ../../NSE
   exclude:
     - ../../ketal/Sources/Mocks/SDK
