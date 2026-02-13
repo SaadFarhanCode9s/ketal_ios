@@ -10,3 +10,5 @@ fastlane/** merge=ours
 # Protect Ketal customizations
 ketal/Sources/Screens/Authentication/OIDC* merge=ours
 ketal/Sources/Application/Settings/AppSettings.swift merge=union
+*/SupportingFiles/target.yml merge=ours
+*/SupportingFiles/*.xctestplan merge=ours
