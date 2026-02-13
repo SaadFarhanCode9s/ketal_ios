@@ -37,7 +37,7 @@ class NotificationServiceExtension: UNNotificationServiceExtension {
     private static var hasHandledFirstNotificationSinceBoot = false
     private static let firstNotificationThreshold: TimeInterval = 15 * 60
     
-    private let settings: CommonSettingsProtocol = AppSettings()
+    private var settings: CommonSettingsProtocol = AppSettings()
     private let appHooks: AppHooks
     
     private var notificationHandler: NotificationHandler?
