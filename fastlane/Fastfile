@@ -1,4 +1,5 @@
 require 'yaml'
+# Configured for GitHub Actions TestFlight Deployment
 
 skip_docs
 
