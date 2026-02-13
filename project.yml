@@ -16,7 +16,7 @@ options:
   - order:
     - ketal
     - NSE
-    - ShareExtension
+    # - ShareExtension
     - UnitTests
     - PreviewTests
     - UITests
@@ -59,7 +59,7 @@ include:
 - path: app.yml
 - path: ketal/SupportingFiles/target.yml
 - path: NSE/SupportingFiles/target.yml
-- path: ShareExtension/SupportingFiles/target.yml
+# - path: ShareExtension/SupportingFiles/target.yml
 - path: SDKMocks/SupportingFiles/target.yml
 - path: UnitTests/SupportingFiles/target.yml
 - path: PreviewTests/SupportingFiles/target.yml
