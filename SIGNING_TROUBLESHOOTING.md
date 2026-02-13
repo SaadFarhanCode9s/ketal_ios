@@ -65,4 +65,51 @@ After fixing App IDs, you must:
 If you changed your Team ID to `G5AQ6D4ZY8`, ensure:
 1. Your Certificate belongs to Team `G5AQ6D4ZY8`.
 2. Your App IDs are created under Team `G5AQ6D4ZY8`.
-3. Your Profiles are generated for Team `G5AQ6D4ZY8` using that Certificate.
+3. Your Profiles are generated for Team `G5AQ6D4ZY8` using *that* Certificate.
+
+---
+
+## 🛠️ How to Recreate Provisioning Profiles (Manual Method)
+
+Since you are on Ubuntu, follow these steps to generate the profiles from scratch using the Apple Developer Portal.
+
+### Step 1: Verify Identifiers (App IDs)
+1. Log in to [developer.apple.com](https://developer.apple.com/account/resources/identifiers/list).
+2. Go to **Identifiers**.
+3. Ensure you have two IDs created (or create them):
+   - **Name:** Ketal App, **Bundle ID:** `io.ketal.app`
+     - Enable: *App Groups, Associated Domains, Push Notifications, Communication Notifications*.
+   - **Name:** Ketal NSE, **Bundle ID:** `io.ketal.app.nse`
+     - Enable: *App Groups, Push Notifications*.
+
+### Step 2: Generate Profiles
+**Note:** You MUST use the Certificate you recently exported/fixed.
+
+1. Go to **Profiles** -> click **(+)**.
+2. Select **App Store** (under Distribution).
+3. **For Main App:**
+   - Select App ID: `io.ketal.app`.
+   - Select the **Correct Certificate** (Check the expiration date to match your P12).
+   - Name it: `Ketal App Store Profile`.
+   - Download as `main.mobileprovision`.
+4. **For NSE:**
+   - Select App ID: `io.ketal.app.nse`.
+   - Select the **SAME Certificate**.
+   - Name it: `Ketal NSE App Store Profile`.
+   - Download as `nse.mobileprovision`.
+
+### Step 3: Base64 Encode on Ubuntu
+Run these commands in your terminal:
+
+```bash
+# Main Profile
+base64 -w 0 main.mobileprovision > main_base64.txt
+
+# NSE Profile
+base64 -w 0 nse.mobileprovision > nse_base64.txt
+```
+
+### Step 4: Update GitHub Secrets
+1. Open `main_base64.txt`, copy content -> Update `PROVISIONING_PROFILE_BASE64`.
+2. Open `nse_base64.txt`, copy content -> Update `NSE_PROVISIONING_PROFILE_BASE64`.
+
