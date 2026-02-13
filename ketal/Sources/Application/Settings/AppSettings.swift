@@ -13,10 +13,8 @@ import EmbeddedElementCall
 import Foundation
 import SwiftUI
 
-/// Common settings between app and NSE
-protocol CommonSettingsProtocol: AnyObject {
-    var lastNotificationBootTime: TimeInterval? { get set }
-    
+// Common settings between app and NSE
+protocol CommonSettingsProtocol {
     var logLevel: LogLevel { get }
     var traceLogPacks: Set<TraceLogPack> { get }
     var bugReportRageshakeURL: RemotePreference<RageshakeConfiguration> { get }
@@ -27,12 +25,6 @@ protocol CommonSettingsProtocol: AnyObject {
     var hideQuietNotificationAlerts: Bool { get }
 }
 
-enum AppBuildType {
-    case debug
-    case nightly
-    case release
-}
-
 /// Store Element specific app settings.
 final class AppSettings {
     private enum UserDefaultsKeys: String {
@@ -40,8 +32,12 @@ final class AppSettings {
         case seenInvites
         case hasSeenSpacesAnnouncement
         case hasSeenNewSoundBanner
+        case acknowledgedHistoryVisibleRooms
         case appLockNumberOfPINAttempts
         case appLockNumberOfBiometricAttempts
+        case appLockIsMandatory
+        case appLockGracePeriod
+        case appLockPINCodeBlockList
         case timelineStyle
         
         case analyticsConsentState
@@ -53,7 +49,6 @@ final class AppSettings {
         case enableNotifications
         case enableInAppNotifications
         case pusherProfileTag
-        case lastNotificationBootTime
         case logLevel
         case traceLogPacks
         case viewSourceEnabled
@@ -77,7 +72,6 @@ final class AppSettings {
         case linkNewDeviceEnabled
         
         // Spaces
-        case spaceFiltersEnabled
         case spaceSettingsEnabled
         case createSpaceEnabled
         
@@ -91,19 +85,16 @@ final class AppSettings {
     /// UserDefaults to be used on reads and writes.
     private static var store: UserDefaults! = UserDefaults(suiteName: suiteName)
     
-    static var appBuildType: AppBuildType {
+    /// Whether or not the app is a development build that isn't in production.
+    static var isDevelopmentBuild: Bool = {
         #if DEBUG
-        return .debug
+        true
         #else
-        switch InfoPlistReader.main.baseBundleIdentifier {
-        case "io.element.elementx.nightly":
-            return .nightly
-        default:
-            return .release
-        }
+        let apps = ["io.ketal.nightly", "io.ketal.pr"]
+        return apps.contains(InfoPlistReader.main.baseBundleIdentifier)
         #endif
-    }
-    
+    }()
+        
     static func resetAllSettings() {
         MXLog.warning("Resetting the AppSettings.")
         store.removePersistentDomain(forName: suiteName)
@@ -189,18 +180,39 @@ final class AppSettings {
     @UserPreference(key: UserDefaultsKeys.hasSeenNewSoundBanner, defaultValue: true, storageType: .userDefaults(store))
     var hasSeenNewSoundBanner
     
+    /// The Set of room identifiers that the user has acknowledged have visible history.
+    @UserPreference(key: UserDefaultsKeys.acknowledgedHistoryVisibleRooms, defaultValue: [], storageType: .userDefaults(store))
+    var acknowledgedHistoryVisibleRooms: Set<String>
+
+    /// Whether the user must have passkey protection enabled.
+    @UserPreference(key: UserDefaultsKeys.appLockIsMandatory, defaultValue: false, storageType: .userDefaults(store))
+    var appLockIsMandatory: Bool
+    /// The grace period before the app automatically locks.
+    @UserPreference(key: UserDefaultsKeys.appLockGracePeriod, defaultValue: 5 * 60, storageType: .userDefaults(store))
+    var appLockGracePeriod: TimeInterval
+    /// A list of PIN codes that are not allowed to be used.
+    @UserPreference(key: UserDefaultsKeys.appLockPINCodeBlockList, defaultValue: ["1234", "0000"], storageType: .userDefaults(store))
+    var appLockPINCodeBlockList: [String]
+    /// The number of times the user has failed to enter their PIN correctly.
+    @UserPreference(key: UserDefaultsKeys.appLockNumberOfPINAttempts, defaultValue: 0, storageType: .userDefaults(store))
+    var appLockNumberOfPINAttempts: Int
+    /// The number of times the user has failed to unlock with biometrics.
+    @UserPreference(key: UserDefaultsKeys.appLockNumberOfBiometricAttempts, defaultValue: 0, storageType: .userDefaults(store))
+    var appLockNumberOfBiometricAttempts: Int
+    
     /// The initial set of account providers shown to the user in the authentication flow.
     ///
-    /// Account provider is the friendly term for the server name. It should not contain an `https` prefix and should
-    /// match the last part of the user ID. For example `example.com` and not `https://matrix.example.com`.
-    private(set) var accountProviders = ["matrix.org"]
-    /// Whether or not the user is allowed to manually enter their own account provider or must select from one of `defaultAccountProviders`.
+    /// For OIDC, this should be the homeserver that is configured to use Keycloak.
+    /// For OIDC, this should be the homeserver that is configured to use Keycloak.
+    private(set) var accountProviders = ["ketals.online"]
+    /// Whether or not the user is allowed to manually enter their own account provider.
+    /// Set to false to force the use of the provider above.
     private(set) var allowOtherAccountProviders = true
     /// Whether the components surrounding the app brand/logo should be hidden or not
     private(set) var hideBrandChrome = false
     
     /// The task identifier used for background app refresh. Also used in main target's the Info.plist
-    let backgroundAppRefreshTaskIdentifier = "io.element.elementx.background.refresh"
+    let backgroundAppRefreshTaskIdentifier = "io.ketal.background.refresh"
 
     /// A URL where users can go read more about the app.
     private(set) var websiteURL: URL = "https://element.io"
@@ -222,7 +234,6 @@ final class AppSettings {
     private(set) var identityPinningViolationDetailsURL: URL = "https://element.io/help#encryption18"
     /// A URL describing how history sharing works
     private(set) var historySharingDetailsURL: URL = "https://element.io/en/help#e2ee-history-sharing"
-
     /// Any domains that Element web may be hosted on - used for handling links.
     private(set) var elementWebHosts = ["app.element.io", "staging.element.io", "develop.element.io"]
     /// The domain that account provisioning links will be hosted on - used for handling the links.
@@ -234,24 +245,23 @@ final class AppSettings {
     @UserPreference(key: UserDefaultsKeys.appAppearance, defaultValue: .system, storageType: .userDefaults(store))
     var appAppearance: AppAppearance
     
-    // MARK: - Security
-    
-    /// The app must be locked with a PIN code as part of the authentication flow.
-    let appLockIsMandatory = false
-    /// The amount of time the app can remain in the background for without requesting the PIN/TouchID/FaceID.
-    let appLockGracePeriod: TimeInterval = 0
-    /// Any codes that the user isn't allowed to use for their PIN.
-    let appLockPINCodeBlockList = ["0000", "1234"]
-    /// The number of attempts the user has made to unlock the app with a PIN code (resets when unlocked).
-    @UserPreference(key: UserDefaultsKeys.appLockNumberOfPINAttempts, defaultValue: 0, storageType: .userDefaults(store))
-    var appLockNumberOfPINAttempts: Int
-    
     // MARK: - Authentication
+
+    /// For OIDC, the app needs a custom URL scheme to receive the callback.
+    /// This should be registered in the project's Info tab.
+    private static let oidcRedirectURLScheme = "ketal"
     
     /// Any pre-defined static client registrations for OIDC issuers.
-    let oidcStaticRegistrations: [URL: String] = ["https://id.thirdroom.io/realms/thirdroom": "elementx"]
-    /// The redirect URL used for OIDC. This no longer uses universal links so we don't need the bundle ID to avoid conflicts between Element X, Nightly and PR builds.
-    private(set) var oidcRedirectURL: URL = "https://element.io/oidc/login"
+    /// This maps issuer URLs to client IDs. If empty, the SDK will attempt to discover
+    /// the client ID from the OIDC provider's discovery endpoint or well-known configuration.
+    /// 
+    /// NOTE: For zero-hardcoding, the client_id should be provided in the .well-known/matrix/client
+    /// file. This static registration is only used as a fallback if well-known discovery fails.
+    /// 
+    /// IMPORTANT: In Keycloak, ensure the client has "ketal://oidc" in Valid Redirect URIs.
+    let oidcStaticRegistrations: [URL: String] = [:]
+    /// The redirect URL used for OIDC.
+    private(set) var oidcRedirectURL = URL(string: "\(oidcRedirectURLScheme)://oidc")!
     
     private(set) lazy var oidcConfiguration = OIDCConfiguration(clientName: InfoPlistReader.main.bundleDisplayName,
                                                                 redirectURI: oidcRedirectURL,
@@ -262,9 +272,8 @@ final class AppSettings {
                                                                 staticRegistrations: oidcStaticRegistrations.mapKeys { $0.absoluteString })
     
     /// Whether or not the Create Account button is shown on the start screen.
-    ///
-    /// **Note:** Setting this to false doesn't prevent someone from creating an account when the selected homeserver's MAS allows registration.
-    let showCreateAccountButton = true
+    /// Set to false as account creation will be handled by Keycloak.
+    let showCreateAccountButton = false
     
     // MARK: - Notifications
     
@@ -276,10 +285,8 @@ final class AppSettings {
         #endif
     }
     
-    private(set) var pushGatewayBaseURL: URL = "https://matrix.org"
-    var pushGatewayNotifyEndpoint: URL {
-        pushGatewayBaseURL.appending(path: "_matrix/push/v1/notify")
-    }
+    private(set) var pushGatewayBaseURL: URL = "https://sygnal.ketals.online"
+    var pushGatewayNotifyEndpoint: URL { pushGatewayBaseURL.appending(path: "_matrix/push/v1/notify") }
     
     @UserPreference(key: UserDefaultsKeys.enableNotifications, defaultValue: true, storageType: .userDefaults(store))
     var enableNotifications
@@ -293,10 +300,6 @@ final class AppSettings {
     /// Tag describing which set of device specific rules a pusher executes.
     @UserPreference(key: UserDefaultsKeys.pusherProfileTag, storageType: .userDefaults(store))
     var pusherProfileTag: String?
-    
-    /// The device's last boot time as recorded by the NSE.
-    @UserPreference(key: UserDefaultsKeys.lastNotificationBootTime, storageType: .userDefaults(store))
-    var lastNotificationBootTime: TimeInterval?
     
     // MARK: - Logging
         
@@ -312,7 +315,7 @@ final class AppSettings {
     let bugReportSentryURL: URL? = Secrets.sentryDSN.map { URL(string: $0)! } // swiftlint:disable:this force_unwrapping
     let bugReportSentryRustURL: URL? = Secrets.sentryRustDSN.map { URL(string: $0)! } // swiftlint:disable:this force_unwrapping
     /// The name allocated by the bug report server
-    private(set) var bugReportApplicationID = "element-x-ios"
+    private(set) var bugReportApplicationID = "ketal-ios"
     /// The maximum size of the upload request. Default value is just below CloudFlare's max request size.
     let bugReportMaxUploadSize = 50 * 1024 * 1024
     
@@ -323,9 +326,7 @@ final class AppSettings {
     /// The URL to open with more information about analytics terms. When this is `nil` the "Learn more" link will be hidden.
     private(set) var analyticsTermsURL: URL? = "https://element.io/cookie-policy"
     /// Whether or not there the app is able ask for user consent to enable analytics or sentry reporting.
-    var canPromptForAnalytics: Bool {
-        analyticsConfiguration != nil || bugReportSentryURL != nil
-    }
+    var canPromptForAnalytics: Bool { analyticsConfiguration != nil || bugReportSentryURL != nil }
     
     private static func makeAnalyticsConfiguration() -> AnalyticsConfiguration? {
         guard let host = Secrets.postHogHost, let apiKey = Secrets.postHogAPIKey else { return nil }
@@ -352,7 +353,7 @@ final class AppSettings {
     
     // MARK: - Room Screen
     
-    @UserPreference(key: UserDefaultsKeys.viewSourceEnabled, defaultValue: appBuildType == .debug, storageType: .userDefaults(store))
+    @UserPreference(key: UserDefaultsKeys.viewSourceEnabled, defaultValue: isDevelopmentBuild, storageType: .userDefaults(store))
     var viewSourceEnabled
     
     @UserPreference(key: UserDefaultsKeys.optimizeMediaUploads, defaultValue: true, storageType: .userDefaults(store))
@@ -376,6 +377,11 @@ final class AppSettings {
     
     @UserPreference(key: UserDefaultsKeys.elementCallBaseURLOverride, defaultValue: nil, storageType: .userDefaults(store))
     var elementCallBaseURLOverride: URL?
+
+    /// Ephemeral flag used to indicate that the next call should start with the camera disabled.
+    /// This is set when the user explicitly starts an audio-only call and is cleared as soon
+    /// as the call screen has applied the desired media state.
+    var startNextCallWithVideoDisabled = false
     
     // MARK: - Users
     
@@ -384,7 +390,7 @@ final class AppSettings {
     
     // MARK: - Maps
     
-    /// maptiler base url
+    // maptiler base url
     private(set) var mapTilerConfiguration = MapTilerConfiguration(baseURL: "https://api.maptiler.com/maps",
                                                                    apiKey: Secrets.mapLibreAPIKey,
                                                                    lightStyleID: "9bc819c8-e627-474a-a348-ec144fe3d810",
@@ -397,17 +403,14 @@ final class AppSettings {
     
     // MARK: - Feature Flags
     
-    /// Spaces
-    @UserPreference(key: UserDefaultsKeys.spaceSettingsEnabled, defaultValue: true, storageType: .volatile)
+    // Spaces
+    @UserPreference(key: UserDefaultsKeys.spaceSettingsEnabled, defaultValue: false, storageType: .userDefaults(store))
     var spaceSettingsEnabled
     
-    @UserPreference(key: UserDefaultsKeys.createSpaceEnabled, defaultValue: true, storageType: .volatile)
+    @UserPreference(key: UserDefaultsKeys.createSpaceEnabled, defaultValue: false, storageType: .userDefaults(store))
     var createSpaceEnabled
     
-    @UserPreference(key: UserDefaultsKeys.spaceFiltersEnabled, defaultValue: true, storageType: .volatile)
-    var spaceFiltersEnabled
-    
-    /// Others
+    // Others
     @UserPreference(key: UserDefaultsKeys.publicSearchEnabled, defaultValue: false, storageType: .userDefaults(store))
     var publicSearchEnabled
     
@@ -440,7 +443,7 @@ final class AppSettings {
     @UserPreference(key: UserDefaultsKeys.linkNewDeviceEnabled, defaultValue: false, storageType: .userDefaults(store))
     var linkNewDeviceEnabled
     
-    @UserPreference(key: UserDefaultsKeys.developerOptionsEnabled, defaultValue: appBuildType == .debug, storageType: .userDefaults(store))
+    @UserPreference(key: UserDefaultsKeys.developerOptionsEnabled, defaultValue: isDevelopmentBuild, storageType: .userDefaults(store))
     var developerOptionsEnabled
 }
 

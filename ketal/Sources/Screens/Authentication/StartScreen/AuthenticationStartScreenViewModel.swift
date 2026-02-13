@@ -16,11 +16,11 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
     private let provisioningParameters: AccountProvisioningParameters?
     private let appSettings: AppSettings
     private let userIndicatorController: UserIndicatorControllerProtocol
-    
+
     private let canReportProblem: Bool
-    
+
     private var actionsSubject: PassthroughSubject<AuthenticationStartScreenViewModelAction, Never> = .init()
-    
+
     var actions: AnyPublisher<AuthenticationStartScreenViewModelAction, Never> {
         actionsSubject.eraseToAnyPublisher()
     }
@@ -35,9 +35,9 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
         self.appSettings = appSettings
         self.userIndicatorController = userIndicatorController
         canReportProblem = isBugReportServiceEnabled
-        
+
         let isQRCodeScanningSupported = !ProcessInfo.processInfo.isiOSAppOnMac
-        
+
         let initialViewState = if !appSettings.allowOtherAccountProviders {
             // We don't show the create account button when custom providers are disallowed.
             // The assumption here being that if you're running a custom app, your users will already be created.
@@ -58,7 +58,7 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
                                                showQRCodeLoginButton: isQRCodeScanningSupported,
                                                hideBrandChrome: appSettings.hideBrandChrome)
         }
-        
+
         super.init(initialViewState: initialViewState)
     }
 
@@ -79,9 +79,9 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
             }
         }
     }
-    
+
     // MARK: - Private
-    
+
     private func login() async {
         if let serverName = state.serverName {
             await configureAccountProvider(serverName, loginHint: provisioningParameters?.loginHint)
@@ -89,48 +89,39 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
             actionsSubject.send(.login) // No need to configure anything here, continue the flow.
         }
     }
-    
+
     private func configureAccountProvider(_ accountProvider: String, loginHint: String? = nil) async {
         startLoading()
         defer { stopLoading() }
-        
+
         guard case .success = await authenticationService.configure(for: accountProvider, flow: .login) else {
             // As the server was provisioned, we don't worry about the specifics and show a generic error to the user.
             displayError()
             return
         }
-        
+
         guard authenticationService.homeserver.value.loginMode.supportsOIDCFlow else {
             actionsSubject.send(.loginDirectlyWithPassword(loginHint: loginHint))
             return
         }
-        
-        guard let window = state.window else {
-            displayError()
-            return
-        }
-        
-        switch await authenticationService.urlForOIDCLogin(loginHint: loginHint) {
-        case .success(let oidcData):
-            actionsSubject.send(.loginDirectlyWithOIDC(data: oidcData, window: window))
-        case .failure:
-            displayError()
-        }
+
+        // The OIDC flow now starts with the email entry screen.
+        actionsSubject.send(.requestOIDCEmail)
     }
-    
+
     private let loadingIndicatorID = "\(AuthenticationStartScreenViewModel.self)-Loading"
-    
+
     private func startLoading() {
         userIndicatorController.submitIndicator(UserIndicator(id: loadingIndicatorID,
                                                               type: .modal,
                                                               title: L10n.commonLoading,
                                                               persistent: true))
     }
-    
+
     private func stopLoading() {
         userIndicatorController.retractIndicatorWithId(loadingIndicatorID)
     }
-    
+
     private func displayError() {
         state.bindings.alertInfo = AlertInfo(id: .genericError)
     }

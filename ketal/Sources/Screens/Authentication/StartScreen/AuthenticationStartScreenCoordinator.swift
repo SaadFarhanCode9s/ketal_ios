@@ -8,6 +8,7 @@
 
 import Combine
 import SwiftUI
+import UIKit
 
 struct AuthenticationStartScreenParameters {
     let authenticationService: AuthenticationServiceProtocol
@@ -21,11 +22,11 @@ final class AuthenticationStartScreenCoordinator: CoordinatorProtocol {
     private var viewModel: AuthenticationStartScreenViewModelProtocol
     private let actionsSubject: PassthroughSubject<AuthenticationStartScreenCoordinatorAction, Never> = .init()
     private var cancellables = Set<AnyCancellable>()
-    
+
     var actions: AnyPublisher<AuthenticationStartScreenCoordinatorAction, Never> {
         actionsSubject.eraseToAnyPublisher()
     }
-    
+
     init(parameters: AuthenticationStartScreenParameters) {
         viewModel = AuthenticationStartScreenViewModel(authenticationService: parameters.authenticationService,
                                                        provisioningParameters: parameters.provisioningParameters,
@@ -33,14 +34,14 @@ final class AuthenticationStartScreenCoordinator: CoordinatorProtocol {
                                                        appSettings: parameters.appSettings,
                                                        userIndicatorController: parameters.userIndicatorController)
     }
-    
+
     // MARK: - Public
-    
+
     func start() {
         viewModel.actions
             .sink { [weak self] action in
                 guard let self else { return }
-                
+
                 switch action {
                 case .loginWithQR:
                     actionsSubject.send(.loginWithQR)
@@ -50,16 +51,22 @@ final class AuthenticationStartScreenCoordinator: CoordinatorProtocol {
                     actionsSubject.send(.register)
                 case .reportProblem:
                     actionsSubject.send(.reportProblem)
-                
-                case .loginDirectlyWithOIDC(let data, let window):
+
+                case .loginDirectlyWithOIDC(let data):
+                    guard let window = viewModel.context.viewState.window else {
+                        fatalError("Window must be set before OIDC login")
+                    }
                     actionsSubject.send(.loginDirectlyWithOIDC(data: data, window: window))
                 case .loginDirectlyWithPassword(let loginHint):
                     actionsSubject.send(.loginDirectlyWithPassword(loginHint: loginHint))
+                case .requestOIDCEmail:
+                    // This is handled by the flow coordinator directly
+                    break
                 }
             }
             .store(in: &cancellables)
     }
-    
+
     func toPresentable() -> AnyView {
         AnyView(AuthenticationStartScreen(context: viewModel.context))
     }
