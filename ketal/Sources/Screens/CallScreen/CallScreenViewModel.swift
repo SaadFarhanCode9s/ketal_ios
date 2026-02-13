@@ -157,6 +157,14 @@ class CallScreenViewModel: CallScreenViewModelType, CallScreenViewModelProtocol 
            decodedMessage.hasLoaded {
             // This means that the call room was joined succesfully, we can stop the timeout task
             timeoutTask = nil
+            
+            // If the app has been instructed to start the next call as audio-only,
+            // now that the widget is loaded, inform Element Call to disable video
+            // while keeping audio enabled, then clear the flag.
+            if appSettings.startNextCallWithVideoDisabled {
+                await setInitialMediaState(audioEnabled: true, videoEnabled: false)
+                appSettings.startNextCallWithVideoDisabled = false
+            }
         }
         await widgetDriver.handleMessage(message)
     }
@@ -198,14 +206,6 @@ class CallScreenViewModel: CallScreenViewModelType, CallScreenViewModelProtocol 
                                                 analyticsConfiguration: analyticsConfiguration) {
                 case .success(let url):
                     state.url = url
-                    
-                    // If the app has been instructed to start the next call as audio-only,
-                    // immediately inform the Element Call widget to disable video while
-                    // keeping audio enabled, then clear the flag.
-                    if appSettings.startNextCallWithVideoDisabled {
-                        await setInitialMediaState(audioEnabled: true, videoEnabled: false)
-                        appSettings.startNextCallWithVideoDisabled = false
-                    }
                 case .failure(let error):
                     MXLog.error("Failed starting ElementCall Widget Driver with error: \(error)")
                     state.bindings.alertInfo = .init(id: UUID(),
