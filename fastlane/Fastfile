@@ -465,6 +465,20 @@ private_lane :import_code_signing_assets do
   File.write(main_profile_path, Base64.decode64(main_profile_base64))
   File.write(nse_profile_path, Base64.decode64(nse_profile_base64))
 
+  # NEW DEBUG BLOCK
+  [main_profile_path, nse_profile_path].each do |path|
+    if File.exist?(path)
+      # Run the 'file' command on the Mac runner to compare with Ubuntu
+      file_type = `file #{path}`
+      UI.message("Mac Runner File Check for #{File.basename(path)}: #{file_type}")
+      
+      # If it doesn't say "DER Encoded", the Base64 decoding failed
+      unless file_type.include?("DER Encoded") || file_type.include?("data")
+        UI.user_error!("Data corruption detected! The file on the Mac is not binary. It is: #{file_type}")
+      end
+    end
+  end
+
   # 4. Verify file integrity to prevent UNKNOWN (-8183) errors
   # If these are 0, the Base64 string in GitHub Secrets is likely malformed or empty.
   UI.user_error!("Decoded main profile is empty. Check your Base64 secret.") if File.size(main_profile_path) == 0
