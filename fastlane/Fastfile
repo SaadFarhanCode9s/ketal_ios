@@ -8,10 +8,10 @@ if File.exist?(enterprise)
   import enterprise
 end
 
-simulator_version = "26.1"
+simulator_version = "26.3"
 
 before_all do
-  xcversion(version: "~> 26.1.0")
+  xcversion(version: "~> 26.3.0")
 
   ENV["FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT"] = "180"
   ENV["FASTLANE_XCODE_LIST_TIMEOUT"] = "180"
