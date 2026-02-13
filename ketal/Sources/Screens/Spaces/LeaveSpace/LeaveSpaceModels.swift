@@ -30,11 +30,11 @@ struct LeaveSpaceViewState: BindableState {
     
     var subtitle: String? {
         switch leaveHandle.mode {
-        case .manyRooms: L10n.screenLeaveSpaceSubtitle
-        case .roomsNeedNewOwner: L10n.screenLeaveSpaceSubtitleOnlyLastAdmin
-        case .noRooms: nil
+        case .manyRooms: return L10n.screenLeaveSpaceSubtitle
+        case .roomsNeedNewOwner: return L10n.screenLeaveSpaceSubtitleOnlyLastAdmin
+        case .noRooms: return nil
         case .spaceNeedsNewOwner(let useTransferOwnershipFlow):
-            useTransferOwnershipFlow ? L10n.screenLeaveSpaceSubtitleLastOwner(spaceName) : L10n.screenLeaveSpaceSubtitleLastAdmin
+            return useTransferOwnershipFlow ? L10n.screenLeaveSpaceSubtitleLastOwner(spaceName) : L10n.screenLeaveSpaceSubtitleLastAdmin
         }
     }
     
