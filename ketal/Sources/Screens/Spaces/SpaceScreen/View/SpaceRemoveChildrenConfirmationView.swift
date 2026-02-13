@@ -13,6 +13,7 @@ struct SpaceRemoveChildrenConfirmationView: View {
     @Environment(\.dismiss) private var dismiss
     
     let spaceName: String
+    let count: Int
     let action: () -> Void
     
     @State private var scrollViewHeight: CGFloat = .zero
@@ -21,7 +22,7 @@ struct SpaceRemoveChildrenConfirmationView: View {
     
     var body: some View {
         ScrollView {
-            TitleAndIcon(title: L10n.screenSpaceRemoveRoomsConfirmationTitleIos(spaceName),
+            TitleAndIcon(title: L10n.screenSpaceRemoveRoomsConfirmationTitleIos(L10n.screenSpaceRemoveRoomsConfirmationTitle(count), spaceName),
                          subtitle: L10n.screenSpaceRemoveRoomsConfirmationContent,
                          icon: \.errorSolid,
                          iconStyle: .alertSolid)
@@ -56,6 +57,6 @@ struct SpaceRemoveChildrenConfirmationView: View {
 
 struct SpaceRemoveChildrenConfirmationView_Previews: PreviewProvider, TestablePreview {
     static var previews: some View {
-        SpaceRemoveChildrenConfirmationView(spaceName: "Company") { }
+        SpaceRemoveChildrenConfirmationView(spaceName: "Company", count: 1) { }
     }
 }

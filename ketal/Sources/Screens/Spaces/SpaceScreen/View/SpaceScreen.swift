@@ -39,7 +39,8 @@ struct SpaceScreen: View {
         .navigationBarBackButtonHidden(isEditModeActive)
         .toolbar { toolbar }
         .sheet(isPresented: $context.isPresentingRemoveChildrenConfirmation) {
-            SpaceRemoveChildrenConfirmationView(spaceName: context.viewState.space.name) {
+            SpaceRemoveChildrenConfirmationView(spaceName: context.viewState.space.name, 
+                                                count: context.viewState.editModeSelectedIDs.count) {
                 context.send(viewAction: .confirmRemoveSelectedChildren)
             }
         }

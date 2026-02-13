@@ -3232,8 +3232,8 @@ internal enum L10n {
     return L10n.tr("Localizable", "screen_space_remove_rooms_confirmation_title", p1)
   }
   /// Remove rooms from %1$@?
-  internal static func screenSpaceRemoveRoomsConfirmationTitleIos(_ p1: Any) -> String {
-    return L10n.tr("Localizable", "screen_space_remove_rooms_confirmation_title_ios", String(describing: p1))
+  internal static func screenSpaceRemoveRoomsConfirmationTitleIos(_ p1: Any, _ p2: Any) -> String {
+    return L10n.tr("Localizable", "screen_space_remove_rooms_confirmation_title_ios", String(describing: p1), String(describing: p2))
   }
   /// Leave space
   internal static var screenSpaceSettingsLeaveSpace: String { return L10n.tr("Localizable", "screen_space_settings_leave_space") }
