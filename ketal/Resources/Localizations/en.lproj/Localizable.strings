@@ -1556,7 +1556,7 @@
 "screen_create_room_space_selection_no_space_title" = "Screen Create Room Space Selection No Space Title";
 "screen_create_room_space_selection_sheet_title" = "Screen Create Room Space Selection Sheet Title";
 "screen_leave_space_choose_owners_action" = "Screen Leave Space Choose Owners Action";
-"screen_leave_space_subtitle_last_owner" = "Screen Leave Space Subtitle Last Owner";
+"screen_leave_space_subtitle_last_owner" = "You are the only owner of %1$@. You need to transfer ownership to someone else before you leave.";
 "screen_leave_space_title_last_owner" = "Screen Leave Space Title Last Owner";
 "screen_roomlist_your_spaces" = "Screen Roomlist Your Spaces";
 "screen_space_add_room_action" = "Screen Space Add Room Action";
