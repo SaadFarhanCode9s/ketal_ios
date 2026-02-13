@@ -203,8 +203,7 @@ final class AppSettings {
     /// The initial set of account providers shown to the user in the authentication flow.
     ///
     /// For OIDC, this should be the homeserver that is configured to use Keycloak.
-    /// For OIDC, this should be the homeserver that is configured to use Keycloak.
-    private(set) var accountProviders = ["ketals.online"]
+    private(set) var accountProviders = [Bundle.main.object(forInfoDictionaryKey: "KetalDomainBase") as? String ?? "ketals.online"]
     /// Whether or not the user is allowed to manually enter their own account provider.
     /// Set to false to force the use of the provider above.
     private(set) var allowOtherAccountProviders = true
@@ -261,7 +260,7 @@ final class AppSettings {
     /// IMPORTANT: In Keycloak, ensure the client has "ketal://oidc" in Valid Redirect URIs.
     let oidcStaticRegistrations: [URL: String] = [:]
     /// The redirect URL used for OIDC.
-    private(set) var oidcRedirectURL = URL(string: "\(oidcRedirectURLScheme)://oidc")!
+    private(set) var oidcRedirectURL = URL(string: Bundle.main.object(forInfoDictionaryKey: "KetalOIDCRedirectURI") as? String ?? "ketal://oidc")!
     
     private(set) lazy var oidcConfiguration = OIDCConfiguration(clientName: InfoPlistReader.main.bundleDisplayName,
                                                                 redirectURI: oidcRedirectURL,
@@ -285,7 +284,13 @@ final class AppSettings {
         #endif
     }
     
-    private(set) var pushGatewayBaseURL: URL = "https://sygnal.ketals.online"
+    private(set) var pushGatewayBaseURL: URL = {
+        if let urlString = Bundle.main.object(forInfoDictionaryKey: "KetalPushFallbackURL") as? String,
+           let url = URL(string: urlString) {
+            return url
+        }
+        return URL(string: "https://sygnal.ketals.online")!
+    }()
     var pushGatewayNotifyEndpoint: URL { pushGatewayBaseURL.appending(path: "_matrix/push/v1/notify") }
     
     @UserPreference(key: UserDefaultsKeys.enableNotifications, defaultValue: true, storageType: .userDefaults(store))

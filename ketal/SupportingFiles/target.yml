@@ -107,6 +107,13 @@ targets:
           LSHandlerRank: Owner
           LSItemContentTypes: $(PILLS_UT_TYPE_IDENTIFIER)
         LSSupportsOpeningDocumentsInPlace: false
+        # Ketal Configuration Injected from app.yml
+        KetalDomainBase: $(KETAL_DOMAIN_BASE)
+        KetalDomainMatrix: $(KETAL_DOMAIN_MATRIX)
+        KetalDomainAuth: $(KETAL_DOMAIN_AUTH)
+        KetalOIDCRedirectURI: $(KETAL_OIDC_REDIRECT_URI)
+        KetalOIDCClientName: $(KETAL_OIDC_CLIENT_NAME)
+        KetalPushFallbackURL: $(KETAL_PUSH_FALLBACK_URL)
 
     entitlements:
       path: ketal.entitlements
