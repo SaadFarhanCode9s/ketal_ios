@@ -61,7 +61,7 @@ Go to: **GitHub Actions** → **Deploy to TestFlight workflow**
 - **Build:** 1
 - **Bundle ID:** io.ketal.app
 - **NSE Bundle ID:** io.ketal.app.nse
-- **Team ID:** DQM48A6L3K
+- **Team ID:** G5AQ6D4ZY8
 
 ---
 

@@ -69,7 +69,7 @@ All 7 required secrets should be configured in your GitHub repository:
 - **Main Bundle ID:** io.ketal.app
 - **NSE Bundle ID:** io.ketal.app.nse
 - **App Group:** group.io.ketal
-- **Team ID:** DQM48A6L3K
+- **Team ID:** G5AQ6D4ZY8
 - **Domain:** ketals.online
 
 ---
@@ -85,7 +85,7 @@ Your provisioning profiles must:
 3. **Be named exactly as specified in Fastfile:**
    - Main: "Ketal App Store Profile"
    - NSE: "Ketal NSE App Store Profile"
-4. **Be associated with Team ID:** DQM48A6L3K
+4. **Be associated with Team ID:** G5AQ6D4ZY8
 5. **Be valid (not expired)**
 
 ---

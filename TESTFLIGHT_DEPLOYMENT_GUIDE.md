@@ -35,7 +35,7 @@ Based on your `project.yml` and `app.yml`:
 - **Bundle ID (NSE):** `io.ketal.app.nse`
 - **Version:** `26.01.1`
 - **Build Number:** `1`
-- **Team ID:** `DQM48A6L3K`
+- **Team ID:** `G5AQ6D4ZY8`
 
 ### 3. App Store Connect Verification
 
