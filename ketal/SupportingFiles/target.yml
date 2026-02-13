@@ -118,7 +118,7 @@ targets:
     entitlements:
       path: ketal.entitlements
       properties:
-        aps-environment: development
+        # aps-environment: development
         com.apple.developer.associated-domains:
         - applinks:element.io
         - applinks:app.element.io
