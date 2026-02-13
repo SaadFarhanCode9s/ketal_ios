@@ -366,7 +366,7 @@ lane :deploy_testflight do
         "io.ketal.app.nse" => "Ketal NSE App Store Profile"
       }
     },
-    xcargs: "-allowProvisioningUpdates=NO CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY='iPhone Distribution'"
+    xcargs: "-allowProvisioningUpdates=NO CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY='iPhone Distribution' DEVELOPMENT_TEAM='DQM48A6L3K'"
   )
 
   # 4. Upload to TestFlight
