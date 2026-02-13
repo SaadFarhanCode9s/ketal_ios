@@ -1547,9 +1547,9 @@
 "crypto_history_sharing_room_info_hidden_badge_content" = "Crypto History Sharing Room Info Hidden Badge Content";
 "crypto_history_sharing_room_info_shared_badge_content" = "Crypto History Sharing Room Info Shared Badge Content";
 "crypto_history_sharing_room_info_world_readable_badge_content" = "Crypto History Sharing Room Info World Readable Badge Content";
-"screen_create_room_room_access_section_knocking_restricted_option_description" = "Screen Create Room Room Access Section Knocking Restricted Option Description";
+"screen_create_room_room_access_section_knocking_restricted_option_description" = "Anyone in %1$@ can join but everyone else must request access.";
 "screen_create_room_room_access_section_knocking_restricted_option_title" = "Screen Create Room Room Access Section Knocking Restricted Option Title";
-"screen_create_room_room_access_section_restricted_option_description" = "Screen Create Room Room Access Section Restricted Option Description";
+"screen_create_room_room_access_section_restricted_option_description" = "Anyone in %1$@ can join.";
 "screen_create_room_room_access_section_restricted_option_title" = "Screen Create Room Room Access Section Restricted Option Title";
 "screen_create_room_space_selection_no_space_description" = "Screen Create Room Space Selection No Space Description";
 "screen_create_room_space_selection_no_space_option" = "Screen Create Room Space Selection No Space Option";
