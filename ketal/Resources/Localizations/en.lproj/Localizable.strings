@@ -1518,3 +1518,4 @@
 "troubleshoot_notifications_test_blocked_users_title" = "Blocked users";
 "troubleshoot_notifications_entry_point_push_history_title" = "Push history";
 "troubleshoot_notifications_entry_point_title" = "Troubleshoot notifications";
+"notification_received_while_offline_ios" = "You have notifications that were received while you were offline.";
