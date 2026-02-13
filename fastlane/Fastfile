@@ -366,7 +366,8 @@ lane :deploy_testflight do
         "io.ketal.app.nse" => "Ketal NSE App Store Profile",
         "io.ketal.app.shareextension" => "Ketal Share Extension App Store Profile"
       }
-    }
+    },
+    xcargs: "-allowProvisioningUpdates=NO CODE_SIGN_STYLE=Manual CODE_SIGN_IDENTITY='iPhone Distribution'"
   )
 
   # 4. Upload to TestFlight
