@@ -41,7 +41,6 @@ struct OIDCWebViewScreen: View {
                 }
             }
         }
-        .padding(.top, 24)
         .background(Color.white)
         .clipShape(UnevenRoundedRectangle(topLeadingRadius: 36, topTrailingRadius: 36))
         .shadow(color: .black.opacity(0.52), radius: 18, x: 0, y: -4)
