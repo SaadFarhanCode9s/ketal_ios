@@ -6,6 +6,7 @@
 // Please see LICENSE files in the repository root for full details.
 //
 
+import SwiftUI
 import UIKit
 
 // sourcery: AutoMockable
@@ -15,6 +16,7 @@ protocol UserIndicatorControllerProtocol: CoordinatorProtocol {
     func retractAllIndicators()
     
     var window: UIWindow? { get set }
+    var alertInfo: AlertInfo<UUID>? { get set }
 }
 
 extension UserIndicatorControllerProtocol {

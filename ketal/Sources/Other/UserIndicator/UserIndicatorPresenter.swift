@@ -14,6 +14,7 @@ struct UserIndicatorPresenter: View {
     var body: some View {
         indicatorViewFor(indicator: userIndicatorController.activeIndicator)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .alert(item: $userIndicatorController.alertInfo)
             .animation(.elementDefault, value: userIndicatorController.activeIndicator)
     }
     

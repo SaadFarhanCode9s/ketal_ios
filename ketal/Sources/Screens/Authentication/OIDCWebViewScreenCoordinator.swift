@@ -81,7 +81,7 @@ class OIDCWebViewScreenCoordinator: CoordinatorProtocol {
 
         case .failure(let error):
             MXLog.error("[OIDC WebView Coordinator] Login failed: \(error)")
-            parameters.userIndicatorController.alertInfo = AlertInfo(id: .init(),
+            parameters.userIndicatorController.alertInfo = AlertInfo(id: UUID(),
                                                                      title: "Authentication Failed",
                                                                      message: "Unable to complete login. Please try again.")
             callback?(.cancel)

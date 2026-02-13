@@ -17,6 +17,7 @@ class UserIndicatorController: ObservableObject, UserIndicatorControllerProtocol
     var nonPersistentDisplayDuration = 2.5
     var minimumDisplayDuration = 0.5
     
+    @Published var alertInfo: AlertInfo<UUID>?
     @Published private(set) var activeIndicator: UserIndicator?
     private(set) var indicatorQueue = [UserIndicator]() {
         didSet {
