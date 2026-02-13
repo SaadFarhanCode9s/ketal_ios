@@ -48,7 +48,7 @@ struct ElementCallWidgetMessage: Codable {
     }
 }
 
-final class ElementCallWidgetDriver: WidgetCapabilitiesProvider, ElementCallWidgetDriverProtocol {
+final class ElementCallWidgetDriver: WidgetCapabilitiesProvider, ElementCallWidgetDriverProtocol, @unchecked Sendable {
     private let room: RoomProtocol
     private let deviceID: String
     

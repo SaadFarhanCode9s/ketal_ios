@@ -19524,6 +19524,7 @@ class UserIdentityProxyMock: UserIdentityProxyProtocol, @unchecked Sendable {
 }
 class UserIndicatorControllerMock: UserIndicatorControllerProtocol, @unchecked Sendable {
     var window: UIWindow?
+    var alertInfo: AlertInfo<UUID>?
 
     //MARK: - submitIndicator
 

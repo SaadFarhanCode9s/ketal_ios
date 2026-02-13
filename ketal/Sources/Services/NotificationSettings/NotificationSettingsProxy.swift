@@ -10,7 +10,7 @@ import Combine
 import Foundation
 import MatrixRustSDK
 
-private final class WeakNotificationSettingsProxy: NotificationSettingsDelegate {
+private final class WeakNotificationSettingsProxy: NotificationSettingsDelegate, @unchecked Sendable {
     private weak var proxy: NotificationSettingsProxy?
     
     init(proxy: NotificationSettingsProxy) {
@@ -26,7 +26,7 @@ private final class WeakNotificationSettingsProxy: NotificationSettingsDelegate 
     }
 }
 
-final class NotificationSettingsProxy: NotificationSettingsProxyProtocol {
+final class NotificationSettingsProxy: NotificationSettingsProxyProtocol, @unchecked Sendable {
     private(set) var notificationSettings: MatrixRustSDK.NotificationSettingsProtocol
     
     let callbacks = PassthroughSubject<NotificationSettingsProxyCallback, Never>()
