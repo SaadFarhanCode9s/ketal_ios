@@ -13,7 +13,7 @@ branding:
   display_name: "ketal"
   bundle_id_base: "io.ketal.app"
   app_group: "group.io.ketal"
-  team_id: "7J4U792NQT"
+  team_id: "DQM48A6L3K"
 
 # Authentication Configuration
 authentication:
