@@ -461,9 +461,17 @@ private_lane :import_code_signing_assets do
   main_profile_path = "#{cert_dir}/main.mobileprovision"
   nse_profile_path = "#{cert_dir}/nse.mobileprovision"
 
-  File.write(cert_path, Base64.decode64(certificate_base64))
-  File.write(main_profile_path, Base64.decode64(main_profile_base64))
-  File.write(nse_profile_path, Base64.decode64(nse_profile_base64))
+  begin
+    File.write(cert_path, Base64.strict_decode64(certificate_base64.gsub(/\s+/, "")))
+    File.write(main_profile_path, Base64.strict_decode64(main_profile_base64.gsub(/\s+/, "")))
+    File.write(nse_profile_path, Base64.strict_decode64(nse_profile_base64.gsub(/\s+/, "")))
+  rescue => e
+    UI.user_error!("Base64 Decoding failed: #{e.message}. Your GitHub Secret likely contains invalid characters.")
+  end
+
+  # File.write(cert_path, Base64.decode64(certificate_base64))
+  # File.write(main_profile_path, Base64.decode64(main_profile_base64))
+  # File.write(nse_profile_path, Base64.decode64(nse_profile_base64))
 
   # NEW DEBUG BLOCK
   [main_profile_path, nse_profile_path].each do |path|
