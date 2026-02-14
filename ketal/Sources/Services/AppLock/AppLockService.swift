@@ -48,9 +48,10 @@ class AppLockService: AppLockServiceProtocol {
     }
     
     var biometricUnlockTrusted: Bool {
-        guard let state = keychainController.pinCodeBiometricState() else { return false }
+        guard let stateData = keychainController.pinCodeBiometricState() else { return false }
         updateBiometrics()
-        return state == context.evaluatedPolicyDomainState
+        guard let currentState = context.evaluatedPolicyDomainState else { return false }
+        return stateData == currentState.data
     }
     
     var numberOfPINAttempts: AnyPublisher<Int, Never> {
@@ -91,7 +92,7 @@ class AppLockService: AppLockServiceProtocol {
         guard let state = context.evaluatedPolicyDomainState else { return .failure(.biometricUnlockNotSupported) }
         
         do {
-            try keychainController.setPINCodeBiometricState(state)
+            try keychainController.setPINCodeBiometricState(state.data)
             return .success(())
         } catch {
             MXLog.error("Keychain access error: \(error)")
