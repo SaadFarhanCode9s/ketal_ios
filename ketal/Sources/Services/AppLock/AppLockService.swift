@@ -39,11 +39,7 @@ class AppLockService: AppLockServiceProtocol {
     
     var biometryType: LABiometryType {
         updateBiometrics()
-        if #available(iOS 18.0, *) {
-            guard context.domainState != nil else { return .none }
-        } else {
-            guard context.evaluatedPolicyDomainState != nil else { return .none }
-        }
+        guard context.evaluatedPolicyDomainState != nil else { return .none }
         return context.biometryType
     }
     
@@ -54,11 +50,7 @@ class AppLockService: AppLockServiceProtocol {
     var biometricUnlockTrusted: Bool {
         guard let state = keychainController.pinCodeBiometricState() else { return false }
         updateBiometrics()
-        if #available(iOS 18.0, *) {
-            return state == context.domainState
-        } else {
-            return state == context.evaluatedPolicyDomainState
-        }
+        return state == context.evaluatedPolicyDomainState
     }
     
     var numberOfPINAttempts: AnyPublisher<Int, Never> {
@@ -96,14 +88,7 @@ class AppLockService: AppLockServiceProtocol {
     
     func enableBiometricUnlock() -> Result<Void, AppLockServiceError> {
         guard isEnabled else { return .failure(.pinNotSet) }
-        let state: Data?
-        if #available(iOS 18.0, *) {
-            state = context.domainState
-        } else {
-            state = context.evaluatedPolicyDomainState
-        }
-        
-        guard let state else { return .failure(.biometricUnlockNotSupported) }
+        guard let state = context.evaluatedPolicyDomainState else { return .failure(.biometricUnlockNotSupported) }
         
         do {
             try keychainController.setPINCodeBiometricState(state)

@@ -302,18 +302,9 @@ class AppCoordinator: AppCoordinatorProtocol, AuthenticationFlowCoordinatorDeleg
     func handleUserActivity(_ userActivity: NSUserActivity) {
         // `INStartVideoCallIntent` is to be replaced with `INStartCallIntent`
         // but calls from Recents still send it ¯\_(ツ)_/¯
-        let intent = userActivity.interaction?.intent
-        let roomIdentifier: String?
-        
-        if #available(iOS 13.0, *), let startCallIntent = intent as? INStartCallIntent {
-            roomIdentifier = startCallIntent.contacts?.first?.personHandle?.value
-        } else if let startVideoCallIntent = intent as? INStartVideoCallIntent {
-            roomIdentifier = startVideoCallIntent.contacts?.first?.personHandle?.value
-        } else {
-            roomIdentifier = nil
-        }
-        
-        guard let roomIdentifier else {
+        guard let intent = userActivity.interaction?.intent as? INStartVideoCallIntent,
+              let contact = intent.contacts?.first,
+              let roomIdentifier = contact.personHandle?.value else {
             MXLog.error("Failed retrieving information from userActivity: \(userActivity)")
             return
         }
