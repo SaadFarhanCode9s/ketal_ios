@@ -5,7 +5,7 @@
 // swiftformat:disable all
 
 import XCTest
-@testable import ElementX
+@testable import ketal
 
 extension PreviewTests {
 

@@ -11,7 +11,7 @@ import Foundation
 import MatrixRustSDK
 
 enum Target: String {
-    case mainApp = "elementx"
+    case mainApp = "ketal"
     case nse
     case shareExtension = "shareextension"
     case tests
