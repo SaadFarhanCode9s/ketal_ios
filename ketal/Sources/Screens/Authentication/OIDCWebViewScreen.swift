@@ -25,27 +25,30 @@ struct OIDCWebViewScreen: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            VStack(spacing: 0) {
-                navigationBar
-                ZStack {
-                    WebView(viewModel: viewModel)
-                        .opacity(viewModel.isLoading ? 0 : 1)
-                        //.ignoresSafeArea()
-                    if viewModel.isLoading {
-                        ProgressView()
-                            .scaleEffect(1.5)
-                    }
-                    if let error = delayedError {
-                        errorView(error)
-                    }
+        ZStack {
+            WebView(viewModel: viewModel)
+                .opacity(viewModel.isLoading ? 0 : 1)
+            
+            if viewModel.isLoading {
+                ProgressView()
+                    .scaleEffect(1.5)
+            }
+            if let error = delayedError {
+                errorView(error)
+            }
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .cancellationAction) {
+                Button(action: onCancel) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundColor(.primary.opacity(0.6))
+                        .padding(8)
+                        .background(.ultraThinMaterial, in: Circle())
                 }
             }
         }
-        .background(Color.white)
-        .clipShape(UnevenRoundedRectangle(topLeadingRadius: 36, topTrailingRadius: 36))
-        .shadow(color: .black.opacity(0.52), radius: 18, x: 0, y: -4)
-        .ignoresSafeArea(edges: .bottom)
         .onChange(of: viewModel.error) { _, newError in
             if let error = newError {
                 Task {
@@ -64,24 +67,6 @@ struct OIDCWebViewScreen: View {
         .onAppear {
             viewModel.loadAuthorizationPage()
         }
-    }
-    
-    private var navigationBar: some View {
-        HStack {
-            Spacer()
-            Button(action: onCancel) {
-                Image(systemName: "xmark")
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(.compound.textPrimary)
-                    .padding(12)
-                    .background(Color.compound.bgCanvasDefault)
-                    .clipShape(Circle())
-                    .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 3)
-            }
-        }
-        .padding(.horizontal, 24)
-        .padding(.top, 24)
-        .padding(.bottom, 8)
     }
 
     private func errorView(_ error: String) -> some View {
@@ -106,6 +91,9 @@ struct OIDCWebViewScreen: View {
             .buttonStyle(.compound(.primary))
             .padding(.top, 8)
         }
+        .padding()
+        .background(.regularMaterial) // Add material background for error view readability over webview
+        .cornerRadius(12)
         .padding()
     }
 }

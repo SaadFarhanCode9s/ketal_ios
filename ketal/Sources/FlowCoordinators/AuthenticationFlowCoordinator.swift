@@ -398,17 +398,14 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
 
     private func startDirectLogin() {
         Task {
-            let indicatorID = "\(Self.self)-DirectLoginLoading"
-            userIndicatorController.submitIndicator(UserIndicator(id: indicatorID, type: .modal, title: "Connecting...", persistent: true))
-
+            // REMOVED: "Connecting..." indicator for immediate feedback
+            
             // Assume the first provider is the default.
             guard let defaultServer = appSettings.accountProviders.first else {
-                userIndicatorController.retractIndicatorWithId(indicatorID)
                 return
             }
 
             let result = await authenticationService.configure(for: defaultServer, flow: .login)
-            userIndicatorController.retractIndicatorWithId(indicatorID)
 
             switch result {
             case .success:
@@ -421,15 +418,10 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
 
     private func continueOIDCWithLoginHint(_ loginHint: String?) {
         Task {
-            let indicatorID = "\(Self.self)-OIDCLoading"
-            userIndicatorController.submitIndicator(UserIndicator(id: indicatorID,
-                                                                  type: .modal,
-                                                                  title: "Loading...",
-                                                                  persistent: true))
+            // REMOVED: "Loading..." indicator for immediate feedback
 
             switch await authenticationService.urlForOIDCLogin(loginHint: loginHint) {
             case .success(let oidcData):
-                userIndicatorController.retractIndicatorWithId(indicatorID)
 
                 guard let window = appMediator.windowManager.mainWindow else {
                     fatalError("No main window found")
@@ -437,7 +429,6 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
                 stateMachine.tryEvent(.continueWithOIDC, userInfo: (oidcData, window))
 
             case .failure(let error):
-                userIndicatorController.retractIndicatorWithId(indicatorID)
                 userIndicatorController.submitIndicator(UserIndicator(title: "Failed to start login: \(error)"))
             }
         }
@@ -462,20 +453,20 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
             switch result {
             case .success(let userSession):
                 // Dismiss then transition
-                self.navigationStackCoordinator.setFullScreenCoverCoordinator(nil)
+                self.navigationStackCoordinator.setSheetCoordinator(nil)
                 self.stateMachine.tryEvent(.signedIn, userInfo: userSession)
 
             case .cancel:
                 // Only send cancellation if we're in the oidcAuthentication state
                 // This prevents race conditions with dismissal callbacks
                 if self.stateMachine.state == .oidcAuthentication {
-                    self.navigationStackCoordinator.setFullScreenCoverCoordinator(nil)
+                    self.navigationStackCoordinator.setSheetCoordinator(nil)
                     self.stateMachine.tryEvent(.cancelledOIDCAuthentication(previousState: fromState))
                 }
             }
         }
 
-        navigationStackCoordinator.setFullScreenCoverCoordinator(coordinator) { [weak self] in
+        navigationStackCoordinator.setSheetCoordinator(coordinator) { [weak self] in
             guard let self else { return }
 
             // Handle interactive dismissal (user swiped down)

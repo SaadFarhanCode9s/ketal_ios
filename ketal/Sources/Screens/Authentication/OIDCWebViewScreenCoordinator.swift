@@ -41,14 +41,16 @@ class OIDCWebViewScreenCoordinator: CoordinatorProtocol {
         let components = URLComponents(url: parameters.authorizationURL, resolvingAgainstBaseURL: false)
         let redirectURI = components?.queryItems?.first(where: { $0.name == "redirect_uri" })?.value ?? "ketal://oidc"
 
-        return AnyView(OIDCWebViewScreen(authorizationURL: parameters.authorizationURL,
-                                         redirectURI: redirectURI,
-                                         onSuccess: { [weak self] callbackURL in
-                                             self?.handleCallback(callbackURL)
-                                         },
-                                         onCancel: { [weak self] in
-                                             self?.handleCancellation()
-                                         }))
+        return AnyView(NavigationStack {
+            OIDCWebViewScreen(authorizationURL: parameters.authorizationURL,
+                              redirectURI: redirectURI,
+                              onSuccess: { [weak self] callbackURL in
+                                  self?.handleCallback(callbackURL)
+                              },
+                              onCancel: { [weak self] in
+                                  self?.handleCancellation()
+                              })
+        })
     }
 
     func callback(_ callback: @escaping (OIDCWebViewScreenCoordinatorResult) -> Void) {
