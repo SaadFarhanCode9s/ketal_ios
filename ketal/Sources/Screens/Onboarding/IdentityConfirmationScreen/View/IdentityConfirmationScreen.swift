@@ -13,11 +13,12 @@ struct IdentityConfirmationScreen: View {
     let context: IdentityConfirmationScreenViewModel.Context
     
     var shouldShowSkipButton: Bool {
-        #if DEBUG
-        !ProcessInfo.isRunningTests
-        #else
-        false
-        #endif
+        true
+        // #if DEBUG
+        // !ProcessInfo.isRunningTests
+        // #else
+        // false
+        // #endif
     }
     
     var body: some View {
@@ -92,7 +93,6 @@ struct IdentityConfirmationScreen: View {
                 .buttonStyle(.compound(.primary))
                 .disabled(true)
             }
-            
             if shouldShowSkipButton {
                 Button("\(L10n.actionSkip) 🙉") {
                     context.send(viewAction: .skip)

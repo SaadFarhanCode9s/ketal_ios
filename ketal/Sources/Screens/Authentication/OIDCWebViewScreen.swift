@@ -10,6 +10,7 @@ import WebKit
 
 struct OIDCWebViewScreen: View {
     @StateObject private var viewModel: OIDCWebViewViewModel
+    @State private var delayedError: String?
     let onSuccess: (URL) -> Void
     let onCancel: () -> Void
 
@@ -35,7 +36,7 @@ struct OIDCWebViewScreen: View {
                         ProgressView()
                             .scaleEffect(1.5)
                     }
-                    if let error = viewModel.error {
+                    if let error = delayedError {
                         errorView(error)
                     }
                 }
@@ -45,6 +46,16 @@ struct OIDCWebViewScreen: View {
         .clipShape(UnevenRoundedRectangle(topLeadingRadius: 36, topTrailingRadius: 36))
         .shadow(color: .black.opacity(0.52), radius: 18, x: 0, y: -4)
         .ignoresSafeArea(edges: .bottom)
+        .onChange(of: viewModel.error) { _, newError in
+            if let error = newError {
+                Task {
+                    try? await Task.sleep(nanoseconds: 5_000_000_000) // 5 seconds
+                    delayedError = error
+                }
+            } else {
+                delayedError = nil
+            }
+        }
         .onChange(of: viewModel.callbackURL) { _, newValue in
             if let callbackURL = newValue {
                 onSuccess(callbackURL)
