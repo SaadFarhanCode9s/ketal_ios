@@ -31,7 +31,7 @@ struct OIDCWebViewScreen: View {
                 ZStack {
                     WebView(viewModel: viewModel)
                         .opacity(viewModel.isLoading ? 0 : 1)
-                        .ignoresSafeArea()
+                        //.ignoresSafeArea()
                     if viewModel.isLoading {
                         ProgressView()
                             .scaleEffect(1.5)
