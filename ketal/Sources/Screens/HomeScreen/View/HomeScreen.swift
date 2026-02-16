@@ -91,7 +91,8 @@ struct HomeScreen: View {
                                 avatarSize: .user(on: .chats),
                                 mediaProvider: context.mediaProvider)
                 .accessibilityIdentifier(A11yIdentifiers.homeScreen.userAvatar)
-                .clipShape(.circle)
+                .background(.compound.bgCanvasDefault)
+                .clipShape(Circle())
                 .overlayBadge(10, isBadged: context.viewState.requiresExtraAccountSetup)
                 .compositingGroup()
         }

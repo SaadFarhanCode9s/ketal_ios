@@ -42,7 +42,7 @@ struct ServerConfirmationScreen: View {
         } bottomContent: {
             buttons
         }
-        .background()
+        .background(backgroundColor)
         .backgroundStyle(backgroundColor)
         .alert(item: $context.alertInfo)
         .introspect(.window, on: .supportedVersions) { window in

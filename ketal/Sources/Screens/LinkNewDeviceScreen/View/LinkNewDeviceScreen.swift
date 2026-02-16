@@ -17,7 +17,7 @@ struct LinkNewDeviceScreen: View {
         } bottomContent: {
             buttons
         }
-        .background()
+        .background(.compound.bgSubtleSecondary)
         .backgroundStyle(.compound.bgSubtleSecondary)
         .navigationTitle(L10n.commonLinkNewDevice)
         .navigationBarTitleDisplayMode(.inline)

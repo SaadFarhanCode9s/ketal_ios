@@ -38,7 +38,7 @@ struct JoinRoomScreen: View {
             bottomContent
         }
         .alert(item: $context.alertInfo)
-        .background()
+        .background(.compound.bgCanvasDefault)
         .backgroundStyle(.compound.bgCanvasDefault)
         .toolbarRole(RoomHeaderView.toolbarRole)
         .navigationBarTitleDisplayMode(.inline)

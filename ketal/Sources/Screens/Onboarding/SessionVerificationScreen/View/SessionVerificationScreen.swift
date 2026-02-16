@@ -27,7 +27,7 @@ struct SessionVerificationScreen: View {
         } bottomContent: {
             actionButtons
         }
-        .background()
+        .background(.compound.bgCanvasDefault)
         .backgroundStyle(.compound.bgCanvasDefault)
         .interactiveDismissDisabled()
         .navigationBarBackButtonHidden(context.viewState.verificationState == .verified)

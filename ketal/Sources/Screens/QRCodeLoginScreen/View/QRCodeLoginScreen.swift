@@ -27,7 +27,7 @@ struct QRCodeLoginScreen: View {
         mainContent
             .toolbar { toolbar }
             .toolbar(.visible, for: .navigationBar)
-            .background()
+            .background(backgroundStyle)
             .backgroundStyle(backgroundStyle)
             .interactiveDismissDisabled()
             .navigationBarBackButtonHidden(!context.viewState.shouldDisplayBackButton)

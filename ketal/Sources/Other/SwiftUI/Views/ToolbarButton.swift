@@ -64,7 +64,11 @@ struct ToolbarButton: View {
             .tint(role.tint)
             .backportButtonStyleGlassProminent()
         } else {
-            Button(role.title, action: action)
+            Button(action: action) {
+                role.icon
+                    .foregroundStyle(role.tint)
+                    .accessibilityLabel(role.title)
+            }
         }
     }
 }

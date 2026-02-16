@@ -20,7 +20,7 @@ struct SpacesAnnouncementSheetView: View {
         } bottomContent: {
             buttons
         }
-        .background()
+        .background(.compound.bgCanvasDefault)
         .backgroundStyle(.compound.bgCanvasDefault)
         .padding(.top, 14) // For the drag indicator
         .presentationDragIndicator(.visible)

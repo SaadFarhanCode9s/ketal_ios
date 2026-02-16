@@ -39,7 +39,7 @@ struct EncryptionResetPasswordScreen: View {
             .buttonStyle(.compound(.primary))
             .accessibilityIdentifier(A11yIdentifiers.encryptionResetPasswordScreen.submit)
         }
-        .background()
+        .background(.compound.bgCanvasDefault)
         .backgroundStyle(.compound.bgCanvasDefault)
         .interactiveDismissDisabled()
         .onAppear { textFieldFocus = true }

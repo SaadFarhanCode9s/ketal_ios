@@ -180,7 +180,7 @@ struct FullscreenDialog_Previews: PreviewProvider, TestablePreview {
         } bottomContent: {
             buttons
         }
-        .background()
+        .background(.compound.bgCanvasDefault)
         .backgroundStyle(.compound.bgCanvasDefault)
         .previewDisplayName("Plain")
         
@@ -189,7 +189,7 @@ struct FullscreenDialog_Previews: PreviewProvider, TestablePreview {
         } bottomContent: {
             buttons
         }
-        .background()
+        .background(.compound.bgCanvasDefault)
         .backgroundStyle(.compound.bgCanvasDefault)
         .previewDisplayName("Gradient")
     }

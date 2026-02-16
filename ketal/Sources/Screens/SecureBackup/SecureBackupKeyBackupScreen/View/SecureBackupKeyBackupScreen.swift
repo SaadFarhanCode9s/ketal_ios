@@ -25,7 +25,7 @@ struct SecureBackupKeyBackupScreen: View {
             .buttonStyle(.compound(.primary))
             .accessibilityIdentifier(A11yIdentifiers.secureBackupKeyBackupScreen.deleteKeyStorage)
         }
-        .background()
+        .background(.compound.bgCanvasDefault)
         .backgroundStyle(.compound.bgCanvasDefault)
         .interactiveDismissDisabled()
         .toolbar { toolbar }

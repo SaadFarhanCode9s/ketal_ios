@@ -19,7 +19,7 @@ struct AnalyticsPromptScreen: View {
         } bottomContent: {
             buttons
         }
-        .background()
+        .background(.compound.bgCanvasDefault)
         .backgroundStyle(.compound.bgCanvasDefault)
         .navigationBarHidden(true)
         .navigationBarBackButtonHidden(true)

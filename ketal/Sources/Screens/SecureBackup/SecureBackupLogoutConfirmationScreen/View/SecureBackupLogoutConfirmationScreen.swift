@@ -24,7 +24,7 @@ struct SecureBackupLogoutConfirmationScreen: View {
             footer.padding()
         }
         .toolbar { toolbar }
-        .background()
+        .background(.compound.bgCanvasDefault)
         .backgroundStyle(.compound.bgCanvasDefault)
         .alert(item: $context.alertInfo)
     }

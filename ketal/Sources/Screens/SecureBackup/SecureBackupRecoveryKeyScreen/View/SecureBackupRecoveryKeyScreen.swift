@@ -29,7 +29,7 @@ struct SecureBackupRecoveryKeyScreen: View {
         }
         .toolbar { toolbar }
         .toolbar(.visible, for: .navigationBar)
-        .background()
+        .background(.compound.bgCanvasDefault)
         .backgroundStyle(.compound.bgCanvasDefault)
         .interactiveDismissDisabled()
         .alert(item: $context.alertInfo)

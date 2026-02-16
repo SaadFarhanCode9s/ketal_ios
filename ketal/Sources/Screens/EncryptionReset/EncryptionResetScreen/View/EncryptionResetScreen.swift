@@ -22,7 +22,7 @@ struct EncryptionResetScreen: View {
             .buttonStyle(.compound(.primary))
             .accessibilityIdentifier(A11yIdentifiers.encryptionResetScreen.continueReset)
         }
-        .background()
+        .background(.compound.bgCanvasDefault)
         .backgroundStyle(.compound.bgCanvasDefault)
         .interactiveDismissDisabled()
         .toolbar { toolbar }

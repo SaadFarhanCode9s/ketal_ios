@@ -46,7 +46,7 @@ struct AppLockScreen: View {
             }
             .font(.compound.bodyMDSemibold)
         }
-        .background()
+        .background(.compound.bgCanvasDefault)
         .backgroundStyle(.compound.bgCanvasDefault)
         .disabled(context.viewState.forcedLogoutIndicator != nil)
         .overlay {

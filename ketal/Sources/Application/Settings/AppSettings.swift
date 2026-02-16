@@ -228,7 +228,7 @@ final class AppSettings {
     private(set) var accountProviders = [Bundle.main.object(forInfoDictionaryKey: "KetalDomainBase") as? String ?? "ketals.online"]
     /// Whether or not the user is allowed to manually enter their own account provider.
     /// Set to false to force the use of the provider above.
-    private(set) var allowOtherAccountProviders = true
+    private(set) var allowOtherAccountProviders = false
     /// Whether the components surrounding the app brand/logo should be hidden or not
     private(set) var hideBrandChrome = false
     
