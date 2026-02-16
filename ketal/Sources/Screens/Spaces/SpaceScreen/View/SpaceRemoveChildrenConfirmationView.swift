@@ -22,7 +22,7 @@ struct SpaceRemoveChildrenConfirmationView: View {
     
     var body: some View {
         ScrollView {
-            TitleAndIcon(title: L10n.screenSpaceRemoveRoomsConfirmationTitleIos(L10n.commonRooms(count)),
+            TitleAndIcon(title: L10n.screenSpaceRemoveRoomsConfirmationTitleIos(L10n.commonRooms(count), spaceName),
                          subtitle: L10n.screenSpaceRemoveRoomsConfirmationContent,
                          icon: \.errorSolid,
                          iconStyle: .alertSolid)
