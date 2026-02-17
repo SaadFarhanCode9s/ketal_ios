@@ -60,8 +60,7 @@ final class AuthenticationStartScreenCoordinator: CoordinatorProtocol {
                 case .loginDirectlyWithPassword(let loginHint):
                     actionsSubject.send(.loginDirectlyWithPassword(loginHint: loginHint))
                 case .requestOIDCEmail:
-                    // This is handled by the flow coordinator directly
-                    break
+                    actionsSubject.send(.requestOIDCEmail)
                 }
             }
             .store(in: &cancellables)

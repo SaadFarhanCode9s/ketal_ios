@@ -18,6 +18,7 @@ enum AuthenticationStartScreenCoordinatorAction {
     case reportProblem
     case loginDirectlyWithOIDC(data: OIDCAuthorizationDataProxy, window: UIWindow)
     case loginDirectlyWithPassword(loginHint: String?)
+    case requestOIDCEmail
 }
 
 /// Replace your existing AuthenticationStartScreenViewModelAction with this:
@@ -49,17 +50,20 @@ enum AuthenticationStartScreenViewModelAction: Equatable {
 //     static func == (lhs: AuthenticationStartScreenViewModelAction, rhs: AuthenticationStartScreenViewModelAction) -> Bool {
 //         switch (lhs, rhs) {
 //         case (.loginWithQR, .loginWithQR):
-//             return true
-//         case (.login, .login):
-//             return true
-//         case (.register, .register):
-//             return true
-//         case (.reportProblem, .reportProblem):
+//             return                case .requestOIDCEmail:
+//                     actionsSubject.send(.requestOIDCEmail)
+//                 }
+//   case (.reportProblem, .reportProblem):
 //             return true
 //         case (.requestOIDCEmail, .requestOIDCEmail):
-//             return true
-//         case (.loginDirectlyWithPassword(let lhsLoginHint), .loginDirectlyWithPassword(let rhsLoginHint)):
-//             return lhsLoginHint == rhsLoginHint
+//             return                case .loginDirectlyWithPassword(let loginHint):
+//                     stateMachine.tryEvent(.continueWithPassword, userInfo: loginHint)
+//                 case .requestOIDCEmail:
+//                     // Force start direct login when email registration is requested
+//                     // but we want to bypass it for Keycloak
+//                     self.startDirectLogin()
+//                 }
+//  return lhsLoginHint == rhsLoginHint
 //         default:
 //             return false
 //         }

@@ -291,6 +291,10 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
                     self.stateMachine.tryEvent(.continueWithOIDC, userInfo: (oidcData, window))
                 case .loginDirectlyWithPassword(let loginHint):
                     stateMachine.tryEvent(.continueWithPassword, userInfo: loginHint)
+                case .requestOIDCEmail:
+                    // Force start direct login when email registration is requested
+                    // but we want to bypass it for Keycloak
+                    self.startDirectLogin()
                 }
             }
             .store(in: &cancellables)
