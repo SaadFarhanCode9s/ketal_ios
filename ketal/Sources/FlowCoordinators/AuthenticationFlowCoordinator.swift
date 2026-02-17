@@ -397,38 +397,44 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
     }
 
     private func startDirectLogin() {
-        Task {
-            // REMOVED: "Connecting..." indicator for immediate feedback
+        Task { @MainActor in
+            MXLog.info("[AuthFlow] Starting direct login flow")
             
             // Assume the first provider is the default.
             guard let defaultServer = appSettings.accountProviders.first else {
+                MXLog.error("[AuthFlow] No account provider found")
                 return
             }
 
+            MXLog.info("[AuthFlow] Configuring for server: \(defaultServer)")
             let result = await authenticationService.configure(for: defaultServer, flow: .login)
 
             switch result {
             case .success:
+                MXLog.info("[AuthFlow] Configuration successful, continuing to OIDC")
                 self.continueOIDCWithLoginHint(nil)
             case .failure(let error):
+                MXLog.error("[AuthFlow] Configuration failed: \(error)")
                 userIndicatorController.submitIndicator(UserIndicator(title: "Failed to connect: \(error)"))
             }
         }
     }
 
     private func continueOIDCWithLoginHint(_ loginHint: String?) {
-        Task {
-            // REMOVED: "Loading..." indicator for immediate feedback
+        Task { @MainActor in
+            MXLog.info("[AuthFlow] Fetching OIDC URL")
 
             switch await authenticationService.urlForOIDCLogin(loginHint: loginHint) {
             case .success(let oidcData):
-
+                MXLog.info("[AuthFlow] Got OIDC data, presenting WebView")
+                
                 guard let window = appMediator.windowManager.mainWindow else {
                     fatalError("No main window found")
                 }
                 stateMachine.tryEvent(.continueWithOIDC, userInfo: (oidcData, window))
 
             case .failure(let error):
+                MXLog.error("[AuthFlow] Failed to get OIDC URL: \(error)")
                 userIndicatorController.submitIndicator(UserIndicator(title: "Failed to start login: \(error)"))
             }
         }
