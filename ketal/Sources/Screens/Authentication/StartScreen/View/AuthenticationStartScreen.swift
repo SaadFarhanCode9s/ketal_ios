@@ -82,9 +82,15 @@ struct AuthenticationStartScreen: View {
             // }
 
             Button { context.send(viewAction: .login) } label: {
-                Text("Sign in")
+                if context.viewState.isLoading {
+                    ProgressView()
+                        .colorScheme(.dark) // Ensure it's visible on primary color
+                } else {
+                    Text("Sign in")
+                }
             }
             .buttonStyle(.compound(.primary))
+            .disabled(context.viewState.isLoading)
             .accessibilityIdentifier(A11yIdentifiers.authenticationStartScreen.signIn)
             .shadow(color: Color.gray.opacity(0.9), radius: 10, x: 0, y: 0)
             .frame(maxWidth: 200)

@@ -98,6 +98,7 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
     // periphery:ignore - retaining purpose
     private var bugReportFlowCoordinator: BugReportFlowCoordinator?
     private var oidcAuthenticationCoordinator: OIDCAuthenticationCoordinator?
+    private var authenticationStartScreenCoordinator: AuthenticationStartScreenCoordinator?
     private var preloadedOIDCData: OIDCAuthorizationDataProxy?
 
     weak var delegate: AuthenticationFlowCoordinatorDelegate?
@@ -269,6 +270,7 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
                                                              appSettings: appSettings,
                                                              userIndicatorController: userIndicatorController)
         let coordinator = AuthenticationStartScreenCoordinator(parameters: parameters)
+        authenticationStartScreenCoordinator = coordinator
 
         coordinator.actions
             .sink { [weak self] action in
@@ -487,6 +489,7 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
     }
 
     private func showOIDCAuthentication(oidcData: OIDCAuthorizationDataProxy, presentationAnchor: UIWindow, fromState: State) {
+        authenticationStartScreenCoordinator?.stopLoading()
         MXLog.info("[Authentication Flow Coordinator] Showing OIDC authentication flow")
         let parameters = OIDCAuthenticationCoordinatorParameters(oidcData: oidcData,
                                                                  authenticationService: authenticationService,
@@ -519,6 +522,7 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
     }
 
     private func showLoginScreen(loginHint: String?, fromState: State) {
+        authenticationStartScreenCoordinator?.stopLoading()
         let parameters = LoginScreenCoordinatorParameters(authenticationService: authenticationService,
                                                           loginHint: loginHint,
                                                           userIndicatorController: userIndicatorController,

@@ -70,7 +70,10 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
         case .loginWithQR:
             actionsSubject.send(.loginWithQR)
         case .login:
+            state.isLoading = true
             Task { await login() }
+        case .stopLoading:
+            state.isLoading = false
         case .register:
             actionsSubject.send(.register)
         case .reportProblem:
@@ -120,6 +123,7 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
     }
 
     private func displayError() {
+        state.isLoading = false
         state.bindings.alertInfo = AlertInfo(id: .genericError)
     }
 }

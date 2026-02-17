@@ -85,6 +85,7 @@ struct AuthenticationStartScreenViewState: BindableState {
     let serverName: String?
     let showCreateAccountButton: Bool
     let showQRCodeLoginButton: Bool
+    var isLoading: Bool = false
 
     let hideBrandChrome: Bool
 
@@ -115,6 +116,7 @@ enum AuthenticationStartScreenViewAction {
 
     case loginWithQR
     case login
+    case stopLoading
     case register
     case reportProblem
 }

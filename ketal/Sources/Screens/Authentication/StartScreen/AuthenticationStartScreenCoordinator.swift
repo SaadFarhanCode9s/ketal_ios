@@ -66,6 +66,10 @@ final class AuthenticationStartScreenCoordinator: CoordinatorProtocol {
             .store(in: &cancellables)
     }
 
+    func stopLoading() {
+        viewModel.process(viewAction: .stopLoading)
+    }
+
     func toPresentable() -> AnyView {
         AnyView(AuthenticationStartScreen(context: viewModel.context))
     }
