@@ -35,6 +35,7 @@ final class OIDCAuthenticationCoordinator: NSObject, CoordinatorProtocol {
 
     init(parameters: OIDCAuthenticationCoordinatorParameters) {
         self.parameters = parameters
+        NSLog("[OIDC DEBUG] OIDCAuthenticationCoordinator initialized")
     }
 
     // MARK: - Public

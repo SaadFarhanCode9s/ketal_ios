@@ -400,65 +400,62 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
     }
 
     private func startDirectLogin() {
+        NSLog("[OIDC DEBUG] startDirectLogin triggered")
         print("[OIDC DEBUG] startDirectLogin called")
         Task {
             let indicatorID = "\(Self.self)-DirectLoginLoading"
-            userIndicatorController.submitIndicator(UserIndicator(id: indicatorID, type: .modal, title: "Connecting...", persistent: true))
+            // Change title to distinguish it
+            userIndicatorController.submitIndicator(UserIndicator(id: indicatorID, type: .modal, title: "OIDC Step 1: Connecting...", persistent: true))
 
-            // Assume the first provider is the default.
             guard let defaultServer = appSettings.accountProviders.first else {
-                print("[OIDC DEBUG] No default server found")
+                NSLog("[OIDC DEBUG] No default server found")
                 userIndicatorController.retractIndicatorWithId(indicatorID)
                 return
             }
 
-            print("[OIDC DEBUG] Configuring for \(defaultServer)")
+            NSLog("[OIDC DEBUG] Configuring for %@", defaultServer)
             let result = await authenticationService.configure(for: defaultServer, flow: .login)
-            print("[OIDC DEBUG] Configure result: \(result)")
+            NSLog("[OIDC DEBUG] Configure finished with result: %@", String(describing: result))
             userIndicatorController.retractIndicatorWithId(indicatorID)
 
             switch result {
             case .success:
                 self.continueOIDCWithLoginHint(nil)
             case .failure(let error):
-                print("[OIDC DEBUG] Configure FAILED: \(error)")
+                NSLog("[OIDC DEBUG] Configure failed: %@", error.localizedDescription)
                 userIndicatorController.submitIndicator(UserIndicator(title: "Failed to connect: \(error)"))
             }
         }
     }
 
     private func continueOIDCWithLoginHint(_ loginHint: String?) {
-        print("[OIDC DEBUG] continueOIDCWithLoginHint called")
+        NSLog("[OIDC DEBUG] continueOIDCWithLoginHint triggered")
         Task {
-            MXLog.info("[Authentication Flow Coordinator] Starting OIDC login with hint: \(String(describing: loginHint))")
             let indicatorID = "\(Self.self)-OIDCLoading"
+            // Change title to distinguish it
             userIndicatorController.submitIndicator(UserIndicator(id: indicatorID,
                                                                   type: .modal,
-                                                                  title: "Loading...",
+                                                                  title: "OIDC Step 2: Requesting URL...",
                                                                   persistent: true))
 
-            print("[OIDC DEBUG] Requesting OIDC URL")
+            NSLog("[OIDC DEBUG] Requesting OIDC URL from service")
             let result = await authenticationService.urlForOIDCLogin(loginHint: loginHint)
-            print("[OIDC DEBUG] OIDC URL Result: \(result)")
-            MXLog.info("[Authentication Flow Coordinator] Result of urlForOIDCLogin: \(result)")
+            NSLog("[OIDC DEBUG] urlForOIDCLogin result: %@", String(describing: result))
             
             switch result {
             case .success(let oidcData):
                 userIndicatorController.retractIndicatorWithId(indicatorID)
 
                 guard let window = appMediator.windowManager.mainWindow else {
-                    print("[OIDC DEBUG] NO MAIN WINDOW")
-                    MXLog.error("[Authentication Flow Coordinator] No main window found!")
+                    NSLog("[OIDC DEBUG] ERROR: No main window found")
                     fatalError("No main window found")
                 }
                 
-                print("[OIDC DEBUG] Transitioning to .oidcAuthentication")
-                MXLog.info("[Authentication Flow Coordinator] Transitioning to OIDC authentication state")
+                NSLog("[OIDC DEBUG] Transitioning state to .oidcAuthentication")
                 stateMachine.tryEvent(.continueWithOIDC, userInfo: (oidcData, window))
 
             case .failure(let error):
-                print("[OIDC DEBUG] Requesting OIDC URL FAILED: \(error)")
-                MXLog.error("[Authentication Flow Coordinator] Failed to get OIDC login URL: \(error)")
+                NSLog("[OIDC DEBUG] urlForOIDCLogin FAILED: %@", error.localizedDescription)
                 userIndicatorController.retractIndicatorWithId(indicatorID)
                 userIndicatorController.submitIndicator(UserIndicator(title: "Failed to start login: \(error)"))
             }
