@@ -62,7 +62,12 @@ final class OIDCAuthenticationCoordinator: NSObject, CoordinatorProtocol {
     // MARK: - Authentication
 
     private func startAuthentication() {
-        let redirectURL = parameters.oidcData.redirectURL
+        let components = URLComponents(url: parameters.oidcData.url, resolvingAgainstBaseURL: false)
+        let redirectURLString = components?.queryItems?.first(where: { $0.name == "redirect_uri" })?.value ?? "ketal://oidc"
+        
+        guard let redirectURL = URL(string: redirectURLString) else {
+            fatalError("Invalid redirect URL extracted: \(redirectURLString)")
+        }
 
         let session = ASWebAuthenticationSession(
             url: parameters.oidcData.url,
@@ -145,32 +150,3 @@ private extension OIDCAuthenticationCoordinator {
     }
 }
 
-// MARK: - Callback Helper
-
-private extension ASWebAuthenticationSession.Callback {
-    static func oidcRedirectURL(_ url: URL) -> Self {
-        if url.scheme == "https", let host = url.host() {
-            return .https(host: host, path: url.path())
-        } else if let scheme = url.scheme {
-            return .customScheme(scheme)
-        } else {
-            fatalError("Invalid OIDC redirect URL: \(url)")
-        }
-    }
-}
-
-// MARK: - Error Helper
-
-private extension Error {
-    var isOIDCUserCancellation: Bool {
-        let nsError = self as NSError
-
-        if nsError.domain == ASWebAuthenticationSessionErrorDomain,
-           nsError.code == ASWebAuthenticationSessionError.canceledLogin.rawValue,
-           nsError.localizedFailureReason == nil {
-            return true
-        }
-
-        return false
-    }
-}
