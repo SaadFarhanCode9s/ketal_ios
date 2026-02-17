@@ -424,22 +424,30 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
 
     private func continueOIDCWithLoginHint(_ loginHint: String?) {
         Task {
+            MXLog.info("[Authentication Flow Coordinator] Starting OIDC login with hint: \(String(describing: loginHint))")
             let indicatorID = "\(Self.self)-OIDCLoading"
             userIndicatorController.submitIndicator(UserIndicator(id: indicatorID,
                                                                   type: .modal,
                                                                   title: "Loading...",
                                                                   persistent: true))
 
-            switch await authenticationService.urlForOIDCLogin(loginHint: loginHint) {
+            let result = await authenticationService.urlForOIDCLogin(loginHint: loginHint)
+            MXLog.info("[Authentication Flow Coordinator] Result of urlForOIDCLogin: \(result)")
+            
+            switch result {
             case .success(let oidcData):
                 userIndicatorController.retractIndicatorWithId(indicatorID)
 
                 guard let window = appMediator.windowManager.mainWindow else {
+                    MXLog.error("[Authentication Flow Coordinator] No main window found!")
                     fatalError("No main window found")
                 }
+                
+                MXLog.info("[Authentication Flow Coordinator] Transitioning to OIDC authentication state")
                 stateMachine.tryEvent(.continueWithOIDC, userInfo: (oidcData, window))
 
             case .failure(let error):
+                MXLog.error("[Authentication Flow Coordinator] Failed to get OIDC login URL: \(error)")
                 userIndicatorController.retractIndicatorWithId(indicatorID)
                 userIndicatorController.submitIndicator(UserIndicator(title: "Failed to start login: \(error)"))
             }
@@ -447,6 +455,7 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
     }
 
     private func showOIDCAuthentication(oidcData: OIDCAuthorizationDataProxy, presentationAnchor: UIWindow, fromState: State) {
+        MXLog.info("[Authentication Flow Coordinator] Showing OIDC authentication flow")
         let parameters = OIDCAuthenticationCoordinatorParameters(oidcData: oidcData,
                                                                  authenticationService: authenticationService,
                                                                  userIndicatorController: userIndicatorController,
@@ -456,6 +465,7 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
 
         coordinator.callback { [weak self] result in
             guard let self else { return }
+            MXLog.info("[Authentication Flow Coordinator] OIDC coordinator result: \(result)")
 
             switch result {
             case .success(let userSession):

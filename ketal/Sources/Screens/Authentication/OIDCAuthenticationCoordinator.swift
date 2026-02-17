@@ -40,6 +40,7 @@ final class OIDCAuthenticationCoordinator: NSObject, CoordinatorProtocol {
     // MARK: - Public
 
     func start() {
+        MXLog.info("[OIDC Authentication Coordinator] Starting...")
         startAuthentication()
     }
 
@@ -62,18 +63,22 @@ final class OIDCAuthenticationCoordinator: NSObject, CoordinatorProtocol {
     // MARK: - Authentication
 
     private func startAuthentication() {
+        MXLog.info("[OIDC Authentication Coordinator] Extracting redirect URL...")
         let components = URLComponents(url: parameters.oidcData.url, resolvingAgainstBaseURL: false)
         let redirectURLString = components?.queryItems?.first(where: { $0.name == "redirect_uri" })?.value ?? "ketal://oidc"
         
         guard let redirectURL = URL(string: redirectURLString) else {
+            MXLog.error("[OIDC Authentication Coordinator] Failed to extract redirect URL")
             fatalError("Invalid redirect URL extracted: \(redirectURLString)")
         }
 
+        MXLog.info("[OIDC Authentication Coordinator] Creating ASWebAuthenticationSession with URL: \(parameters.oidcData.url)")
         let session = ASWebAuthenticationSession(
             url: parameters.oidcData.url,
             callback: .oidcRedirectURL(redirectURL)
         ) { [weak self] callbackURL, error in
             guard let self else { return }
+            MXLog.info("[OIDC Authentication Coordinator] Session finished. Callback URL: \(String(describing: callbackURL)), Error: \(String(describing: error))")
             Task { await self.handleAuthResult(callbackURL: callbackURL, error: error) }
         }
 
@@ -85,7 +90,14 @@ final class OIDCAuthenticationCoordinator: NSObject, CoordinatorProtocol {
         ]
 
         activeSession = session
-        session.start()
+        let started = session.start()
+        MXLog.info("[OIDC Authentication Coordinator] Session started: \(started)")
+        
+        if !started {
+            MXLog.error("[OIDC Authentication Coordinator] Failed to start ASWebAuthenticationSession")
+            // Handle failure to start - maybe notify via callback?
+            callbackClosure?(.cancel)
+        }
     }
 
     private func handleAuthResult(callbackURL: URL?, error: Error?) async {
