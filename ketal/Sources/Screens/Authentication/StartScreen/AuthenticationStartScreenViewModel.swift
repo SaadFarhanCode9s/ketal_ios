@@ -91,9 +91,6 @@ class AuthenticationStartScreenViewModel: AuthenticationStartScreenViewModelType
     }
 
     private func configureAccountProvider(_ accountProvider: String, loginHint: String? = nil) async {
-        startLoading()
-        defer { stopLoading() }
-
         guard case .success = await authenticationService.configure(for: accountProvider, flow: .login) else {
             // As the server was provisioned, we don't worry about the specifics and show a generic error to the user.
             displayError()

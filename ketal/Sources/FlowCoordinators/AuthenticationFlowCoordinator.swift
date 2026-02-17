@@ -423,28 +423,25 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
 
     private func startDirectLogin() {
         NSLog("[OIDC DEBUG] startDirectLogin triggered")
-        print("[OIDC DEBUG] startDirectLogin called")
-        Task {
-            let indicatorID = "\(Self.self)-DirectLoginLoading"
-            // Change title to distinguish it
-            userIndicatorController.submitIndicator(UserIndicator(id: indicatorID, type: .modal, title: "OIDC Step 1: Connecting...", persistent: true))
+        
+        if let oidcData = preloadedOIDCData {
+            NSLog("[OIDC DEBUG] Using preloaded data in startDirectLogin")
+            showOIDCImmediately(oidcData: oidcData)
+            return
+        }
 
+        Task {
             guard let defaultServer = appSettings.accountProviders.first else {
-                NSLog("[OIDC DEBUG] No default server found")
-                userIndicatorController.retractIndicatorWithId(indicatorID)
                 return
             }
 
             NSLog("[OIDC DEBUG] Configuring for %@", defaultServer)
             let result = await authenticationService.configure(for: defaultServer, flow: .login)
-            NSLog("[OIDC DEBUG] Configure finished with result: %@", String(describing: result))
-            userIndicatorController.retractIndicatorWithId(indicatorID)
-
+            
             switch result {
             case .success:
                 self.continueOIDCWithLoginHint(nil)
             case .failure(let error):
-                NSLog("[OIDC DEBUG] Configure failed: %@", error.localizedDescription)
                 userIndicatorController.submitIndicator(UserIndicator(title: "Failed to connect: \(error)"))
             }
         }
