@@ -98,6 +98,7 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
     // periphery:ignore - retaining purpose
     private var bugReportFlowCoordinator: BugReportFlowCoordinator?
     private var oidcAuthenticationCoordinator: OIDCAuthenticationCoordinator?
+    private var preloadedOIDCData: OIDCAuthorizationDataProxy?
 
     weak var delegate: AuthenticationFlowCoordinatorDelegate?
 
@@ -304,6 +305,23 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
         if fromState == .initial {
             navigationRootCoordinator.setRootCoordinator(navigationStackCoordinator)
         }
+        
+        // Preload OIDC data in the background
+        preloadOIDCData()
+    }
+    
+    private func preloadOIDCData() {
+        Task {
+            NSLog("[OIDC DEBUG] Preloading OIDC data...")
+            let result = await authenticationService.urlForOIDCLogin(loginHint: nil)
+            switch result {
+            case .success(let oidcData):
+                NSLog("[OIDC DEBUG] OIDC data preloaded successfully")
+                self.preloadedOIDCData = oidcData
+            case .failure(let error):
+                NSLog("[OIDC DEBUG] Failed to preload OIDC data: \(error.localizedDescription)")
+            }
+        }
     }
 
     // MARK: - QR Code
@@ -434,7 +452,13 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
 
     private func continueOIDCWithLoginHint(_ loginHint: String?) {
         Task {
-            NSLog("[OIDC DEBUG] continueOIDCWithLoginHint started")
+            if let oidcData = preloadedOIDCData {
+                NSLog("[OIDC DEBUG] Using preloaded OIDC data")
+                showOIDCImmediately(oidcData: oidcData)
+                return
+            }
+
+            NSLog("[OIDC DEBUG] continueOIDCWithLoginHint started (no preloaded data)")
             
             let result = await authenticationService.urlForOIDCLogin(loginHint: loginHint)
             NSLog("[OIDC DEBUG] urlForOIDCLogin result: %@", String(describing: result))
@@ -455,35 +479,46 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
             }
         }
     }
+    
+    private func showOIDCImmediately(oidcData: OIDCAuthorizationDataProxy) {
+        guard let window = appMediator.windowManager.mainWindow else {
+            NSLog("[OIDC DEBUG] ERROR: No main window found")
+            return
+        }
+        NSLog("[OIDC DEBUG] Showing OIDC immediately")
+        stateMachine.tryEvent(.continueWithOIDC, userInfo: (oidcData, window))
+    }
 
     private func showOIDCAuthentication(oidcData: OIDCAuthorizationDataProxy, presentationAnchor: UIWindow, fromState: State) {
-        MXLog.info("[Authentication Flow Coordinator] Showing OIDC authentication flow via WebView")
-        
-        let parameters = OIDCWebViewScreenCoordinatorParameters(authorizationURL: oidcData.url,
-                                                                  oidcData: oidcData,
-                                                                  authenticationService: authenticationService,
-                                                                  userIndicatorController: userIndicatorController)
+        MXLog.info("[Authentication Flow Coordinator] Showing OIDC authentication flow")
+        let parameters = OIDCAuthenticationCoordinatorParameters(oidcData: oidcData,
+                                                                 authenticationService: authenticationService,
+                                                                 userIndicatorController: userIndicatorController,
+                                                                 presentationAnchor: presentationAnchor)
 
-        let coordinator = OIDCWebViewScreenCoordinator(parameters: parameters)
+        let coordinator = OIDCAuthenticationCoordinator(parameters: parameters)
 
         coordinator.callback { [weak self] result in
             guard let self else { return }
-            MXLog.info("[Authentication Flow Coordinator] OIDC WebView coordinator result: \(result)")
+            MXLog.info("[Authentication Flow Coordinator] OIDC coordinator result: \(result)")
 
             switch result {
             case .success(let userSession):
-                self.navigationStackCoordinator.setSheetCoordinator(nil)
+                self.oidcAuthenticationCoordinator = nil
                 self.stateMachine.tryEvent(.signedIn, userInfo: userSession)
 
             case .cancel:
-                self.navigationStackCoordinator.setSheetCoordinator(nil)
+                // Only send cancellation if we're in the oidcAuthentication state
+                // This prevents race conditions with dismissal callbacks
                 if self.stateMachine.state == .oidcAuthentication {
+                    self.oidcAuthenticationCoordinator = nil
                     self.stateMachine.tryEvent(.cancelledOIDCAuthentication(previousState: fromState))
                 }
             }
         }
 
-        navigationStackCoordinator.setSheetCoordinator(coordinator)
+        oidcAuthenticationCoordinator = coordinator
+        coordinator.start()
     }
 
     private func showLoginScreen(loginHint: String?, fromState: State) {
