@@ -87,7 +87,11 @@ class AuthenticationService: AuthenticationServiceProtocol {
     }
 
     func urlForOIDCLogin(loginHint: String?) async -> Result<OIDCAuthorizationDataProxy, AuthenticationServiceError> {
-        guard let client else { return .failure(.oidcError(.urlFailure)) }
+        print("[OIDC DEBUG] urlForOIDCLogin called with hint: \(String(describing: loginHint))")
+        guard let client else { 
+            print("[OIDC DEBUG] urlForOIDCLogin: NO CLIENT")
+            return .failure(.oidcError(.urlFailure)) 
+        }
 
         func attemptLogin(config: OidcConfiguration) async throws -> OIDCAuthorizationDataProxy {
             MXLog.info("[OIDC DEBUG] Attempting login with configuration")
@@ -135,9 +139,12 @@ class AuthenticationService: AuthenticationServiceProtocol {
             MXLog.info("[OIDC DEBUG] staticRegistrations: \(staticRegistrations)")
 
             do {
+                print("[OIDC DEBUG] Attempting login with discovered config")
                 let result = try await attemptLogin(config: discoveredConfig)
+                print("[OIDC DEBUG] Login attempt SUCCESS")
                 return .success(result)
             } catch {
+                print("[OIDC DEBUG] Login attempt FAILED: \(error)")
                 let nsError = error as NSError
                 MXLog.error("[OIDC DEBUG] Login attempt FAILED")
                 MXLog.error("[OIDC DEBUG] Error domain: \(nsError.domain), code: \(nsError.code)")
@@ -158,10 +165,13 @@ class AuthenticationService: AuthenticationServiceProtocol {
 
         // PRIORITY 2: Fallback to static configuration from AppSettings
         do {
+            print("[OIDC DEBUG] falling back to static config")
             let config = appSettings.oidcConfiguration.rustValue
             let result = try await attemptLogin(config: config)
+            print("[OIDC DEBUG] Static config login attempt SUCCESS")
             return .success(result)
         } catch {
+            print("[OIDC DEBUG] Static config login attempt FAILED: \(error)")
             MXLog.error("Failed to get URL for OIDC login with static config: \(error)")
 
             // If we found issuer but not client ID (logic reused from cached fetch)

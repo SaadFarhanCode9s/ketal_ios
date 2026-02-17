@@ -40,6 +40,8 @@ final class OIDCAuthenticationCoordinator: NSObject, CoordinatorProtocol {
     // MARK: - Public
 
     func start() {
+        print("[OIDC DEBUG] Coordinator starting...")
+        NSLog("[OIDC DEBUG] Coordinator starting...")
         MXLog.info("[OIDC Authentication Coordinator] Starting...")
         startAuthentication()
     }
@@ -63,20 +65,25 @@ final class OIDCAuthenticationCoordinator: NSObject, CoordinatorProtocol {
     // MARK: - Authentication
 
     private func startAuthentication() {
+        print("[OIDC DEBUG] startAuthentication called")
+        NSLog("[OIDC DEBUG] startAuthentication called")
         MXLog.info("[OIDC Authentication Coordinator] Extracting redirect URL...")
         let components = URLComponents(url: parameters.oidcData.url, resolvingAgainstBaseURL: false)
         let redirectURLString = components?.queryItems?.first(where: { $0.name == "redirect_uri" })?.value ?? "ketal://oidc"
         
         guard let redirectURL = URL(string: redirectURLString) else {
+            print("[OIDC DEBUG] Failed to extract redirect URL")
             MXLog.error("[OIDC Authentication Coordinator] Failed to extract redirect URL")
             fatalError("Invalid redirect URL extracted: \(redirectURLString)")
         }
 
+        print("[OIDC DEBUG] Creating session with URL: \(parameters.oidcData.url)")
         MXLog.info("[OIDC Authentication Coordinator] Creating ASWebAuthenticationSession with URL: \(parameters.oidcData.url)")
         let session = ASWebAuthenticationSession(
             url: parameters.oidcData.url,
             callback: .oidcRedirectURL(redirectURL)
         ) { [weak self] callbackURL, error in
+            print("[OIDC DEBUG] Completion handler hit. Callback: \(String(describing: callbackURL)), Error: \(String(describing: error))")
             guard let self else { return }
             MXLog.info("[OIDC Authentication Coordinator] Session finished. Callback URL: \(String(describing: callbackURL)), Error: \(String(describing: error))")
             Task { await self.handleAuthResult(callbackURL: callbackURL, error: error) }
@@ -91,11 +98,11 @@ final class OIDCAuthenticationCoordinator: NSObject, CoordinatorProtocol {
 
         activeSession = session
         let started = session.start()
+        print("[OIDC DEBUG] session.start() returned \(started)")
         MXLog.info("[OIDC Authentication Coordinator] Session started: \(started)")
         
         if !started {
             MXLog.error("[OIDC Authentication Coordinator] Failed to start ASWebAuthenticationSession")
-            // Handle failure to start - maybe notify via callback?
             callbackClosure?(.cancel)
         }
     }
