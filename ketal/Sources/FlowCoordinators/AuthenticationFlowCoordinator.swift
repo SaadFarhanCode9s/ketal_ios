@@ -97,6 +97,7 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
 
     // periphery:ignore - retaining purpose
     private var bugReportFlowCoordinator: BugReportFlowCoordinator?
+    private var oidcAuthenticationCoordinator: OIDCAuthenticationCoordinator?
 
     weak var delegate: AuthenticationFlowCoordinatorDelegate?
 
@@ -157,6 +158,8 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
             navigationStackCoordinator.popToRoot(animated: animated)
 
         case .oidcAuthentication:
+            oidcAuthenticationCoordinator?.stop()
+            oidcAuthenticationCoordinator = nil
             navigationStackCoordinator.setSheetCoordinator(nil)
             navigationStackCoordinator.popToRoot(animated: animated)
         case .loginScreen:
@@ -397,90 +400,80 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
     }
 
     private func startDirectLogin() {
-        Task { @MainActor in
-            MXLog.info("[AuthFlow] Starting direct login flow")
-            
+        Task {
+            let indicatorID = "\(Self.self)-DirectLoginLoading"
+            userIndicatorController.submitIndicator(UserIndicator(id: indicatorID, type: .modal, title: "Connecting...", persistent: true))
+
             // Assume the first provider is the default.
             guard let defaultServer = appSettings.accountProviders.first else {
-                MXLog.error("[AuthFlow] No account provider found")
+                userIndicatorController.retractIndicatorWithId(indicatorID)
                 return
             }
 
-            MXLog.info("[AuthFlow] Configuring for server: \(defaultServer)")
             let result = await authenticationService.configure(for: defaultServer, flow: .login)
+            userIndicatorController.retractIndicatorWithId(indicatorID)
 
             switch result {
             case .success:
-                MXLog.info("[AuthFlow] Configuration successful, continuing to OIDC")
                 self.continueOIDCWithLoginHint(nil)
             case .failure(let error):
-                MXLog.error("[AuthFlow] Configuration failed: \(error)")
                 userIndicatorController.submitIndicator(UserIndicator(title: "Failed to connect: \(error)"))
             }
         }
     }
 
     private func continueOIDCWithLoginHint(_ loginHint: String?) {
-        Task { @MainActor in
-            MXLog.info("[AuthFlow] Fetching OIDC URL")
+        Task {
+            let indicatorID = "\(Self.self)-OIDCLoading"
+            userIndicatorController.submitIndicator(UserIndicator(id: indicatorID,
+                                                                  type: .modal,
+                                                                  title: "Loading...",
+                                                                  persistent: true))
 
             switch await authenticationService.urlForOIDCLogin(loginHint: loginHint) {
             case .success(let oidcData):
-                MXLog.info("[AuthFlow] Got OIDC data, presenting WebView")
-                
+                userIndicatorController.retractIndicatorWithId(indicatorID)
+
                 guard let window = appMediator.windowManager.mainWindow else {
                     fatalError("No main window found")
                 }
                 stateMachine.tryEvent(.continueWithOIDC, userInfo: (oidcData, window))
 
             case .failure(let error):
-                MXLog.error("[AuthFlow] Failed to get OIDC URL: \(error)")
+                userIndicatorController.retractIndicatorWithId(indicatorID)
                 userIndicatorController.submitIndicator(UserIndicator(title: "Failed to start login: \(error)"))
             }
         }
     }
 
     private func showOIDCAuthentication(oidcData: OIDCAuthorizationDataProxy, presentationAnchor: UIWindow, fromState: State) {
-        // NEW: Using WKWebView instead of ASWebAuthenticationSession
-        let parameters = OIDCWebViewScreenCoordinatorParameters(authorizationURL: oidcData.url,
-                                                                oidcData: oidcData,
-                                                                authenticationService: authenticationService,
-                                                                userIndicatorController: userIndicatorController)
+        let parameters = OIDCAuthenticationCoordinatorParameters(oidcData: oidcData,
+                                                                 authenticationService: authenticationService,
+                                                                 userIndicatorController: userIndicatorController,
+                                                                 presentationAnchor: presentationAnchor)
 
-        let coordinator = OIDCWebViewScreenCoordinator(parameters: parameters)
+        let coordinator = OIDCAuthenticationCoordinator(parameters: parameters)
 
-        // Track whether we've already handled the result to avoid double-processing
-        var resultHandled = false
-
-        coordinator.callback { [weak self] (result: OIDCWebViewScreenCoordinatorResult) in
-            guard let self, !resultHandled else { return }
-            resultHandled = true
+        coordinator.callback { [weak self] result in
+            guard let self else { return }
 
             switch result {
             case .success(let userSession):
-                // Dismiss then transition
-                self.navigationStackCoordinator.setSheetCoordinator(nil)
+                self.oidcAuthenticationCoordinator = nil
                 self.stateMachine.tryEvent(.signedIn, userInfo: userSession)
 
             case .cancel:
                 // Only send cancellation if we're in the oidcAuthentication state
                 // This prevents race conditions with dismissal callbacks
                 if self.stateMachine.state == .oidcAuthentication {
-                    self.navigationStackCoordinator.setSheetCoordinator(nil)
+                    self.oidcAuthenticationCoordinator = nil
                     self.stateMachine.tryEvent(.cancelledOIDCAuthentication(previousState: fromState))
                 }
             }
         }
 
-        navigationStackCoordinator.setSheetCoordinator(coordinator) { [weak self] in
-            guard let self else { return }
-
-            // Handle interactive dismissal (user swiped down)
-            // Only send the event if we haven't already handled a result and we're in the right state
-            if !resultHandled, self.stateMachine.state == .oidcAuthentication {
-                self.stateMachine.tryEvent(.cancelledOIDCAuthentication(previousState: fromState))
-            }
-        }
+        oidcAuthenticationCoordinator = coordinator
+        coordinator.start()
     }
 
     private func showLoginScreen(loginHint: String?, fromState: State) {

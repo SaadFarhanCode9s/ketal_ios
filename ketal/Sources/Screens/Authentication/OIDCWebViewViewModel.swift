@@ -17,23 +17,6 @@ class OIDCWebViewViewModel: NSObject, ObservableObject {
     private let authorizationURL: URL
     private let redirectURI: String
 
-    // lazy var webView: WKWebView = {
-    //     let config = WKWebViewConfiguration()
-    //     // Use non-persistent data store to avoid sharing cookies with the app
-    //     config.websiteDataStore = .nonPersistent()
-
-    //     let webView = WKWebView(frame: .zero, configuration: config)
-    //     webView.navigationDelegate = self
-    //     webView.customUserAgent = UserAgentBuilder.makeASCIIUserAgent()
-    //     // Style the webview
-    //     webView.isOpaque = false
-    //     webView.backgroundColor = .clear
-    //     webView.scrollView.backgroundColor = .clear
-    //     webView.scrollView.contentInsetAdjustmentBehavior = .never
-        
-    //     return webView
-    // }()
-
     lazy var webView: WKWebView = {
         let config = WKWebViewConfiguration()
         config.websiteDataStore = .nonPersistent()
