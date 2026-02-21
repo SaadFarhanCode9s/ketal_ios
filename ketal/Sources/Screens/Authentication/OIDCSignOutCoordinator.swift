@@ -34,8 +34,8 @@ class OIDCSignOutCoordinator: NSObject {
             return false
         }
         
-        guard var logoutURL = await fetchEndSessionEndpoint(issuer: issuer) else {
-            MXLog.error("[OIDCSignOutCoordinator] Failed to discover end_session_endpoint from OIDC configuration.")
+        guard var logoutURL = await fetchEndSessionEndpoint(issuer: issuer, domain: domain) else {
+            MXLog.error("[OIDCSignOutCoordinator] Failed to discover end_session_endpoint from OIDC configuration AND fallback failed.")
             return false
         }
         
@@ -137,7 +137,7 @@ class OIDCSignOutCoordinator: NSObject {
         return nil
     }
 
-    private func fetchEndSessionEndpoint(issuer: String) async -> URL? {
+    private func fetchEndSessionEndpoint(issuer: String, domain: String) async -> URL? {
         let cleanIssuer = issuer.hasSuffix("/") ? String(issuer.dropLast()) : issuer
         let configURLString = "\(cleanIssuer)/.well-known/openid-configuration"
         guard let url = URL(string: configURLString) else { return nil }
@@ -151,7 +151,10 @@ class OIDCSignOutCoordinator: NSObject {
         } catch {
             MXLog.error("[OIDCSignOutCoordinator] OIDC config discovery failed: \(error)")
         }
-        return nil
+        
+        // Fallback for MAS lacking end_session_endpoint: construct Keycloak logout endpoint directly
+        MXLog.info("[OIDCSignOutCoordinator] end_session_endpoint not found in discovery. Falling back to Keycloak.")
+        return URL(string: "https://auth.\(domain)/realms/ketal/protocol/openid-connect/logout")
     }
 }
 
