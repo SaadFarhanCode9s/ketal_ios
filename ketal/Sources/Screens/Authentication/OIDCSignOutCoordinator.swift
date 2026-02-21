@@ -53,7 +53,7 @@ class OIDCSignOutCoordinator: NSObject {
             
             // post_logout_redirect_uri is essential to get the callback from ASWebAuthenticationSession
             // We use the same redirect URI as for login
-            queryItems.append(URLQueryItem(name: "post_logout_redirect_uri", value: "ketal://oidc"))
+            queryItems.append(URLQueryItem(name: "post_logout_redirect_uri", value: "app.ketal.ios:/oidc"))
             
             components.queryItems = queryItems
             if let updatedURL = components.url {

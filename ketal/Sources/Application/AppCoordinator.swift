@@ -795,6 +795,17 @@ class AppCoordinator: AppCoordinatorProtocol, AuthenticationFlowCoordinatorDeleg
             // First log out from the server
             await userSession.clientProxy.logout()
             
+            // Hard logout: clear all webview data and cookies
+            await MainActor.run {
+                WKWebsiteDataStore.default().removeData(ofTypes: WKWebsiteDataStore.allWebsiteDataTypes(), modifiedSince: Date(timeIntervalSince1970: 0), completionHandler: {})
+                if let cookies = HTTPCookieStorage.shared.cookies {
+                    for cookie in cookies {
+                        HTTPCookieStorage.shared.deleteCookie(cookie)
+                    }
+                }
+                URLCache.shared.removeAllCachedResponses()
+            }
+            
             // Regardless of the result, clear user data
             userSessionStore.logout(userSession: userSession)
             tearDownUserSession()
