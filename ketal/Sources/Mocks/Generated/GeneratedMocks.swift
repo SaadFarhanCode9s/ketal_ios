@@ -20426,6 +20426,52 @@ class UserSessionStoreMock: UserSessionStoreProtocol, @unchecked Sendable {
         }
         logoutUserSessionClosure?(userSession)
     }
+
+    //MARK: - getOIDCSessionData
+    
+    var getOIDCSessionDataForUnderlyingCallsCount = 0
+    var getOIDCSessionDataForCallsCount: Int {
+        get {
+            if Thread.isMainThread {
+                return getOIDCSessionDataForUnderlyingCallsCount
+            } else {
+                var returnValue: Int? = nil
+                DispatchQueue.main.sync {
+                    returnValue = getOIDCSessionDataForUnderlyingCallsCount
+                }
+                return returnValue!
+            }
+        }
+        set {
+            if Thread.isMainThread {
+                getOIDCSessionDataForUnderlyingCallsCount = newValue
+            } else {
+                DispatchQueue.main.sync {
+                    getOIDCSessionDataForUnderlyingCallsCount = newValue
+                }
+            }
+        }
+    }
+    var getOIDCSessionDataForCalled: Bool {
+        return getOIDCSessionDataForCallsCount > 0
+    }
+    var getOIDCSessionDataForReceivedUserID: String?
+    var getOIDCSessionDataForReceivedInvocations: [String] = []
+    var getOIDCSessionDataForReturnValue: String?
+    var getOIDCSessionDataForClosure: ((String) -> String?)?
+
+    func getOIDCSessionData(for userID: String) -> String? {
+        getOIDCSessionDataForCallsCount += 1
+        getOIDCSessionDataForReceivedUserID = userID
+        DispatchQueue.main.async {
+            self.getOIDCSessionDataForReceivedInvocations.append(userID)
+        }
+        if let getOIDCSessionDataForClosure = getOIDCSessionDataForClosure {
+            return getOIDCSessionDataForClosure(userID)
+        } else {
+            return getOIDCSessionDataForReturnValue
+        }
+    }
 }
 class VoiceMessageCacheMock: VoiceMessageCacheProtocol, @unchecked Sendable {
     var urlForRecording: URL {

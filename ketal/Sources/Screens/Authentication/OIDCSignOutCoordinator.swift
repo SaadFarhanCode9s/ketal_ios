@@ -6,15 +6,20 @@
 //
 
 import AuthenticationServices
+import Foundation
 
 @MainActor
 class OIDCSignOutCoordinator: NSObject {
     private let homeserver: String
+    private let idTokenHint: String?
+    private let clientID: String?
     private let presentationAnchor: UIWindow
     private var activeSession: ASWebAuthenticationSession?
 
-    init(homeserver: String, presentationAnchor: UIWindow) {
+    init(homeserver: String, idTokenHint: String? = nil, clientID: String? = nil, presentationAnchor: UIWindow) {
         self.homeserver = homeserver
+        self.idTokenHint = idTokenHint
+        self.clientID = clientID
         self.presentationAnchor = presentationAnchor
         super.init()
     }
@@ -29,12 +34,34 @@ class OIDCSignOutCoordinator: NSObject {
             return false
         }
         
-        guard let logoutURL = await fetchEndSessionEndpoint(issuer: issuer) else {
+        guard var logoutURL = await fetchEndSessionEndpoint(issuer: issuer) else {
             MXLog.error("[OIDCSignOutCoordinator] Failed to discover end_session_endpoint from OIDC configuration.")
             return false
         }
         
-        MXLog.info("[OIDCSignOutCoordinator] Found end_session_endpoint: \\(logoutURL.absoluteString)")
+        // Append OIDC logout parameters if available
+        if var components = URLComponents(url: logoutURL, resolvingAgainstBaseURL: false) {
+            var queryItems = components.queryItems ?? []
+            
+            if let idTokenHint {
+                queryItems.append(URLQueryItem(name: "id_token_hint", value: idTokenHint))
+            }
+            
+            if let clientID {
+                queryItems.append(URLQueryItem(name: "client_id", value: clientID))
+            }
+            
+            // post_logout_redirect_uri is essential to get the callback from ASWebAuthenticationSession
+            // We use the same redirect URI as for login
+            queryItems.append(URLQueryItem(name: "post_logout_redirect_uri", value: "ketal://oidc"))
+            
+            components.queryItems = queryItems
+            if let updatedURL = components.url {
+                logoutURL = updatedURL
+            }
+        }
+        
+        MXLog.info("[OIDCSignOutCoordinator] Built logout URL: \(logoutURL.absoluteString)")
 
         return await withCheckedContinuation { continuation in
             let session = ASWebAuthenticationSession(url: logoutURL, callback: .customScheme("app.ketal.ios")) { _, error in
@@ -44,7 +71,7 @@ class OIDCSignOutCoordinator: NSObject {
                         continuation.resume(returning: false)
                         return
                     }
-                    MXLog.error("[OIDCSignOutCoordinator] Logout session failed with error: \\(error)")
+                    MXLog.error("[OIDCSignOutCoordinator] Logout session failed with error: \(error)")
                     continuation.resume(returning: false)
                     return
                 }
@@ -89,7 +116,7 @@ class OIDCSignOutCoordinator: NSObject {
     }
 
     private func fetchIssuer(domain: String) async -> String? {
-        let urlString = "https://\\(domain)/.well-known/matrix/client"
+        let urlString = "https://\(domain)/.well-known/matrix/client"
         guard let url = URL(string: urlString) else { return nil }
 
         do {
@@ -105,14 +132,14 @@ class OIDCSignOutCoordinator: NSObject {
                 }
             }
         } catch {
-            MXLog.error("[OIDCSignOutCoordinator] Discovery failed for \\(domain): \\(error)")
+            MXLog.error("[OIDCSignOutCoordinator] Discovery failed for \(domain): \(error)")
         }
         return nil
     }
 
     private func fetchEndSessionEndpoint(issuer: String) async -> URL? {
         let cleanIssuer = issuer.hasSuffix("/") ? String(issuer.dropLast()) : issuer
-        let configURLString = "\\(cleanIssuer)/.well-known/openid-configuration"
+        let configURLString = "\(cleanIssuer)/.well-known/openid-configuration"
         guard let url = URL(string: configURLString) else { return nil }
         
         do {
@@ -122,7 +149,7 @@ class OIDCSignOutCoordinator: NSObject {
                 return URL(string: endSessionEndpoint)
             }
         } catch {
-            MXLog.error("[OIDCSignOutCoordinator] OIDC config discovery failed: \\(error)")
+            MXLog.error("[OIDCSignOutCoordinator] OIDC config discovery failed: \(error)")
         }
         return nil
     }

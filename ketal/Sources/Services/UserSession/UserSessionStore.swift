@@ -100,6 +100,10 @@ class UserSessionStore: UserSessionStoreProtocol {
             credentials.restorationToken.sessionDirectories.delete()
         }
     }
+    
+    func getOIDCSessionData(for userID: String) -> String? {
+        keychainController.restorationTokens().first { $0.userID == userID }?.restorationToken.session.oidcData
+    }
         
     // MARK: - Private
     

@@ -38,4 +38,7 @@ protocol UserSessionStoreProtocol {
     
     /// Logs out of the specified session.
     func logout(userSession: UserSessionProtocol)
+    
+    /// Returns the OIDC session data for the specified user if available.
+    func getOIDCSessionData(for userID: String) -> String?
 }

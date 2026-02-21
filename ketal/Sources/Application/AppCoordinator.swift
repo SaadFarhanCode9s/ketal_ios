@@ -774,7 +774,21 @@ class AppCoordinator: AppCoordinatorProtocol, AuthenticationFlowCoordinatorDeleg
         Task {
             // Initiate OIDC Backchannel Logout by clearing the ASWebAuthenticationSession cookie
             let serverName = userSession.clientProxy.userIDServerName ?? appSettings.accountProviders.first ?? "ketals.online"
-            let oidcSignOutCoordinator = OIDCSignOutCoordinator(homeserver: serverName, presentationAnchor: windowManager.mainWindow)
+            
+            var idToken: String?
+            var clientID: String?
+            
+            if let oidcDataString = userSessionStore.getOIDCSessionData(for: userSession.clientProxy.userID),
+               let data = oidcDataString.data(using: .utf8),
+               let oidcData = try? JSONDecoder().decode(AppCoordinator.OIDCSessionData.self, from: data) {
+                idToken = oidcData.id_token
+                clientID = oidcData.client_id
+            }
+            
+            let oidcSignOutCoordinator = OIDCSignOutCoordinator(homeserver: serverName,
+                                                                idTokenHint: idToken,
+                                                                clientID: clientID,
+                                                                presentationAnchor: windowManager.mainWindow)
             _ = await oidcSignOutCoordinator.start()
             
             // First log out from the server
@@ -1256,5 +1270,11 @@ class AppCoordinator: AppCoordinatorProtocol, AuthenticationFlowCoordinatorDeleg
                     task.setTaskCompleted(success: true)
                 }
             }
+    }
+}
+extension AppCoordinator {
+    struct OIDCSessionData: Codable {
+        let client_id: String?
+        let id_token: String?
     }
 }
