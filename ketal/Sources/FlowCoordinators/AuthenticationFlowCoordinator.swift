@@ -315,6 +315,16 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
     private func preloadOIDCData() {
         Task {
             NSLog("[OIDC DEBUG] Preloading OIDC data...")
+            guard let defaultServer = appSettings.accountProviders.first else {
+                return
+            }
+            
+            let configResult = await authenticationService.configure(for: defaultServer, flow: .login)
+            guard case .success = configResult else {
+                NSLog("[OIDC DEBUG] Failed to configure authentication service for preloading.")
+                return
+            }
+            
             let result = await authenticationService.urlForOIDCLogin(loginHint: nil)
             switch result {
             case .success(let oidcData):
