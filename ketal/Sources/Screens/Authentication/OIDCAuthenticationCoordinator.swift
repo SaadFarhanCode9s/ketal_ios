@@ -91,7 +91,7 @@ final class OIDCAuthenticationCoordinator: NSObject, CoordinatorProtocol {
         }
 
         session.presentationContextProvider = self
-        session.prefersEphemeralWebBrowserSession = false
+        session.prefersEphemeralWebBrowserSession = true
 
         session.additionalHeaderFields = [
             "X-Element-User-Agent": UserAgentBuilder.makeASCIIUserAgent()
