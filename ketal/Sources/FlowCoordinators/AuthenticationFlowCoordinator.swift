@@ -99,7 +99,6 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
     private var bugReportFlowCoordinator: BugReportFlowCoordinator?
     private var oidcAuthenticationCoordinator: OIDCAuthenticationCoordinator?
     private var authenticationStartScreenCoordinator: AuthenticationStartScreenCoordinator?
-    private var preloadedOIDCData: OIDCAuthorizationDataProxy?
 
     weak var delegate: AuthenticationFlowCoordinatorDelegate?
 
@@ -307,33 +306,6 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
         if fromState == .initial {
             navigationRootCoordinator.setRootCoordinator(navigationStackCoordinator)
         }
-        
-        // Preload OIDC data in the background
-        preloadOIDCData()
-    }
-    
-    private func preloadOIDCData() {
-        Task {
-            NSLog("[OIDC DEBUG] Preloading OIDC data...")
-            guard let defaultServer = appSettings.accountProviders.first else {
-                return
-            }
-            
-            let configResult = await authenticationService.configure(for: defaultServer, flow: .login)
-            guard case .success = configResult else {
-                NSLog("[OIDC DEBUG] Failed to configure authentication service for preloading.")
-                return
-            }
-            
-            let result = await authenticationService.urlForOIDCLogin(loginHint: nil)
-            switch result {
-            case .success(let oidcData):
-                NSLog("[OIDC DEBUG] OIDC data preloaded successfully")
-                self.preloadedOIDCData = oidcData
-            case .failure(let error):
-                NSLog("[OIDC DEBUG] Failed to preload OIDC data: \(error.localizedDescription)")
-            }
-        }
     }
 
     // MARK: - QR Code
@@ -436,12 +408,6 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
     private func startDirectLogin() {
         NSLog("[OIDC DEBUG] startDirectLogin triggered")
         
-        if let oidcData = preloadedOIDCData {
-            NSLog("[OIDC DEBUG] Using preloaded data in startDirectLogin")
-            showOIDCImmediately(oidcData: oidcData)
-            return
-        }
-
         Task {
             guard let defaultServer = appSettings.accountProviders.first else {
                 return
@@ -461,13 +427,7 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
 
     private func continueOIDCWithLoginHint(_ loginHint: String?) {
         Task {
-            if let oidcData = preloadedOIDCData {
-                NSLog("[OIDC DEBUG] Using preloaded OIDC data")
-                showOIDCImmediately(oidcData: oidcData)
-                return
-            }
-
-            NSLog("[OIDC DEBUG] continueOIDCWithLoginHint started (no preloaded data)")
+            NSLog("[OIDC DEBUG] continueOIDCWithLoginHint started")
             
             let result = await authenticationService.urlForOIDCLogin(loginHint: loginHint)
             NSLog("[OIDC DEBUG] urlForOIDCLogin result: %@", String(describing: result))
@@ -487,15 +447,6 @@ class AuthenticationFlowCoordinator: FlowCoordinatorProtocol {
                 userIndicatorController.submitIndicator(UserIndicator(title: "Failed to start login: \(error)"))
             }
         }
-    }
-    
-    private func showOIDCImmediately(oidcData: OIDCAuthorizationDataProxy) {
-        guard let window = appMediator.windowManager.mainWindow else {
-            NSLog("[OIDC DEBUG] ERROR: No main window found")
-            return
-        }
-        NSLog("[OIDC DEBUG] Showing OIDC immediately")
-        stateMachine.tryEvent(.continueWithOIDC, userInfo: (oidcData, window))
     }
 
     private func showOIDCAuthentication(oidcData: OIDCAuthorizationDataProxy, presentationAnchor: UIWindow, fromState: State) {
