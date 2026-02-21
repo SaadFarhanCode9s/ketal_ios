@@ -772,6 +772,11 @@ class AppCoordinator: AppCoordinatorProtocol, AuthenticationFlowCoordinatorDeleg
         unregisterForRemoteNotifications()
         
         Task {
+            // Initiate OIDC Backchannel Logout by clearing the ASWebAuthenticationSession cookie
+            let homeserver = userSession.clientProxy.homeserver
+            let oidcSignOutCoordinator = OIDCSignOutCoordinator(homeserver: homeserver, presentationAnchor: windowManager.mainWindow)
+            _ = await oidcSignOutCoordinator.start()
+            
             // First log out from the server
             await userSession.clientProxy.logout()
             
