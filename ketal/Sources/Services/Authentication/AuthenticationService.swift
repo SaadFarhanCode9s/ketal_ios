@@ -131,9 +131,9 @@ class AuthenticationService: AuthenticationServiceProtocol {
             let discoveredConfig = OIDCConfiguration(clientName: "ketal",
                                                      redirectURI: "app.ketal.ios:/oidc",
                                                      clientURI: URL(string: "https://ios.ketal.app")!,
-                                                     logoURI: URL(string: "https://ios.ketal.app/logo.png"),
-                                                     tosURI: URL(string: "https://ios.ketal.app/tos"),
-                                                     policyURI: URL(string: "https://ios.ketal.app/policy"),
+                                                     logoURI: appSettings.logoURL,
+                                                     tosURI: appSettings.acceptableUseURL,
+                                                     policyURI: appSettings.privacyURL,
                                                      staticRegistrations: [:]).rustValue
 
             MXLog.info("[OIDC DEBUG] Config - redirectURI: ketal://oidc, clientName: ketal")
