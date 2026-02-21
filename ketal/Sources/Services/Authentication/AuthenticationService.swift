@@ -120,18 +120,9 @@ class AuthenticationService: AuthenticationServiceProtocol {
 
         if let oidcConfig = wellKnownConfig {
             let issuer = oidcConfig.issuer
-            // This will now be "01JTFZH15V95D7JNP5CJJHJH46" from your well-known file
-            let discoveredClientId = oidcConfig.clientId
 
-            MXLog.info("[OIDC DEBUG] Discovered OIDC configuration: issuer=\(issuer), clientId=\(discoveredClientId ?? "nil")")
-
-            var staticRegistrations: [String: String] = [:]
-            if let cid = discoveredClientId {
-                staticRegistrations[issuer] = cid
-                MXLog.info("[OIDC DEBUG] Using client ID from well-known: \(cid) for issuer: \(issuer)")
-            } else {
-                MXLog.warning("[OIDC DEBUG] No client_id found in well-known! MAS may require Dynamic Client Registration.")
-            }
+            MXLog.info("[OIDC DEBUG] Discovered OIDC configuration: issuer=\(issuer)")
+            MXLog.info("[OIDC DEBUG] Allowing Rust SDK to perform Dynamic Client Registration (DCR)")
 
             let discoveredConfig = OIDCConfiguration(clientName: "ketal",
                                                      redirectURI: "ketal://oidc",
@@ -139,10 +130,9 @@ class AuthenticationService: AuthenticationServiceProtocol {
                                                      logoURI: appSettings.logoURL,
                                                      tosURI: appSettings.acceptableUseURL,
                                                      policyURI: appSettings.privacyURL,
-                                                     staticRegistrations: staticRegistrations).rustValue
+                                                     staticRegistrations: [:]).rustValue
 
             MXLog.info("[OIDC DEBUG] Config - redirectURI: ketal://oidc, clientName: ketal")
-            MXLog.info("[OIDC DEBUG] staticRegistrations: \(staticRegistrations)")
 
             do {
                 print("[OIDC DEBUG] Attempting login with discovered config")

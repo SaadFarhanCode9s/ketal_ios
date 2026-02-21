@@ -773,8 +773,8 @@ class AppCoordinator: AppCoordinatorProtocol, AuthenticationFlowCoordinatorDeleg
         
         Task {
             // Initiate OIDC Backchannel Logout by clearing the ASWebAuthenticationSession cookie
-            let homeserver = userSession.clientProxy.homeserver
-            let oidcSignOutCoordinator = OIDCSignOutCoordinator(homeserver: homeserver, presentationAnchor: windowManager.mainWindow)
+            let serverName = userSession.clientProxy.userIDServerName ?? appSettings.accountProviders.first ?? "ketals.online"
+            let oidcSignOutCoordinator = OIDCSignOutCoordinator(homeserver: serverName, presentationAnchor: windowManager.mainWindow)
             _ = await oidcSignOutCoordinator.start()
             
             // First log out from the server
