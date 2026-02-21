@@ -57,13 +57,13 @@ class OIDCWebViewViewModel: NSObject, ObservableObject {
     }
 
     func cleanup() {
-        // Clear all website data after authentication
-        let dataStore = WKWebsiteDataStore.nonPersistent()
+        // Clear all website data from this webview's own data store after authentication.
+        // The webview uses a non-persistent store, so this is purely defensive housekeeping.
+        let dataStore = webView.configuration.websiteDataStore
         let dataTypes = WKWebsiteDataStore.allWebsiteDataTypes()
-        let date = Date(timeIntervalSince1970: 0)
 
-        dataStore.removeData(ofTypes: dataTypes, modifiedSince: date) {
-            MXLog.info("Cleared WebView data after OIDC authentication")
+        dataStore.removeData(ofTypes: dataTypes, modifiedSince: .distantPast) {
+            MXLog.info("[OIDC WebView] Cleared WebView data after OIDC authentication")
         }
     }
 }

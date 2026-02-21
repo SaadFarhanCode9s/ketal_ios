@@ -14,6 +14,7 @@ import MatrixRustSDK
 import Sentry
 import SwiftUI
 import Version
+import WebKit
 
 class AppCoordinator: AppCoordinatorProtocol, AuthenticationFlowCoordinatorDelegate, NotificationManagerDelegate, SecureWindowManagerDelegate {
     private let stateMachine: AppCoordinatorStateMachine
@@ -805,6 +806,10 @@ class AppCoordinator: AppCoordinatorProtocol, AuthenticationFlowCoordinatorDeleg
             ServiceLocator.shared.analytics.optOut()
             ServiceLocator.shared.analytics.resetConsentState()
             
+            // Hard-clear all native WebView (WKWebView) data so session cookies,
+            // localStorage, caches and IndexedDB don't survive logout.
+            await clearWebViewCache()
+            
             stateMachine.processEvent(.completedSigningOut)
                        
             hideLoadingIndicator()
@@ -819,6 +824,20 @@ class AppCoordinator: AppCoordinatorProtocol, AuthenticationFlowCoordinatorDeleg
         userSessionFlowCoordinator = nil
 
         notificationManager.setUserSession(nil)
+    }
+    
+    /// Removes all data from the default WKWebsiteDataStore (cookies, caches,
+    /// localStorage, IndexedDB, etc.) so no session state persists after logout.
+    @MainActor
+    private func clearWebViewCache() async {
+        await withCheckedContinuation { continuation in
+            let dataStore = WKWebsiteDataStore.default()
+            let dataTypes = WKWebsiteDataStore.allWebsiteDataTypes()
+            dataStore.removeData(ofTypes: dataTypes, modifiedSince: .distantPast) {
+                MXLog.info("[Logout] Cleared all native WKWebView data (cookies, caches, localStorage, etc.)")
+                continuation.resume()
+            }
+        }
     }
     
     private func presentSplashScreen(isSoftLogout: Bool = false, disableAppLock: Bool = false) {
