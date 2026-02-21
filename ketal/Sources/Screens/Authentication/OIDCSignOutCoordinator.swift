@@ -37,7 +37,7 @@ class OIDCSignOutCoordinator: NSObject {
         MXLog.info("[OIDCSignOutCoordinator] Found end_session_endpoint: \\(logoutURL.absoluteString)")
 
         return await withCheckedContinuation { continuation in
-            let session = ASWebAuthenticationSession(url: logoutURL, callback: .customScheme("ketal")) { _, error in
+            let session = ASWebAuthenticationSession(url: logoutURL, callback: .customScheme("app.ketal.ios")) { _, error in
                 if let error = error {
                     if let asError = error as? ASWebAuthenticationSessionError, asError.code == .canceledLogin {
                         MXLog.info("[OIDCSignOutCoordinator] User cancelled the logout session.")

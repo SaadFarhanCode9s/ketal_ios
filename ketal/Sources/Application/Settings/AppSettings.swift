@@ -270,7 +270,7 @@ final class AppSettings {
 
     /// For OIDC, the app needs a custom URL scheme to receive the callback.
     /// This should be registered in the project's Info tab.
-    private static let oidcRedirectURLScheme = "ketal"
+    private static let oidcRedirectURLScheme = "app.ketal.ios"
     
     /// Any pre-defined static client registrations for OIDC issuers.
     /// This maps issuer URLs to client IDs. If empty, the SDK will attempt to discover

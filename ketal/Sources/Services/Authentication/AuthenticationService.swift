@@ -124,9 +124,13 @@ class AuthenticationService: AuthenticationServiceProtocol {
             MXLog.info("[OIDC DEBUG] Discovered OIDC configuration: issuer=\(issuer)")
             MXLog.info("[OIDC DEBUG] Allowing Rust SDK to perform Dynamic Client Registration (DCR)")
 
+            // To pass MAS's Strict OPA Policy (client_registration.rego):
+            // 1) The 'redirectURI' authority must be empty (i.e. `scheme:/` instead of `scheme://`)
+            // 2) The 'scheme' must be a reverse-DNS match of the 'client_uri' host.
+            // So we use "app.ketal.ios" as the scheme and "https://ios.ketal.app" as the client_uri.
             let discoveredConfig = OIDCConfiguration(clientName: "ketal",
-                                                     redirectURI: "ketal://oidc",
-                                                     clientURI: appSettings.websiteURL,
+                                                     redirectURI: "app.ketal.ios:/oidc",
+                                                     clientURI: URL(string: "https://ios.ketal.app")!,
                                                      logoURI: appSettings.logoURL,
                                                      tosURI: appSettings.acceptableUseURL,
                                                      policyURI: appSettings.privacyURL,
