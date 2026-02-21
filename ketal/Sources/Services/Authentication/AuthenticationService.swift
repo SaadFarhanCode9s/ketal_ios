@@ -47,6 +47,12 @@ class AuthenticationService: AuthenticationServiceProtocol {
     // MARK: - Public
 
     func configure(for homeserverAddress: String, flow: AuthenticationFlow) async -> Result<Void, AuthenticationServiceError> {
+        // Prevent wiping the Rust client if we are already configured for this exact server and flow.
+        // This is necessary because OIDC data is preloaded, and wiping the client clears the OIDC state.
+        if homeserverSubject.value.address == homeserverAddress, self.flow == flow, self.client != nil {
+            return .success(())
+        }
+
         do {
             var homeserver = LoginHomeserver(address: homeserverAddress, loginMode: .unknown)
 
