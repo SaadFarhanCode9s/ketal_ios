@@ -78,11 +78,11 @@ struct UserProfileCell_Previews: PreviewProvider, TestablePreview {
                                kind: .multiSelection(isSelected: true, action: action))
                 .disabled(true)
             
-            UserProfileListRow(user: .init(userID: "@someone:matrix.org"), membership: .join, mediaProvider: MediaProviderMock(configuration: .init()),
+            UserProfileListRow(user: .init(userID: "@someone:ketals.online"), membership: .join, mediaProvider: MediaProviderMock(configuration: .init()),
                                kind: .multiSelection(isSelected: false, action: action))
                 .disabled(true)
             
-            UserProfileListRow(user: .init(userID: "@someone:matrix.org"), membership: nil, mediaProvider: MediaProviderMock(configuration: .init()),
+            UserProfileListRow(user: .init(userID: "@someone:ketals.online"), membership: nil, mediaProvider: MediaProviderMock(configuration: .init()),
                                kind: .multiSelection(isSelected: false, action: action))
         }
         .compoundList()

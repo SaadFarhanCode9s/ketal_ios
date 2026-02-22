@@ -215,7 +215,7 @@ struct TimelineMediaPreviewDetailsView_Previews: PreviewProvider, TestablePrevie
                                          isOutgoing: isOutgoing,
                                          isEditable: true,
                                          canBeRepliedTo: true,
-                                         sender: .init(id: "@alice:matrix.org",
+                                         sender: .init(id: "@alice:ketals.online",
                                                        displayName: "Alice",
                                                        avatarURL: .mockMXCUserAvatar),
                                          content: .init(filename: "Amazing Image.jpeg",

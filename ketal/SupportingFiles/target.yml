@@ -120,16 +120,16 @@ targets:
       properties:
         # aps-environment: development
         com.apple.developer.associated-domains:
-        - applinks:element.io
-        - applinks:app.element.io
-        - applinks:staging.element.io
-        - applinks:develop.element.io
-        - applinks:mobile.element.io
-        - applinks:call.element.io
-        - applinks:call.element.dev
-        - applinks:matrix.to
+        - applinks:ketals.online
+        - applinks:app.ketals.online
+        - applinks:staging.ketals.online
+        - applinks:develop.ketals.online
+        - applinks:mobile.ketals.online
+        - applinks:call.ketals.online
+        - applinks:call.ketals.dev
+        - applinks:ketals.online
         # - applinks:localhost?mode=developer # developer mode only works with https (but self-signed is fine).
-        - webcredentials:*.element.io
+        - webcredentials:*.ketals.online
         com.apple.developer.usernotifications.communication: true
         com.apple.security.app-sandbox: true
         com.apple.security.application-groups:

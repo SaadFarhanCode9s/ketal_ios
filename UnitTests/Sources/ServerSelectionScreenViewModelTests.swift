@@ -25,8 +25,8 @@ class ServerSelectionScreenViewModelTests: XCTestCase {
         XCTAssertEqual(service.homeserver.value.loginMode, .unknown)
         XCTAssertEqual(clientFactory.makeClientHomeserverAddressSessionDirectoriesPassphraseClientSessionDelegateAppSettingsAppHooksCallsCount, 0)
         
-        // When selecting matrix.org.
-        context.homeserverAddress = "matrix.org"
+        // When selecting ketals.online.
+        context.homeserverAddress = "ketals.online"
         let deferred = deferFulfillment(viewModel.actions) { $0 == .updated }
         context.send(viewAction: .confirm)
         try await deferred.fulfill()
@@ -60,8 +60,8 @@ class ServerSelectionScreenViewModelTests: XCTestCase {
         XCTAssertEqual(service.homeserver.value.loginMode, .unknown)
         XCTAssertEqual(clientFactory.makeClientHomeserverAddressSessionDirectoriesPassphraseClientSessionDelegateAppSettingsAppHooksCallsCount, 0)
         
-        // When selecting matrix.org.
-        context.homeserverAddress = "matrix.org"
+        // When selecting ketals.online.
+        context.homeserverAddress = "ketals.online"
         let deferred = deferFulfillment(viewModel.actions) { $0 == .updated }
         context.send(viewAction: .confirm)
         try await deferred.fulfill()

@@ -96,7 +96,7 @@ struct TimelineReplyView: View {
     
     private struct LoadingReplyView: View {
         var body: some View {
-            ReplyView(sender: .init(id: "@alice:matrix.org"), plainBody: "Hello world", formattedBody: nil)
+            ReplyView(sender: .init(id: "@alice:ketals.online"), plainBody: "Hello world", formattedBody: nil)
                 .redacted(reason: .placeholder)
                 .accessibilityLabel(L10n.commonLoading)
         }
@@ -187,7 +187,7 @@ struct TimelineReplyView_Previews: PreviewProvider, TestablePreview {
     
     static let attributedStringWithMention = {
         var attributedString = AttributedString("To be replaced")
-        attributedString.userID = "@alice:matrix.org"
+        attributedString.userID = "@alice:ketals.online"
         return attributedString
     }()
     
@@ -199,25 +199,25 @@ struct TimelineReplyView_Previews: PreviewProvider, TestablePreview {
     
     static let attributedStringWithRoomAliasMention = {
         var attributedString = AttributedString("to be replaced")
-        attributedString.roomAlias = "#room:matrix.org"
+        attributedString.roomAlias = "#room:ketals.online"
         return attributedString
     }()
     
     static let attributedStringWithRoomIDMention = {
         var attributedString = AttributedString("to be replaced")
-        attributedString.roomID = "!room:matrix.org"
+        attributedString.roomID = "!room:ketals.online"
         return attributedString
     }()
     
     static let attributedStringWithEventOnRoomIDMention = {
         var attributedString = AttributedString("to be replaced")
-        attributedString.eventOnRoomID = .init(roomID: "!room:matrix.org", eventID: "$event")
+        attributedString.eventOnRoomID = .init(roomID: "!room:ketals.online", eventID: "$event")
         return attributedString
     }()
     
     static let attributedStringWithEventOnRoomAliasMention = {
         var attributedString = AttributedString("to be replaced")
-        attributedString.eventOnRoomAlias = .init(alias: "#room:matrix.org", eventID: "$event")
+        attributedString.eventOnRoomAlias = .init(alias: "#room:ketals.online", eventID: "$event")
         return attributedString
     }()
     

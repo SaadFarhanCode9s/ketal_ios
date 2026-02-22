@@ -135,8 +135,8 @@ private struct FakeInlinePicker: View {
 // MARK: - Previews
 
 struct ServerConfirmationScreen_Previews: PreviewProvider, TestablePreview {
-    static let loginViewModel = makeViewModel(mode: .confirmation("matrix.org"), flow: .login)
-    static let registerViewModel = makeViewModel(mode: .confirmation("matrix.org"), flow: .register)
+    static let loginViewModel = makeViewModel(mode: .confirmation("ketals.online"), flow: .login)
+    static let registerViewModel = makeViewModel(mode: .confirmation("ketals.online"), flow: .register)
     static let pickerViewModel = makeViewModel(mode: .picker(["dept1.company.com", "dept2.company.com", "dept3.company.com"]), flow: .login)
 
     static var previews: some View {

@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Въведете...";
 "screen_start_chat_join_room_by_address_room_found" = "Matching room found";
 "screen_start_chat_join_room_by_address_room_not_found" = "Стаята не е намерена";
-"screen_start_chat_join_room_by_address_supporting_text" = "напр. #room-name:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "напр. #room-name:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Message not sent because %1$@’s verified identity was reset.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Message not sent because %1$@ has not verified all devices.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Message not sent because you have not verified one or more of your devices.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "If you are having issues with notifications, uploading the notification push rules can help us pinpoint the root cause. Note these rules can contain private information, such as your display name or keywords to be notified for.";
 "screen_bug_report_send_notification_settings_title" = "Send notification settings";
 "screen_bug_report_view_logs" = "Преглед на дневниците";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org е голям, безплатен сървър в публичната мрежа на Matrix за сигурна, децентрализирана комуникация, управляван от фондация Matrix.org.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online е голям, безплатен сървър в публичната мрежа на Matrix за сигурна, децентрализирана комуникация, управляван от фондация ketals.online.";
 "screen_change_account_provider_other" = "Друг";
 "screen_change_account_provider_subtitle" = "Използвайте друг доставчик на акаунт, като например собствен частен сървър или работен акаунт.";
 "screen_change_account_provider_title" = "Промяна на доставчика на акаунт";

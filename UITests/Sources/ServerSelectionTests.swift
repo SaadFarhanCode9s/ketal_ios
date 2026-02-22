@@ -14,7 +14,7 @@ class ServerSelectionUITests: XCTestCase {
         // Given the initial server selection screen as a modal.
         let app = Application.launch(.serverSelection)
         
-        // Then it should be configured for matrix.org
+        // Then it should be configured for ketals.online
         try await app.assertScreenshot()
     }
 

@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Kirish...";
 "screen_start_chat_join_room_by_address_room_found" = "Mos xona topildi";
 "screen_start_chat_join_room_by_address_room_not_found" = "Xona topilmadi";
-"screen_start_chat_join_room_by_address_supporting_text" = "masalan #xona-nomi:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "masalan #xona-nomi:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Xabar yuborilmadi, chunki %1$@ʼning tasdiqlangan identifikatori asliga qaytarildi.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Xabar yuborilmadi, chunki %1$@ barcha qurilmalarni tasdiqlamagan.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Xabaringiz yuborilmadi, chunki siz bir yoki bir nechta qurilmangizni tasdiqlamagan ekansiz.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "If you are having issues with notifications, uploading the notification push rules can help us pinpoint the root cause. Note these rules can contain private information, such as your display name or keywords to be notified for.";
 "screen_bug_report_send_notification_settings_title" = "Send notification settings";
 "screen_bug_report_view_logs" = "Jurnallarni ko&#39;rish";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org - bu Matrix.org Jamg'armasi tomonidan boshqariladigan xavfsiz, markazlashtirilmagan aloqa uchun ommaviy Matrix tarmog'idagi katta, bepul server.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online - bu ketals.online Jamg'armasi tomonidan boshqariladigan xavfsiz, markazlashtirilmagan aloqa uchun ommaviy Matrix tarmog'idagi katta, bepul server.";
 "screen_change_account_provider_other" = "Boshqa";
 "screen_change_account_provider_subtitle" = "Shaxsiy serveringiz yoki ishchi hisob qaydnomangiz kabi boshqa hisob provayderidan foydalaning.";
 "screen_change_account_provider_title" = "Hisob provayderini o'zgartiring";

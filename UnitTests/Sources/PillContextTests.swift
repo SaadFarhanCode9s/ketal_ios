@@ -13,7 +13,7 @@ import XCTest
 @MainActor
 class PillContextTests: XCTestCase {
     func testUser() async {
-        let id = "@test:matrix.org"
+        let id = "@test:ketals.online"
         let proxyMock = JoinedRoomProxyMock(.init(name: "Test"))
         let subject = CurrentValueSubject<[RoomMemberProxyProtocol], Never>([])
         proxyMock.membersPublisher = subject.asCurrentValuePublisher()
@@ -43,7 +43,7 @@ class PillContextTests: XCTestCase {
     }
     
     func testOwnUser() {
-        let id = "@test:matrix.org"
+        let id = "@test:ketals.online"
         let proxyMock = JoinedRoomProxyMock(.init(name: "Test", ownUserID: id))
         let subject = CurrentValueSubject<[RoomMemberProxyProtocol], Never>([])
         proxyMock.membersPublisher = subject.asCurrentValuePublisher()
@@ -140,7 +140,7 @@ class PillContextTests: XCTestCase {
         let clientMock = ClientProxyMock(.init())
         clientMock.roomSummaryForAliasReturnValue = .mock(id: "2",
                                                           name: "Foundation and Empire",
-                                                          canonicalAlias: "#foundation-and-empire:matrix.org")
+                                                          canonicalAlias: "#foundation-and-empire:ketals.online")
         let mock = TimelineViewModel(roomProxy: proxyMock,
                                      timelineController: mockController,
                                      userSession: UserSessionMock(.init(clientProxy: clientMock)),
@@ -152,7 +152,7 @@ class PillContextTests: XCTestCase {
                                      emojiProvider: EmojiProvider(appSettings: ServiceLocator.shared.settings),
                                      linkMetadataProvider: LinkMetadataProvider(),
                                      timelineControllerFactory: TimelineControllerFactoryMock(.init()))
-        let context = PillContext(timelineContext: mock.context, data: PillTextAttachmentData(type: .roomAlias("#foundation-and-empire:matrix.org"), font: .preferredFont(forTextStyle: .body)))
+        let context = PillContext(timelineContext: mock.context, data: PillTextAttachmentData(type: .roomAlias("#foundation-and-empire:ketals.online"), font: .preferredFont(forTextStyle: .body)))
         
         XCTAssertFalse(context.viewState.isOwnMention)
         XCTAssertFalse(context.viewState.isUndefined)
@@ -174,11 +174,11 @@ class PillContextTests: XCTestCase {
                                      emojiProvider: EmojiProvider(appSettings: ServiceLocator.shared.settings),
                                      linkMetadataProvider: LinkMetadataProvider(),
                                      timelineControllerFactory: TimelineControllerFactoryMock(.init()))
-        let context = PillContext(timelineContext: mock.context, data: PillTextAttachmentData(type: .roomAlias("#foundation-and-empire:matrix.org"), font: .preferredFont(forTextStyle: .body)))
+        let context = PillContext(timelineContext: mock.context, data: PillTextAttachmentData(type: .roomAlias("#foundation-and-empire:ketals.online"), font: .preferredFont(forTextStyle: .body)))
         
         XCTAssertFalse(context.viewState.isOwnMention)
         XCTAssertFalse(context.viewState.isUndefined)
-        XCTAssertEqual(context.viewState.displayText, "#foundation-and-empire:matrix.org")
+        XCTAssertEqual(context.viewState.displayText, "#foundation-and-empire:ketals.online")
     }
     
     func testEventOnRoomIDMention() {
@@ -234,7 +234,7 @@ class PillContextTests: XCTestCase {
         let clientMock = ClientProxyMock(.init())
         clientMock.roomSummaryForAliasReturnValue = .mock(id: "2",
                                                           name: "Foundation and Empire",
-                                                          canonicalAlias: "#foundation-and-empire:matrix.org")
+                                                          canonicalAlias: "#foundation-and-empire:ketals.online")
         let mock = TimelineViewModel(roomProxy: proxyMock,
                                      timelineController: mockController,
                                      userSession: UserSessionMock(.init(clientProxy: clientMock)),
@@ -246,7 +246,7 @@ class PillContextTests: XCTestCase {
                                      emojiProvider: EmojiProvider(appSettings: ServiceLocator.shared.settings),
                                      linkMetadataProvider: LinkMetadataProvider(),
                                      timelineControllerFactory: TimelineControllerFactoryMock(.init()))
-        let context = PillContext(timelineContext: mock.context, data: PillTextAttachmentData(type: .event(room: .roomAlias("#foundation-and-empire:matrix.org")), font: .preferredFont(forTextStyle: .body)))
+        let context = PillContext(timelineContext: mock.context, data: PillTextAttachmentData(type: .event(room: .roomAlias("#foundation-and-empire:ketals.online")), font: .preferredFont(forTextStyle: .body)))
         
         XCTAssertFalse(context.viewState.isOwnMention)
         XCTAssertFalse(context.viewState.isUndefined)
@@ -268,10 +268,10 @@ class PillContextTests: XCTestCase {
                                      emojiProvider: EmojiProvider(appSettings: ServiceLocator.shared.settings),
                                      linkMetadataProvider: LinkMetadataProvider(),
                                      timelineControllerFactory: TimelineControllerFactoryMock(.init()))
-        let context = PillContext(timelineContext: mock.context, data: PillTextAttachmentData(type: .event(room: .roomAlias("#foundation-and-empire:matrix.org")), font: .preferredFont(forTextStyle: .body)))
+        let context = PillContext(timelineContext: mock.context, data: PillTextAttachmentData(type: .event(room: .roomAlias("#foundation-and-empire:ketals.online")), font: .preferredFont(forTextStyle: .body)))
         
         XCTAssertFalse(context.viewState.isOwnMention)
         XCTAssertFalse(context.viewState.isUndefined)
-        XCTAssertEqual(context.viewState.displayText, "💬 > #foundation-and-empire:matrix.org")
+        XCTAssertEqual(context.viewState.displayText, "💬 > #foundation-and-empire:ketals.online")
     }
 }

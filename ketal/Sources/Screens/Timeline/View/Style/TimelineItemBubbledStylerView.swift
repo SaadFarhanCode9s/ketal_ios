@@ -329,7 +329,7 @@ private extension View {
 
 private extension TimelineItemKeyForwarder {
     static var test: TimelineItemKeyForwarder {
-        TimelineItemKeyForwarder(id: "@alice:matrix.org", displayName: "alice")
+        TimelineItemKeyForwarder(id: "@alice:ketals.online", displayName: "alice")
     }
 }
 
@@ -459,8 +459,8 @@ struct TimelineItemBubbledStylerView_Previews: PreviewProvider, TestablePreview 
     
     static var threadSummary: some View {
         ScrollView {
-            let threadSummary = TimelineItemThreadSummary.loaded(senderID: "@alice:matrix.org",
-                                                                 sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            let threadSummary = TimelineItemThreadSummary.loaded(senderID: "@alice:ketals.online",
+                                                                 sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                                  latestEventContent: .message(.text(.init(body: "This is a very long, multi-lined, threaded message"))),
                                                                  numberOfReplies: 42)
             

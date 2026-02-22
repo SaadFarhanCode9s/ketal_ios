@@ -13,8 +13,8 @@ import XCTest
 @MainActor
 class TimelineItemFactoryTests: XCTestCase {
     func testCallInvite() {
-        let ownUserID = "@alice:matrix.org"
-        let senderUserID = "@bob:matrix.org"
+        let ownUserID = "@alice:ketals.online"
+        let senderUserID = "@bob:ketals.online"
 
         let factory = RoomTimelineItemFactory(userID: ownUserID,
                                               attributedStringBuilder: AttributedStringBuilder(mentionBuilder: MentionBuilder()),

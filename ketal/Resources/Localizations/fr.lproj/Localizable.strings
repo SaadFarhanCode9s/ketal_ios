@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Saisir…";
 "screen_start_chat_join_room_by_address_room_found" = "Ce salon existe";
 "screen_start_chat_join_room_by_address_room_not_found" = "Salon non trouvé";
-"screen_start_chat_join_room_by_address_supporting_text" = "ex: #nom-du-salon:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "ex: #nom-du-salon:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Le message n'a pas été envoyé car l'identité vérifiée de %1$@ a été réinitialisée.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Le message n'a pas été envoyé car %1$@ n'a pas vérifié tous ses appareils.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Message non envoyé car vous n'avez pas vérifié tous vos appareils.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "Si vous rencontrez des problèmes avec les notifications, l'envoie des paramètres de notification peut nous aider à identifier la cause du problème.";
 "screen_bug_report_send_notification_settings_title" = "Envoyer les paramètres de notification";
 "screen_bug_report_view_logs" = "Afficher les journaux";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org est un grand serveur gratuit sur le réseau public Matrix pour une communication sécurisée et décentralisée, géré par la Fondation Matrix.org.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online est un grand serveur gratuit sur le réseau public Matrix pour une communication sécurisée et décentralisée, géré par la Fondation ketals.online.";
 "screen_change_account_provider_other" = "Autres";
 "screen_change_account_provider_subtitle" = "Utilisez un autre fournisseur de compte, tel que votre propre serveur privé ou un serveur professionnel.";
 "screen_change_account_provider_title" = "Changer de fournisseur de compte";

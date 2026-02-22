@@ -153,7 +153,7 @@ extension SpaceServiceRoom {
                                      joinedMembersCount: 123,
                                      heroes: [.mockAlice, .mockBob, .mockCharlie],
                                      topic: "“Science and technology were the only keys to opening the door to the future, and people approached science with the faith and sincerity of elementary school students.”",
-                                     canonicalAlias: "#3-body-problem:matrix.org",
+                                     canonicalAlias: "#3-body-problem:ketals.online",
                                      joinRule: joinRule,
                                      state: state)
     }
@@ -167,7 +167,7 @@ extension [SpaceServiceRoom] {
                                   isSpace: true,
                                   childrenCount: 1,
                                   joinedMembersCount: 500,
-                                  canonicalAlias: "#the-foundation:matrix.org",
+                                  canonicalAlias: "#the-foundation:ketals.online",
                                   state: .joined),
             SpaceServiceRoom.mock(id: "space2",
                                   name: "The Second Foundation",
@@ -180,7 +180,7 @@ extension [SpaceServiceRoom] {
                                   isSpace: true,
                                   childrenCount: 25000,
                                   joinedMembersCount: 1_000_000_000,
-                                  canonicalAlias: "#the-galactic-empire:matrix.org",
+                                  canonicalAlias: "#the-galactic-empire:ketals.online",
                                   state: .joined),
             SpaceServiceRoom.mock(id: "space4",
                                   name: "The Korellians",
@@ -217,7 +217,7 @@ extension [SpaceServiceRoom] {
                                   isSpace: true,
                                   childrenCount: 1,
                                   joinedMembersCount: 500,
-                                  canonicalAlias: "#the-foundation:matrix.org",
+                                  canonicalAlias: "#the-foundation:ketals.online",
                                   joinRule: .invite,
                                   state: .joined),
             SpaceServiceRoom.mock(id: "space2",
@@ -231,7 +231,7 @@ extension [SpaceServiceRoom] {
                                   isSpace: true,
                                   childrenCount: 25000,
                                   joinedMembersCount: 1_000_000_000,
-                                  canonicalAlias: "#the-galactic-empire:matrix.org",
+                                  canonicalAlias: "#the-galactic-empire:ketals.online",
                                   state: .joined)
         ]
     }
@@ -241,7 +241,7 @@ extension [SpaceServiceRoom] {
     }
     
     static var mockSingleRoom: [SpaceServiceRoom] {
-        [SpaceServiceRoom.mock(id: "!spaceroom:matrix.org",
+        [SpaceServiceRoom.mock(id: "!spaceroom:ketals.online",
                                name: "Management",
                                isSpace: false,
                                joinedMembersCount: 12,
@@ -253,17 +253,17 @@ extension [SpaceServiceRoom] {
         let typeName = isSpace ? "Space" : "Room"
         
         return [
-            SpaceServiceRoom.mock(id: "!\(typeName.lowercased())1:matrix.org",
+            SpaceServiceRoom.mock(id: "!\(typeName.lowercased())1:ketals.online",
                                   name: "Company \(typeName)",
                                   isSpace: isSpace),
-            SpaceServiceRoom.mock(id: "!\(typeName.lowercased())2:matrix.org",
+            SpaceServiceRoom.mock(id: "!\(typeName.lowercased())2:ketals.online",
                                   name: "Public \(typeName)",
                                   avatarURL: .mockMXCAvatar,
                                   isSpace: isSpace,
                                   joinedMembersCount: 78,
                                   topic: "Discussion on specific topic goes here.",
                                   joinRule: .public),
-            SpaceServiceRoom.mock(id: "!\(typeName.lowercased())3:matrix.org",
+            SpaceServiceRoom.mock(id: "!\(typeName.lowercased())3:ketals.online",
                                   name: "Joined \(typeName)",
                                   isSpace: isSpace,
                                   joinedMembersCount: 123,

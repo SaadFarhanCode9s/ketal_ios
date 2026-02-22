@@ -12,8 +12,8 @@ import XCTest
 
 class MatrixEntityRegexTests: XCTestCase {
     func testHomeserver() {
-        XCTAssertTrue(MatrixEntityRegex.isMatrixHomeserver("matrix.org"))
-        XCTAssertTrue(MatrixEntityRegex.isMatrixHomeserver("MATRIX.ORG"))
+        XCTAssertTrue(MatrixEntityRegex.isMatrixHomeserver("ketals.online"))
+        XCTAssertTrue(MatrixEntityRegex.isMatrixHomeserver("ketals.online"))
         XCTAssertFalse(MatrixEntityRegex.isMatrixHomeserver("matrix?.org"))
     }
 
@@ -24,9 +24,9 @@ class MatrixEntityRegexTests: XCTestCase {
     }
     
     func testRoomAlias() {
-        XCTAssertTrue(MatrixEntityRegex.isMatrixRoomAlias("#element-ios:matrix.org"))
-        XCTAssertFalse(MatrixEntityRegex.isMatrixRoomAlias("element-ios:matrix.org"))
-        XCTAssertFalse(MatrixEntityRegex.isMatrixRoomAlias("#element-ios.matrix.org"))
+        XCTAssertTrue(MatrixEntityRegex.isMatrixRoomAlias("#element-ios:ketals.online"))
+        XCTAssertFalse(MatrixEntityRegex.isMatrixRoomAlias("element-ios:ketals.online"))
+        XCTAssertFalse(MatrixEntityRegex.isMatrixRoomAlias("#element-ios.ketals.online"))
     }
     
     func testMatrixURI() {
@@ -40,7 +40,7 @@ class MatrixEntityRegexTests: XCTestCase {
         XCTAssertTrue(MatrixEntityRegex.isMatrixURI("matrix:roomid/123_room:chat.myserver.net?via=elsewhere.ca&via=other.org"))
         
         // Room Alias
-        XCTAssertTrue(MatrixEntityRegex.isMatrixURI("matrix:r/general:matrix.org"))
+        XCTAssertTrue(MatrixEntityRegex.isMatrixURI("matrix:r/general:ketals.online"))
         XCTAssertTrue(MatrixEntityRegex.isMatrixURI("matrix:r/123_room:chat.myserver.net"))
         
         // Event
@@ -56,7 +56,7 @@ class MatrixEntityRegexTests: XCTestCase {
         // Invalid
         XCTAssertFalse(MatrixEntityRegex.isMatrixURI("matrix://@alice:example.org"))
         XCTAssertFalse(MatrixEntityRegex.isMatrixURI("matrix://!somewhere:example.org"))
-        XCTAssertFalse(MatrixEntityRegex.isMatrixURI("matrix://#general:matrix.org"))
+        XCTAssertFalse(MatrixEntityRegex.isMatrixURI("matrix://#general:ketals.online"))
         XCTAssertFalse(MatrixEntityRegex.isMatrixURI("matrix:event/somewhere:example.org/e/event"))
         XCTAssertFalse(MatrixEntityRegex.isMatrixURI("matrix:e/somewhere:example.org/e/event"))
     }

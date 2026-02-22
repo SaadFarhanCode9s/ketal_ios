@@ -255,7 +255,7 @@ struct HomeScreenRoomCell_Previews: PreviewProvider, TestablePreview {
                                   unreadMentionsCount: 0,
                                   unreadNotificationsCount: 2,
                                   notificationMode: .mute,
-                                  canonicalAlias: "#foundation-and-empire:matrix.org",
+                                  canonicalAlias: "#foundation-and-empire:ketals.online",
                                   alternativeAliases: [],
                                   hasOngoingCall: false,
                                   isMarkedUnread: false,

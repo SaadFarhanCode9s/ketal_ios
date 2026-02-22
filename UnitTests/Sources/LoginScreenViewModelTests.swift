@@ -117,7 +117,7 @@ class LoginScreenViewModelTests: XCTestCase {
     }
 
     func testOIDCServer() async throws {
-        // Given the screen configured for matrix.org
+        // Given the screen configured for ketals.online
         await setupViewModel()
         
         // When entering a username for a user on a homeserver with OIDC.
@@ -131,7 +131,7 @@ class LoginScreenViewModelTests: XCTestCase {
     }
     
     func testUnsupportedServer() async throws {
-        // Given the screen configured for matrix.org
+        // Given the screen configured for ketals.online
         await setupViewModel()
         XCTAssertNil(context.alertInfo, "There shouldn't be an alert when the screen loads.")
         
@@ -146,7 +146,7 @@ class LoginScreenViewModelTests: XCTestCase {
     }
     
     func testElementProRequired() async throws {
-        // Given the screen configured for matrix.org
+        // Given the screen configured for ketals.online
         await setupViewModel()
         XCTAssertNil(context.alertInfo, "There shouldn't be an alert when the screen loads.")
         

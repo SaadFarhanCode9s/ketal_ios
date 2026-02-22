@@ -180,13 +180,13 @@ extension KnockRequestCellInfo: Identifiable {
 
 struct KnockRequestCell_Previews: PreviewProvider, TestablePreview {
     // swiftlint:disable:next line_length
-    static let aliceWithLongReason = KnockRequestCellInfo(eventID: "1", userID: "@alice:matrix.org", displayName: "Alice", avatarURL: nil, timestamp: "20 Nov 2024", reason: "Hello would like to join this room, also this is a very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very long reason")
+    static let aliceWithLongReason = KnockRequestCellInfo(eventID: "1", userID: "@alice:ketals.online", displayName: "Alice", avatarURL: nil, timestamp: "20 Nov 2024", reason: "Hello would like to join this room, also this is a very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very long reason")
     
-    static let aliceWithShortReason = KnockRequestCellInfo(eventID: "1", userID: "@alice:matrix.org", displayName: "Alice", avatarURL: nil, timestamp: "20 Nov 2024", reason: "Hello, I am Alice and would like to join this room, please")
+    static let aliceWithShortReason = KnockRequestCellInfo(eventID: "1", userID: "@alice:ketals.online", displayName: "Alice", avatarURL: nil, timestamp: "20 Nov 2024", reason: "Hello, I am Alice and would like to join this room, please")
     
-    static let aliceWithNoReason = KnockRequestCellInfo(eventID: "1", userID: "@alice:matrix.org", displayName: "Alice", avatarURL: nil, timestamp: "20 Nov 2024", reason: nil)
+    static let aliceWithNoReason = KnockRequestCellInfo(eventID: "1", userID: "@alice:ketals.online", displayName: "Alice", avatarURL: nil, timestamp: "20 Nov 2024", reason: nil)
     
-    static let aliceWithNoName = KnockRequestCellInfo(eventID: "1", userID: "@alice:matrix.org", displayName: nil, avatarURL: nil, timestamp: "20 Nov 2024", reason: nil)
+    static let aliceWithNoName = KnockRequestCellInfo(eventID: "1", userID: "@alice:ketals.online", displayName: nil, avatarURL: nil, timestamp: "20 Nov 2024", reason: nil)
     
     static var previews: some View {
         KnockRequestCell(cellInfo: aliceWithLongReason) { _ in } onDecline: { _ in } onDeclineAndBan: { _ in }

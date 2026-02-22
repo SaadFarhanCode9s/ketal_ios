@@ -14,10 +14,10 @@ extension ClientSDKMock {
     struct Configuration {
         // MARK: Authentication
         
-        var serverAddress = "matrix.org"
-        var homeserverURL = "https://matrix-client.matrix.org"
+        var serverAddress = "ketals.online"
+        var homeserverURL = "https://matrix-client.ketals.online"
         var slidingSyncVersion = SlidingSyncVersion.native
-        var oidcLoginURL: String? = "https://account.matrix.org/authorize"
+        var oidcLoginURL: String? = "https://account.ketals.online/authorize"
         var supportsOIDCCreatePrompt = true
         var supportsPasswordLogin = true
         var elementWellKnown: String?
@@ -28,9 +28,9 @@ extension ClientSDKMock {
         var userID: String?
         var session = Session(accessToken: UUID().uuidString,
                               refreshToken: nil,
-                              userId: "@alice:matrix.org",
+                              userId: "@alice:ketals.online",
                               deviceId: UUID().uuidString,
-                              homeserverUrl: "https://matrix-client.matrix.org",
+                              homeserverUrl: "https://matrix-client.ketals.online",
                               oidcData: nil,
                               slidingSyncVersion: .native)
     }

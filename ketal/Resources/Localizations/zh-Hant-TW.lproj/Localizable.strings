@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "輸入……";
 "screen_start_chat_join_room_by_address_room_found" = "找到相符的聊天室";
 "screen_start_chat_join_room_by_address_room_not_found" = "找不到聊天室";
-"screen_start_chat_join_room_by_address_supporting_text" = "例如 #room-name:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "例如 #room-name:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "因為 %1$@ 的驗證身份已重設，因此未傳送訊息。";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "訊息未傳送，因為 %1$@ 尚未驗證所有裝置。";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "因為您尚未驗證一個或多個裝置，因此未傳送訊息";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "若您遇到通知問題，上傳通知推播規則可以協助我們找出根本原因。請注意，這些規則可能包含您的私人資訊，例如您的顯示名稱或要接收通知的關鍵字。";
 "screen_bug_report_send_notification_settings_title" = "傳送通知設定";
 "screen_bug_report_view_logs" = "查看日誌";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org 由 Matrix.org 基金會營運，是用於安全、去中心化通訊的公共 Matrix 網路上的大型免費伺服器。";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online 由 ketals.online 基金會營運，是用於安全、去中心化通訊的公共 Matrix 網路上的大型免費伺服器。";
 "screen_change_account_provider_other" = "其他";
 "screen_change_account_provider_subtitle" = "使用不同的帳戶提供者，例如您自己的伺服器或工作帳號。";
 "screen_change_account_provider_title" = "更改帳號提供者";

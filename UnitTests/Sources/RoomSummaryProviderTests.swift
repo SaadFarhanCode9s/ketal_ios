@@ -105,7 +105,7 @@ final class RoomSummaryProviderTests: XCTestCase {
     private func setupProvider(isLowPriorityFilterEnabled: Bool = false) {
         appSettings.lowPriorityFilterEnabled = isLowPriorityFilterEnabled
         
-        let stateEventStringBuilder = RoomStateEventStringBuilder(userID: "@me:matrix.org")
+        let stateEventStringBuilder = RoomStateEventStringBuilder(userID: "@me:ketals.online")
         let attributedStringBuilder = AttributedStringBuilder(mentionBuilder: MentionBuilder())
         let eventStringBuilder = RoomEventStringBuilder(stateEventStringBuilder: stateEventStringBuilder,
                                                         messageEventStringBuilder: RoomMessageEventStringBuilder(attributedStringBuilder: attributedStringBuilder,

@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Ewch i mewn...";
 "screen_start_chat_join_room_by_address_room_found" = "Cafwyd hyd i ystafell gyfatebol";
 "screen_start_chat_join_room_by_address_room_not_found" = "Heb ganfod yr ystafell";
-"screen_start_chat_join_room_by_address_supporting_text" = "e.e. #enw-ystafell:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "e.e. #enw-ystafell:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Heb anfon y neges oherwydd bod hunaniaeth wedi 'i ddilysu %1$@ wedi'i ailosod.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Heb anfon y neges oherwydd nid yw %1$@ wedi gwirio pob dyfais.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Heb anfon y neges oherwydd nad ydych wedi gwirio un neu fwy o'ch dyfeisiau.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "Os ydych chi'n cael problemau gyda hysbysiadau, gall llwytho'r gosodiadau hysbysiadau ein helpu i ddarganfod yr achos gwreiddiol.";
 "screen_bug_report_send_notification_settings_title" = "Anfon gosodiadau hysbysiadau";
 "screen_bug_report_view_logs" = "Gweld logiau";
-"screen_change_account_provider_matrix_org_subtitle" = "Mae Matrix.org yn weinydd mawr, rhad ac am ddim ar y rhwydwaith Matrix cyhoeddus ar gyfer cyfathrebu diogel, datganoledig, sy'n cael ei redeg gan y Matrix.org Foundation.";
+"screen_change_account_provider_matrix_org_subtitle" = "Mae ketals.online yn weinydd mawr, rhad ac am ddim ar y rhwydwaith Matrix cyhoeddus ar gyfer cyfathrebu diogel, datganoledig, sy'n cael ei redeg gan y ketals.online Foundation.";
 "screen_change_account_provider_other" = "Arall";
 "screen_change_account_provider_subtitle" = "Defnyddiwch ddarparwr cyfrif gwahanol, fel eich gweinydd preifat eich hun neu gyfrif gwaith.";
 "screen_change_account_provider_title" = "Newid darparwr cyfrif";

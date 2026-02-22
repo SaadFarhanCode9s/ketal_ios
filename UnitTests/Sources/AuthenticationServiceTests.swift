@@ -44,7 +44,7 @@ class AuthenticationServiceTests: XCTestCase {
     func testConfigureLoginWithOIDC() async {
         setupMocks()
         
-        switch await service.configure(for: "matrix.org", flow: .login) {
+        switch await service.configure(for: "ketals.online", flow: .login) {
         case .success:
             break
         case .failure(let error):
@@ -58,7 +58,7 @@ class AuthenticationServiceTests: XCTestCase {
     func testConfigureRegisterWithOIDC() async {
         setupMocks()
         
-        switch await service.configure(for: "matrix.org", flow: .register) {
+        switch await service.configure(for: "ketals.online", flow: .register) {
         case .success:
             break
         case .failure(let error):
@@ -81,12 +81,12 @@ class AuthenticationServiceTests: XCTestCase {
         }
         
         XCTAssertEqual(service.flow, .login)
-        XCTAssertEqual(service.homeserver.value, .init(address: "matrix.org", loginMode: .unknown))
+        XCTAssertEqual(service.homeserver.value, .init(address: "ketals.online", loginMode: .unknown))
     }
     
     // MARK: - Helpers
     
-    private func setupMocks(serverAddress: String = "matrix.org") {
+    private func setupMocks(serverAddress: String = "ketals.online") {
         let configuration: AuthenticationClientFactoryMock.Configuration = .init()
         let clientFactory = AuthenticationClientFactoryMock(configuration: configuration)
         

@@ -245,12 +245,12 @@ struct AvatarHeaderView<Footer: View>: View {
 struct AvatarHeaderView_Previews: PreviewProvider, TestablePreview {
     static var previews: some View {
         Form {
-            AvatarHeaderView(room: .init(id: "@test:matrix.org",
+            AvatarHeaderView(room: .init(id: "@test:ketals.online",
                                          name: "Test Room",
-                                         avatar: .room(id: "@test:matrix.org",
+                                         avatar: .room(id: "@test:ketals.online",
                                                        name: "Test Room",
                                                        avatarURL: .mockMXCAvatar),
-                                         canonicalAlias: "#test:matrix.org",
+                                         canonicalAlias: "#test:ketals.online",
                                          isEncrypted: true,
                                          isPublic: true,
                                          isDirect: false,
@@ -308,12 +308,12 @@ struct AvatarHeaderView_Previews: PreviewProvider, TestablePreview {
     
     private static func makeHistorySharingPreview(state: RoomHistorySharingState) -> some View {
         Form {
-            AvatarHeaderView(room: .init(id: "@test:matrix.org",
+            AvatarHeaderView(room: .init(id: "@test:ketals.online",
                                          name: "Test Room",
-                                         avatar: .room(id: "@test:matrix.org",
+                                         avatar: .room(id: "@test:ketals.online",
                                                        name: "Test Room",
                                                        avatarURL: .mockMXCAvatar),
-                                         canonicalAlias: "#test:matrix.org",
+                                         canonicalAlias: "#test:ketals.online",
                                          isEncrypted: true,
                                          isPublic: true,
                                          isDirect: false,

@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Indtast...";
 "screen_start_chat_join_room_by_address_room_found" = "Matchende rum fundet";
 "screen_start_chat_join_room_by_address_room_not_found" = "Rum ikke fundet";
-"screen_start_chat_join_room_by_address_supporting_text" = "f.eks. #rummets-navn:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "f.eks. #rummets-navn:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Beskeden blev ikke sendt fordi %1$@ s bekræftede identitet blev nulstillet.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Meddelelsen er ikke sendt, fordi %1$@ ikke har bekræftet alle enheder.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Beskeden er ikke sendt, fordi du ikke har verificeret en eller flere af dine enheder.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "Hvis du har problemer med notifikationer, kan upload af notifikationsindstillingerne hjælpe os med at identificere den grundlæggende årsag.";
 "screen_bug_report_send_notification_settings_title" = "Send notifikationsindstillinger";
 "screen_bug_report_view_logs" = "Se logfiler";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org er en stor, gratis server på det offentlige Matrix-netværk til sikker, decentraliseret kommunikation, drevet af Matrix.org Foundation.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online er en stor, gratis server på det offentlige Matrix-netværk til sikker, decentraliseret kommunikation, drevet af ketals.online Foundation.";
 "screen_change_account_provider_other" = "Anden";
 "screen_change_account_provider_subtitle" = "Brug en anden kontoudbyder, f.eks. din egen private server eller en arbejdskonto.";
 "screen_change_account_provider_title" = "Skift kontoudbyder";

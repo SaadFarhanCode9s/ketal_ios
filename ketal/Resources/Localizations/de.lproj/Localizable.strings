@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Eintreten...";
 "screen_start_chat_join_room_by_address_room_found" = "Passender Chat gefunden";
 "screen_start_chat_join_room_by_address_room_not_found" = "Chat nicht gefunden";
-"screen_start_chat_join_room_by_address_supporting_text" = "z. B. #room -name:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "z. B. #room -name:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Nachricht nicht gesendet, weil sich die verifizierte Identität von %1$@ geändert hat.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Die Nachricht wurde nicht gesendet, weil %1$@ nicht alle Geräte verifiziert hat.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Die Nachricht wurde nicht gesendet, weil du eines oder mehrere deiner Geräte nicht verifiziert hast.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "Wenn du Probleme mit Benachrichtigungen hast, kann das Hochladen der Einstellungen für Benachrichtigungen uns helfen, die Ursache zu finden.";
 "screen_bug_report_send_notification_settings_title" = "Einstellungen für Benachrichtigungen senden";
 "screen_bug_report_view_logs" = "Logs ansehen";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org ist ein großer, kostenloser Server im öffentlichen Matrix-Netzwerk für eine sichere, dezentralisierte Kommunikation, der von der Matrix.org Foundation betrieben wird.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online ist ein großer, kostenloser Server im öffentlichen Matrix-Netzwerk für eine sichere, dezentralisierte Kommunikation, der von der ketals.online Foundation betrieben wird.";
 "screen_change_account_provider_other" = "Sonstige";
 "screen_change_account_provider_subtitle" = "Verwende einen anderen Kontoanbieter, z. B. deinen eigenen privaten Server oder ein Geschäftskonto.";
 "screen_change_account_provider_title" = "Kontoanbieter wechseln";

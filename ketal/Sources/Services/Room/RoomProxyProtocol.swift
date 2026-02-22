@@ -134,7 +134,7 @@ protocol JoinedRoomProxyProtocol: RoomProxyProtocol {
     
     func edit(eventID: String, newContent: RoomMessageEventContentWithoutRelation) async -> Result<Void, RoomProxyError>
     
-    /// https://spec.matrix.org/v1.9/client-server-api/#typing-notifications
+    /// https://spec.ketals.online/v1.9/client-server-api/#typing-notifications
     @discardableResult func sendTypingNotification(isTyping: Bool) async -> Result<Void, RoomProxyError>
     
     func ignoreDeviceTrustAndResend(devices: [String: [String]], sendHandle: SendHandleProxy) async -> Result<Void, RoomProxyError>

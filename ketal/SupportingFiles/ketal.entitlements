@@ -5,15 +5,15 @@
 
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>applinks:element.io</string>
-		<string>applinks:app.element.io</string>
-		<string>applinks:staging.element.io</string>
-		<string>applinks:develop.element.io</string>
-		<string>applinks:mobile.element.io</string>
-		<string>applinks:call.element.io</string>
-		<string>applinks:call.element.dev</string>
-		<string>applinks:matrix.to</string>
-		<string>webcredentials:*.element.io</string>
+		<string>applinks:ketals.online</string>
+		<string>applinks:app.ketals.online</string>
+		<string>applinks:staging.ketals.online</string>
+		<string>applinks:develop.ketals.online</string>
+		<string>applinks:mobile.ketals.online</string>
+		<string>applinks:call.ketals.online</string>
+		<string>applinks:call.ketals.dev</string>
+		<string>applinks:ketals.online</string>
+		<string>webcredentials:*.ketals.online</string>
 	</array>
 	<key>com.apple.developer.usernotifications.communication</key>
 	<true/>

@@ -208,7 +208,7 @@ private struct ElementWebURLParser: URLParser {
         }
         
         for domain in domains where domain == url.host {
-            components.host = "matrix.to"
+            components.host = "ketals.online"
             for path in paths {
                 components.fragment?.replace("/\(path)", with: "")
             }

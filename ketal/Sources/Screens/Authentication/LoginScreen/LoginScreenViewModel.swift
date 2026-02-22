@@ -148,7 +148,7 @@ class LoginScreenViewModel: LoginScreenViewModelType, LoginScreenViewModelProtoc
                                                  title: L10n.commonServerNotSupported,
                                                  message: L10n.screenChangeServerErrorNoSlidingSyncMessage(nonBreakingAppName))
 
-            // Clear out the invalid username to avoid an attempted login to matrix.org
+            // Clear out the invalid username to avoid an attempted login to ketals.online
             state.bindings.username = ""
         case .elementProRequired(let serverName):
             state.bindings.alertInfo = AlertInfo(id: .elementProAlert,
@@ -158,7 +158,7 @@ class LoginScreenViewModel: LoginScreenViewModelType, LoginScreenViewModelProtoc
                                                      UIApplication.shared.open(self.appSettings.elementProAppStoreURL)
                                                  },
                                                  secondaryButton: .init(title: L10n.actionCancel, role: .cancel, action: nil))
-            // Clear out the invalid username to avoid an attempted login to matrix.org
+            // Clear out the invalid username to avoid an attempted login to ketals.online
             state.bindings.username = ""
         case .sessionTokenRefreshNotSupported:
             state.bindings.alertInfo = AlertInfo(id: .refreshTokenAlert,

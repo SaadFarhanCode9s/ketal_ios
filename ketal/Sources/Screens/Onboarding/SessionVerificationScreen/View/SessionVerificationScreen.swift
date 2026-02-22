@@ -213,10 +213,10 @@ struct SessionVerification_Previews: PreviewProvider, TestablePreview {
         sessionVerificationScreen(state: .initial, flow: .deviceInitiator)
             .previewDisplayName("Initial - Device Initiator")
         
-        sessionVerificationScreen(state: .initial, flow: .userInitiator(userID: "@bob:matrix.org"))
+        sessionVerificationScreen(state: .initial, flow: .userInitiator(userID: "@bob:ketals.online"))
             .previewDisplayName("Initial - User Initiator")
         
-        let details = SessionVerificationRequestDetails(senderProfile: UserProfileProxy(userID: "@bob:matrix.org",
+        let details = SessionVerificationRequestDetails(senderProfile: UserProfileProxy(userID: "@bob:ketals.online",
                                                                                         displayName: "Billy Bob",
                                                                                         avatarURL: .mockMXCUserAvatar),
                                                         flowID: "123",

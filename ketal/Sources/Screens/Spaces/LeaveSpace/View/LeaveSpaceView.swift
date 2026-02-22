@@ -149,7 +149,7 @@ struct LeaveSpaceView_Previews: PreviewProvider, TestablePreview {
             .previewDisplayName("Last Space Owner")
     }
     
-    static let spaceServiceRoom = SpaceServiceRoom.mock(id: "!eng-space:matrix.org",
+    static let spaceServiceRoom = SpaceServiceRoom.mock(id: "!eng-space:ketals.online",
                                                         name: "Engineering Team",
                                                         isSpace: true,
                                                         childrenCount: 30,

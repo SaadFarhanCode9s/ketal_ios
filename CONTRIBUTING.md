@@ -4,7 +4,7 @@ Before opening a PR please make sure that there is a well defined issue. When ad
 
 Please note: [element-meta](https://github.com/element-hq/element-meta) is where we centralise all product level and cross platform requests. If the change you would like to make will create a disparity between platforms then there must also be a meta-issue before contributing.
 
-Support can be found in [![Element X iOS Matrix room #element-x-ios:matrix.org](https://img.shields.io/matrix/element-x-ios:matrix.org.svg?label=%23element-x-ios:matrix.org&logo=matrix&server_fqdn=matrix.org)](https://matrix.to/#/#element-x-ios:matrix.org).
+Support can be found in [![Element X iOS Matrix room #element-x-ios:ketals.online](https://img.shields.io/matrix/element-x-ios:ketals.online.svg?label=%23element-x-ios:ketals.online&logo=matrix&server_fqdn=ketals.online)](https://matrix.to/#/#element-x-ios:ketals.online).
 
 ## Contributing code to Matrix
 

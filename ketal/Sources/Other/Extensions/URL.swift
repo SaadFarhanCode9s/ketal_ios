@@ -136,27 +136,27 @@ extension URL {
     // MARK: Mocks
     
     static var mockMXCAudio: URL {
-        "mxc://matrix.org/1234567890AuDiO"
+        "mxc://ketals.online/1234567890AuDiO"
     }
 
     static var mockMXCFile: URL {
-        "mxc://matrix.org/1234567890FiLe"
+        "mxc://ketals.online/1234567890FiLe"
     }
 
     static var mockMXCImage: URL {
-        "mxc://matrix.org/1234567890ImAgE"
+        "mxc://ketals.online/1234567890ImAgE"
     }
 
     static var mockMXCVideo: URL {
-        "mxc://matrix.org/1234567890ViDeO"
+        "mxc://ketals.online/1234567890ViDeO"
     }
 
     static var mockMXCAvatar: URL {
-        "mxc://matrix.org/1234567890AvAtAr"
+        "mxc://ketals.online/1234567890AvAtAr"
     }
 
     static var mockMXCUserAvatar: URL {
-        "mxc://matrix.org/1234567890AvAtArUsEr"
+        "mxc://ketals.online/1234567890AvAtArUsEr"
     }
 }
 

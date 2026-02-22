@@ -227,7 +227,7 @@ class NotificationSettingsEditScreenViewModelTests: XCTestCase {
     }
 
     func testSelectRoom() async throws {
-        let roomID = "!roomidentifier:matrix.org"
+        let roomID = "!roomidentifier:ketals.online"
         viewModel = NotificationSettingsEditScreenViewModel(chatType: .oneToOneChat, userSession: userSession)
         
         let deferredActions = deferFulfillment(viewModel.actions) { action in

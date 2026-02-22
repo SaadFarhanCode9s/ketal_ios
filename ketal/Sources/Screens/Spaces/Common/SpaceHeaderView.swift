@@ -115,21 +115,21 @@ struct SpaceHeaderView_Previews: PreviewProvider, TestablePreview {
     
     static func makeSpaceRooms() -> [SpaceServiceRoom] {
         [
-            SpaceServiceRoom.mock(id: "!space1:matrix.org",
+            SpaceServiceRoom.mock(id: "!space1:ketals.online",
                                   name: "Company Space",
                                   isSpace: true,
                                   childrenCount: 10,
                                   joinedMembersCount: 50),
-            SpaceServiceRoom.mock(id: "!space2:matrix.org",
+            SpaceServiceRoom.mock(id: "!space2:ketals.online",
                                   name: "Community Space",
                                   avatarURL: .mockMXCAvatar,
                                   isSpace: true,
                                   childrenCount: 20,
                                   joinedMembersCount: 78,
                                   topic: "Description of the space goes right here.",
-                                  canonicalAlias: "#space:matrix.org",
+                                  canonicalAlias: "#space:ketals.online",
                                   joinRule: .public),
-            SpaceServiceRoom.mock(id: "!space3:matrix.org",
+            SpaceServiceRoom.mock(id: "!space3:ketals.online",
                                   name: "Subspace",
                                   isSpace: true,
                                   childrenCount: 30,
@@ -141,7 +141,7 @@ struct SpaceHeaderView_Previews: PreviewProvider, TestablePreview {
                                           "Sem amet enim habitant nibh augue mauris.",
                                           "Interdum mauris ultrices tincidunt proin morbi erat aenean risus nibh.",
                                           "Diam amet sit fermentum vulputate faucibus."].joined(separator: " "),
-                                  canonicalAlias: "#subspace:matrix.org",
+                                  canonicalAlias: "#subspace:ketals.online",
                                   joinRule: .knockRestricted(rules: [.roomMembership(roomID: "")]))
         ]
     }

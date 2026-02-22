@@ -315,8 +315,8 @@ class TimelineViewModelTests: XCTestCase {
     }
     
     func testShowReadReceipts() async throws {
-        let receipts: [ReadReceipt] = [.init(userID: "@alice:matrix.org", formattedTimestamp: "12:00"),
-                                       .init(userID: "@charlie:matrix.org", formattedTimestamp: "11:00")]
+        let receipts: [ReadReceipt] = [.init(userID: "@alice:ketals.online", formattedTimestamp: "12:00"),
+                                       .init(userID: "@charlie:ketals.online", formattedTimestamp: "11:00")]
         // Given 3 messages from Bob where the middle message has a reaction.
         let message = TextRoomTimelineItem(text: "Test",
                                            sender: "bob",
@@ -551,7 +551,7 @@ class TimelineViewModelTests: XCTestCase {
         
         viewModel.process(viewAction: .itemSendInfoTapped(itemID: items[0].id))
         
-        XCTAssertEqual(viewModel.state.bindings.alertInfo?.title, "alice (@alice:matrix.org) shared this message since you were not in the room when it was sent.")
+        XCTAssertEqual(viewModel.state.bindings.alertInfo?.title, "alice (@alice:ketals.online) shared this message since you were not in the room when it was sent.")
     }
     
     // MARK: - Helpers
@@ -643,6 +643,6 @@ private extension TimelineItemSender {
 
 private extension TimelineItemKeyForwarder {
     static var test: TimelineItemKeyForwarder {
-        TimelineItemKeyForwarder(id: "@alice:matrix.org", displayName: "alice")
+        TimelineItemKeyForwarder(id: "@alice:ketals.online", displayName: "alice")
     }
 }

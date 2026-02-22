@@ -64,21 +64,21 @@ struct EditRoomAddressScreen: View {
 
 struct EditRoomAddressScreen_Previews: PreviewProvider, TestablePreview {
     static let noAliasviewModel = EditRoomAddressScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(name: "Room Name")),
-                                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "matrix.org")),
+                                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "ketals.online")),
                                                                  userIndicatorController: UserIndicatorControllerMock())
     
-    static let aliasviewModel = EditRoomAddressScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(name: "Room Name", canonicalAlias: "#room-alias:matrix.org")),
-                                                               clientProxy: ClientProxyMock(.init(userIDServerName: "matrix.org")),
+    static let aliasviewModel = EditRoomAddressScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(name: "Room Name", canonicalAlias: "#room-alias:ketals.online")),
+                                                               clientProxy: ClientProxyMock(.init(userIDServerName: "ketals.online")),
                                                                userIndicatorController: UserIndicatorControllerMock())
     
-    static let invalidSymbolsViewModel = EditRoomAddressScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(name: "Room Name", canonicalAlias: "#room#-alias:matrix.org")),
-                                                                        clientProxy: ClientProxyMock(.init(userIDServerName: "matrix.org")),
+    static let invalidSymbolsViewModel = EditRoomAddressScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(name: "Room Name", canonicalAlias: "#room#-alias:ketals.online")),
+                                                                        clientProxy: ClientProxyMock(.init(userIDServerName: "ketals.online")),
                                                                         userIndicatorController: UserIndicatorControllerMock())
     
     static let alreadyExistingViewModel = {
-        let clientProxy = ClientProxyMock(.init(userIDServerName: "matrix.org"))
+        let clientProxy = ClientProxyMock(.init(userIDServerName: "ketals.online"))
         clientProxy.isAliasAvailableReturnValue = .success(false)
-        return EditRoomAddressScreenViewModel(initialViewState: .init(serverName: "matrix.org",
+        return EditRoomAddressScreenViewModel(initialViewState: .init(serverName: "ketals.online",
                                                                       bindings: .init(desiredAliasLocalPart: "whatever")),
                                               roomProxy: JoinedRoomProxyMock(.init(name: "Room Name")),
                                               clientProxy: clientProxy,

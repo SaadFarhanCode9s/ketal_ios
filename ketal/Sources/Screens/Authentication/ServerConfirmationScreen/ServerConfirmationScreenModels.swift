@@ -55,7 +55,7 @@ struct ServerConfirmationScreenViewState: BindableState {
 
         return switch authenticationFlow {
         case .login:
-            if homeserverAddress == "matrix.org" {
+            if homeserverAddress == "ketals.online" {
                 L10n.screenServerConfirmationMessageLoginMatrixDotOrg
             } else if homeserverAddress == "element.io" {
                 L10n.screenServerConfirmationMessageLoginElementDotIo

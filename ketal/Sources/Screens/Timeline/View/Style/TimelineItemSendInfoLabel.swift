@@ -196,7 +196,7 @@ private extension EncryptionAuthenticity {
 
 private extension TimelineItemKeyForwarder {
     static var test: TimelineItemKeyForwarder {
-        TimelineItemKeyForwarder(id: "@alice:matrix.org", displayName: "alice")
+        TimelineItemKeyForwarder(id: "@alice:ketals.online", displayName: "alice")
     }
 }
 

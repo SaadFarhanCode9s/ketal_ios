@@ -14,7 +14,7 @@ class ServerConfirmationScreenViewStateTests: XCTestCase {
     func testLoginMessageString() {
         let matrixDotOrgLogin = ServerConfirmationScreenViewState(mode: .confirmation(LoginHomeserver.mockMatrixDotOrg.address),
                                                                   authenticationFlow: .login)
-        XCTAssertEqual(matrixDotOrgLogin.message, L10n.screenServerConfirmationMessageLoginMatrixDotOrg, "matrix.org should have a custom message.")
+        XCTAssertEqual(matrixDotOrgLogin.message, L10n.screenServerConfirmationMessageLoginMatrixDotOrg, "ketals.online should have a custom message.")
         
         let elementDotIoLogin = ServerConfirmationScreenViewState(mode: .confirmation("element.io"),
                                                                   authenticationFlow: .login)
@@ -24,7 +24,7 @@ class ServerConfirmationScreenViewStateTests: XCTestCase {
                                                            authenticationFlow: .login)
         XCTAssertEqual(otherLogin.message, "", "Other servers should not show a message.")
         
-        let pickerLogin = ServerConfirmationScreenViewState(mode: .picker(["element.io", "matrix.org"]),
+        let pickerLogin = ServerConfirmationScreenViewState(mode: .picker(["element.io", "ketals.online"]),
                                                             authenticationFlow: .login)
         XCTAssertNil(pickerLogin.message, "The picker mode should not show a message.")
     }

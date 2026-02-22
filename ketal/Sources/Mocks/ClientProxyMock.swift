@@ -70,7 +70,7 @@ extension ClientProxyMock {
         
         isOnlyDeviceLeftReturnValue = .success(false)
         hasDevicesToVerifyAgainstReturnValue = .success(true)
-        accountURLActionReturnValue = "https://matrix.org/account"
+        accountURLActionReturnValue = "https://ketals.online/account"
         canDeactivateAccount = false
         directRoomForUserIDReturnValue = .failure(.sdkError(ClientProxyMockError.generic))
         createDirectRoomWithExpectedRoomNameReturnValue = .failure(.sdkError(ClientProxyMockError.generic))

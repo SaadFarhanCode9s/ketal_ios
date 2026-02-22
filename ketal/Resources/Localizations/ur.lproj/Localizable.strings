@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Enter...";
 "screen_start_chat_join_room_by_address_room_found" = "Matching room found";
 "screen_start_chat_join_room_by_address_room_not_found" = "Room not found";
-"screen_start_chat_join_room_by_address_supporting_text" = "e.g. #room-name:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "e.g. #room-name:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "پیغام نہیں بھیجا گیا کیونکہ %1$@ کی تصدیق شدہ شناخت کو دوبارہ ترتیب دے دیا گیا ہے۔";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "پیغام نہیں بھیجا گیا کیونکہ%1$@ نے تمام آلات کی تصدیق نہیں کی ہے۔";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "پیغام نہیں بھیجا گیا کیونکہ آپ نے اپنے ایک یا زیادہ آلات کی تصدیق نہیں کی ہے۔";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "If you are having issues with notifications, uploading the notification push rules can help us pinpoint the root cause. Note these rules can contain private information, such as your display name or keywords to be notified for.";
 "screen_bug_report_send_notification_settings_title" = "Send notification settings";
 "screen_bug_report_view_logs" = "نوشتہ جات ملحوظ کریں";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org Matrix.org فاؤنڈیشن کے ذریعہ محفوظ، غیر مرکزی مواصلات کے لئے عوامی میٹرکس شبکہ پر ایک بڑا، مفت خادم ہے۔";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online ketals.online فاؤنڈیشن کے ذریعہ محفوظ، غیر مرکزی مواصلات کے لئے عوامی میٹرکس شبکہ پر ایک بڑا، مفت خادم ہے۔";
 "screen_change_account_provider_other" = "دیگر";
 "screen_change_account_provider_subtitle" = "ایک مختلف کھاتہ فراہم کنندہ استعمال کریں، جیسے آپ کا اپنا نجی خادم یا کام کا کھاتہ۔";
 "screen_change_account_provider_title" = "اکاؤنٹ فراہم کنندہ بدلیں";

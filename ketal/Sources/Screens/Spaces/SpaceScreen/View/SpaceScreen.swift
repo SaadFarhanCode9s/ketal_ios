@@ -215,7 +215,7 @@ struct SpaceScreen_Previews: PreviewProvider, TestablePreview {
         appSettings.spaceSettingsEnabled = true
         appSettings.createSpaceEnabled = true
         
-        let spaceServiceRoom = SpaceServiceRoom.mock(id: "!eng-space:matrix.org",
+        let spaceServiceRoom = SpaceServiceRoom.mock(id: "!eng-space:ketals.online",
                                                      name: "Engineering Team",
                                                      isSpace: true,
                                                      childrenCount: 30,

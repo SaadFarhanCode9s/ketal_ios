@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Enter...";
 "screen_start_chat_join_room_by_address_room_found" = "Matching room found";
 "screen_start_chat_join_room_by_address_room_not_found" = "Room not found";
-"screen_start_chat_join_room_by_address_supporting_text" = "e.g. #room-name:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "e.g. #room-name:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Bericht niet verzonden omdat %1$@'s geverifieerde identiteit is gewijzigd.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Bericht niet verzonden omdat %1$@ niet alle apparaten heeft geverifieerd.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Bericht is niet verzonden omdat je een of meerdere apparaten niet geverifieerd hebt";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "If you are having issues with notifications, uploading the notification push rules can help us pinpoint the root cause. Note these rules can contain private information, such as your display name or keywords to be notified for.";
 "screen_bug_report_send_notification_settings_title" = "Send notification settings";
 "screen_bug_report_view_logs" = "Logboeken weergeven";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org is een grote, gratis server op het openbare Matrix-netwerk voor veilige, gedecentraliseerde communicatie, beheerd door de Matrix.org Foundation.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online is een grote, gratis server op het openbare Matrix-netwerk voor veilige, gedecentraliseerde communicatie, beheerd door de ketals.online Foundation.";
 "screen_change_account_provider_other" = "Anders";
 "screen_change_account_provider_subtitle" = "Gebruik een andere accountprovider, zoals je eigen privéserver of een zakelijke account.";
 "screen_change_account_provider_title" = "Wijzig accountprovider";

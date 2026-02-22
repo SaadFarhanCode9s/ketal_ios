@@ -13,7 +13,7 @@ import MatrixRustSDKMocks
 extension AuthenticationClientFactoryMock {
     struct Configuration {
         var homeserverClients = [
-            "matrix.org": ClientSDKMock(configuration: .init()),
+            "ketals.online": ClientSDKMock(configuration: .init()),
             "example.com": ClientSDKMock(configuration: .init(serverAddress: "example.com",
                                                               homeserverURL: "https://matrix.example.com",
                                                               slidingSyncVersion: .native,

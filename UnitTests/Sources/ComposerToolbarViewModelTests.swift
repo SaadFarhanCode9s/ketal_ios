@@ -91,8 +91,8 @@ class ComposerToolbarViewModelTests: XCTestCase {
     }
     
     func testSuggestions() {
-        let suggestions: [SuggestionItem] = [.init(suggestionType: .user(.init(id: "@user_mention_1:matrix.org", displayName: "User 1", avatarURL: nil)), range: .init(), rawSuggestionText: ""),
-                                             .init(suggestionType: .user(.init(id: "@user_mention_2:matrix.org", displayName: "User 2", avatarURL: nil)), range: .init(), rawSuggestionText: "")]
+        let suggestions: [SuggestionItem] = [.init(suggestionType: .user(.init(id: "@user_mention_1:ketals.online", displayName: "User 1", avatarURL: nil)), range: .init(), rawSuggestionText: ""),
+                                             .init(suggestionType: .user(.init(id: "@user_mention_2:ketals.online", displayName: "User 2", avatarURL: nil)), range: .init(), rawSuggestionText: "")]
         let mockCompletionSuggestionService = CompletionSuggestionServiceMock(configuration: .init(suggestions: suggestions))
         
         viewModel = ComposerToolbarViewModel(roomProxy: JoinedRoomProxyMock(.init()),
@@ -121,18 +121,18 @@ class ComposerToolbarViewModelTests: XCTestCase {
     }
     
     func testSelectedUserSuggestion() {
-        let suggestion = SuggestionItem(suggestionType: .user(.init(id: "@test:matrix.org", displayName: "Test", avatarURL: nil)), range: .init(), rawSuggestionText: "")
+        let suggestion = SuggestionItem(suggestionType: .user(.init(id: "@test:ketals.online", displayName: "Test", avatarURL: nil)), range: .init(), rawSuggestionText: "")
         viewModel.context.send(viewAction: .selectedSuggestion(suggestion))
         
         // The display name can be used for HTML injection in the rich text editor and it's useless anyway as the clients don't use it when resolving display names
-        XCTAssertEqual(wysiwygViewModel.content.html, "<a href=\"https://matrix.to/#/@test:matrix.org\">@test:matrix.org</a> ")
+        XCTAssertEqual(wysiwygViewModel.content.html, "<a href=\"https://ketals.online/#/@test:ketals.online\">@test:ketals.online</a> ")
     }
     
     func testSelectedRoomSuggestion() {
-        let suggestion = SuggestionItem(suggestionType: .room(.init(id: "!room:matrix.org",
-                                                                    canonicalAlias: "#room-alias:matrix.org",
+        let suggestion = SuggestionItem(suggestionType: .room(.init(id: "!room:ketals.online",
+                                                                    canonicalAlias: "#room-alias:ketals.online",
                                                                     name: "Room",
-                                                                    avatar: .room(id: "!room:matrix.org",
+                                                                    avatar: .room(id: "!room:ketals.online",
                                                                                   name: "Room",
                                                                                   avatarURL: nil))),
                                         range: .init(), rawSuggestionText: "")
@@ -140,7 +140,7 @@ class ComposerToolbarViewModelTests: XCTestCase {
         
         // The display name can be used for HTML injection in the rich text editor and it's useless anyway as the clients don't use it when resolving display names
 
-        XCTAssertEqual(wysiwygViewModel.content.html, "<a href=\"https://matrix.to/#/%23room-alias:matrix.org\">#room-alias:matrix.org</a> ")
+        XCTAssertEqual(wysiwygViewModel.content.html, "<a href=\"https://ketals.online/#/%23room-alias:ketals.online\">#room-alias:ketals.online</a> ")
     }
     
     func testAllUsersSuggestion() throws {
@@ -155,7 +155,7 @@ class ComposerToolbarViewModelTests: XCTestCase {
     func testUserMentionPillInRTE() async {
         viewModel.context.send(viewAction: .composerAppeared)
         await Task.yield()
-        let userID = "@test:matrix.org"
+        let userID = "@test:ketals.online"
         let suggestion = SuggestionItem(suggestionType: .user(.init(id: userID, displayName: "Test", avatarURL: nil)), range: .init(), rawSuggestionText: "")
         viewModel.context.send(viewAction: .selectedSuggestion(suggestion))
         
@@ -166,7 +166,7 @@ class ComposerToolbarViewModelTests: XCTestCase {
     func testRoomMentionPillInRTE() async {
         viewModel.context.send(viewAction: .composerAppeared)
         await Task.yield()
-        let roomAlias = "#test:matrix.org"
+        let roomAlias = "#test:ketals.online"
         let suggestion = SuggestionItem(suggestionType: .room(.init(id: "room-id", canonicalAlias: roomAlias, name: "Room", avatar: .room(id: "room-id", name: "Room", avatarURL: nil))), range: .init(), rawSuggestionText: "")
         viewModel.context.send(viewAction: .selectedSuggestion(suggestion))
         
@@ -187,13 +187,13 @@ class ComposerToolbarViewModelTests: XCTestCase {
     func testIntentionalMentions() async throws {
         wysiwygViewModel.setHtmlContent("""
         <p>Hello @room \
-        and especially hello to <a href=\"https://matrix.to/#/@test:matrix.org\">Test</a></p>
+        and especially hello to <a href=\"https://ketals.online/#/@test:ketals.online\">Test</a></p>
         """)
         
         let deferred = deferFulfillment(viewModel.actions) { action in
             switch action {
             case let .sendMessage(_, _, _, intentionalMentions):
-                return intentionalMentions == IntentionalMentions(userIDs: ["@test:matrix.org"], atRoom: true)
+                return intentionalMentions == IntentionalMentions(userIDs: ["@test:ketals.online"], atRoom: true)
             default:
                 return false
             }
@@ -566,15 +566,15 @@ class ComposerToolbarViewModelTests: XCTestCase {
     
     func testRestoreUserMentionInPlainText() async throws {
         viewModel.context.composerFormattingEnabled = false
-        let text = "Hello [TestName](https://matrix.to/#/@test:matrix.org)!"
+        let text = "Hello [TestName](https://ketals.online/#/@test:ketals.online)!"
         viewModel.process(timelineAction: .setText(plainText: text, htmlText: nil))
         
         let deferred = deferFulfillment(viewModel.actions) { action in
             switch action {
             case let .sendMessage(plainText, _, _, intentionalMentions):
                 // As of right now the markdown loses the display name when restored
-                return plainText == "Hello [@test:matrix.org](https://matrix.to/#/@test:matrix.org)!" &&
-                    intentionalMentions == IntentionalMentions(userIDs: ["@test:matrix.org"], atRoom: false)
+                return plainText == "Hello [@test:ketals.online](https://ketals.online/#/@test:ketals.online)!" &&
+                    intentionalMentions == IntentionalMentions(userIDs: ["@test:ketals.online"], atRoom: false)
             default:
                 return false
             }
@@ -605,15 +605,15 @@ class ComposerToolbarViewModelTests: XCTestCase {
     
     func testRestoreMixedMentionsInPlainText() async throws {
         viewModel.context.composerFormattingEnabled = false
-        let text = "Hello [User1](https://matrix.to/#/@user1:matrix.org), [User2](https://matrix.to/#/@user2:matrix.org) and @room"
+        let text = "Hello [User1](https://ketals.online/#/@user1:ketals.online), [User2](https://ketals.online/#/@user2:ketals.online) and @room"
         viewModel.process(timelineAction: .setText(plainText: text, htmlText: nil))
         
         let deferred = deferFulfillment(viewModel.actions) { action in
             switch action {
             case let .sendMessage(plainText, _, _, intentionalMentions):
                 // As of right now the markdown loses the display name when restored
-                return plainText == "Hello [@user1:matrix.org](https://matrix.to/#/@user1:matrix.org), [@user2:matrix.org](https://matrix.to/#/@user2:matrix.org) and @room" &&
-                    intentionalMentions == IntentionalMentions(userIDs: ["@user1:matrix.org", "@user2:matrix.org"], atRoom: true)
+                return plainText == "Hello [@user1:ketals.online](https://ketals.online/#/@user1:ketals.online), [@user2:ketals.online](https://ketals.online/#/@user2:ketals.online) and @room" &&
+                    intentionalMentions == IntentionalMentions(userIDs: ["@user1:ketals.online", "@user2:ketals.online"], atRoom: true)
             default:
                 return false
             }
@@ -625,15 +625,15 @@ class ComposerToolbarViewModelTests: XCTestCase {
     
     func testRestoreAmbiguousMention() async throws {
         viewModel.context.composerFormattingEnabled = false
-        let text = "Hello [User1](https://matrix.to/#/@roomuser:matrix.org)"
+        let text = "Hello [User1](https://ketals.online/#/@roomuser:ketals.online)"
         viewModel.process(timelineAction: .setText(plainText: text, htmlText: nil))
         
         let deferred = deferFulfillment(viewModel.actions) { action in
             switch action {
             case let .sendMessage(plainText, _, _, intentionalMentions):
                 // As of right now the markdown loses the display name when restored
-                return plainText == "Hello [@roomuser:matrix.org](https://matrix.to/#/@roomuser:matrix.org)" &&
-                    intentionalMentions == IntentionalMentions(userIDs: ["@roomuser:matrix.org"], atRoom: false)
+                return plainText == "Hello [@roomuser:ketals.online](https://ketals.online/#/@roomuser:ketals.online)" &&
+                    intentionalMentions == IntentionalMentions(userIDs: ["@roomuser:ketals.online"], atRoom: false)
             default:
                 return false
             }

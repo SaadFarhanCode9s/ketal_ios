@@ -25,7 +25,7 @@ enum PhishingDetector {
             
             // We also make sure that the link string is just the user ID
             // We also trim any invalid character that might hide the phishing attempt
-            // Like by using whitespaces emojis or other invalid symbols e.g click here [👉️ @alice:matrix.org](https://matrix.org)
+            // Like by using whitespaces emojis or other invalid symbols e.g click here [👉️ @alice:ketals.online](https://ketals.online)
             let trimmedDisplayString = disambiguatedDisplayString.lowercased().trimmingCharacters(in: .matrixUserIDAllowedCharacters.inverted)
             if identifier == trimmedDisplayString,
                isMatrixUserIDPhishingAttempt(internalURL: internalURL, identifier: identifier) {
@@ -40,7 +40,7 @@ enum PhishingDetector {
             
             // We also make sure that the link string is just the user ID
             // We also trim any invalid character that might hide the phishing attempt
-            // Like by using whitespaces emojis or other invalid symbols e.g click here [👉️ #room:matrix.org](https://matrix.org)
+            // Like by using whitespaces emojis or other invalid symbols e.g click here [👉️ #room:ketals.online](https://ketals.online)
             let trimmedDisplayString = disambiguatedDisplayString.lowercased().trimmingCharacters(in: .roomAliasAllowedCharacters.inverted)
             if alias == trimmedDisplayString,
                isRoomAliasPhishingAttempt(internalURL: internalURL, alias: alias) {
@@ -49,9 +49,9 @@ enum PhishingDetector {
             // Else we check if the link string is itself what is considered a tappable link for the OS
         } else if linkMatch != nil {
             // Then we compare the external URL with the internal one
-            // To avoid false positives like [Matrix.org](https://matrix.org) we sanitize and lowercase
+            // To avoid false positives like [ketals.online](https://ketals.online) we sanitize and lowercase
             // And trim invalid characters that might hide phishing attemps
-            // Like emoji whitespaces and other invalid symbols e.g click here [👉️ https://element.io](https://matrix.org)
+            // Like emoji whitespaces and other invalid symbols e.g click here [👉️ https://element.io](https://ketals.online)
             let trimmedDisplayString = disambiguatedDisplayString.asSanitizedLink.lowercased().trimmingCharacters(in: .urlAllowedCharacters.inverted)
             if trimmedDisplayString != internalURL.absoluteString.asSanitizedLink.lowercased().removingPercentEncoding {
                 return true

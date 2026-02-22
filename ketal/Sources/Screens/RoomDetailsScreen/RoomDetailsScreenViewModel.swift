@@ -95,7 +95,8 @@ class RoomDetailsScreenViewModel: RoomDetailsScreenViewModelType, RoomDetailsScr
         
         Task {
             if case let .success(permalinkURL) = await roomProxy.matrixToPermalink() {
-                state.permalink = permalinkURL
+                let ketalPermalinkString = permalinkURL.absoluteString.replacingOccurrences(of: "matrix.to", with: "ketals.online")
+                state.permalink = URL(string: ketalPermalinkString)
             }
         }
         

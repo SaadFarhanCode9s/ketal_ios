@@ -60,19 +60,19 @@ struct ReadReceiptCell: View {
 
 struct ReadReceiptCell_Previews: PreviewProvider, TestablePreview {
     static var previews: some View {
-        ReadReceiptCell(readReceipt: .init(userID: "@test:matrix.org",
+        ReadReceiptCell(readReceipt: .init(userID: "@test:ketals.online",
                                            formattedTimestamp: "10:00"),
                         memberState: .init(displayName: "Test",
                                            avatarURL: nil),
                         mediaProvider: MediaProviderMock(configuration: .init()))
             .previewDisplayName("No Image")
-        ReadReceiptCell(readReceipt: .init(userID: "@test:matrix.org",
+        ReadReceiptCell(readReceipt: .init(userID: "@test:ketals.online",
                                            formattedTimestamp: "10:00"),
                         memberState: .init(displayName: "Test",
                                            avatarURL: .mockMXCUserAvatar),
                         mediaProvider: MediaProviderMock(configuration: .init()))
             .previewDisplayName("With Image")
-        ReadReceiptCell(readReceipt: .init(userID: "@test:matrix.org",
+        ReadReceiptCell(readReceipt: .init(userID: "@test:ketals.online",
                                            formattedTimestamp: "10:00"),
                         memberState: nil,
                         mediaProvider: MediaProviderMock(configuration: .init()))

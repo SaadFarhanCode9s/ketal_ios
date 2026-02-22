@@ -163,7 +163,7 @@ class StartChatScreenViewModel: StartChatScreenViewModelType, StartChatScreenVie
     private var fetchUsersTask: Task<Void, Never>?
     
     private func fetchUsers() {
-        guard context.searchQuery.count >= 3 else {
+        guard context.searchQuery.count >= 1 else {
             state.usersSection = .init(type: .suggestions, users: suggestedUsers)
             return
         }

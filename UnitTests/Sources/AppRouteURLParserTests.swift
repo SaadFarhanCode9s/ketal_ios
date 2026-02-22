@@ -74,8 +74,8 @@ class AppRouteURLParserTests: XCTestCase {
     }
     
     func testMatrixUserURL() {
-        let userID = "@test:matrix.org"
-        guard let url = URL(string: "https://matrix.to/#/\(userID)") else {
+        let userID = "@test:ketals.online"
+        guard let url = URL(string: "https://ketals.online/#/\(userID)") else {
             XCTFail("Invalid url")
             return
         }
@@ -86,8 +86,8 @@ class AppRouteURLParserTests: XCTestCase {
     }
     
     func testMatrixRoomIdentifierURL() {
-        let id = "!abcdefghijklmnopqrstuvwxyz1234567890:matrix.org"
-        guard let url = URL(string: "https://matrix.to/#/\(id)") else {
+        let id = "!abcdefghijklmnopqrstuvwxyz1234567890:ketals.online"
+        guard let url = URL(string: "https://ketals.online/#/\(id)") else {
             XCTFail("Invalid url")
             return
         }
@@ -98,7 +98,7 @@ class AppRouteURLParserTests: XCTestCase {
     }
     
     func testWebRoomIDURL() {
-        let id = "!abcdefghijklmnopqrstuvwxyz1234567890:matrix.org"
+        let id = "!abcdefghijklmnopqrstuvwxyz1234567890:ketals.online"
         guard let url = URL(string: "https://app.element.io/#/room/\(id)") else {
             XCTFail("URL invalid")
             return
@@ -110,7 +110,7 @@ class AppRouteURLParserTests: XCTestCase {
     }
     
     func testWebUserIDURL() {
-        let id = "@alice:matrix.org"
+        let id = "@alice:ketals.online"
         guard let url = URL(string: "https://develop.element.io/#/user/\(id)") else {
             XCTFail("URL invalid")
             return

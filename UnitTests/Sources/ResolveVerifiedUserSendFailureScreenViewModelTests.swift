@@ -19,7 +19,7 @@ class ResolveVerifiedUserSendFailureScreenViewModelTests: XCTestCase {
     
     func testUnsignedDevice() async throws {
         // Given a failure where a single user has an unverified device
-        let userID = "@alice:matrix.org"
+        let userID = "@alice:ketals.online"
         viewModel = makeViewModel(with: .hasUnsignedDevice(devices: [userID: ["DEVICE1"]]))
         
         try await verifyResolving(userIDs: [userID])
@@ -27,7 +27,7 @@ class ResolveVerifiedUserSendFailureScreenViewModelTests: XCTestCase {
     
     func testMultipleUnsignedDevices() async throws {
         // Given a failure where a multiple users have unverified devices.
-        let userIDs = ["@alice:matrix.org", "@bob:matrix.org", "@charlie:matrix.org"]
+        let userIDs = ["@alice:ketals.online", "@bob:ketals.online", "@charlie:ketals.online"]
         let devices = Dictionary(uniqueKeysWithValues: userIDs.map { ($0, ["DEVICE1, DEVICE2"]) })
         viewModel = makeViewModel(with: .hasUnsignedDevice(devices: devices))
         
@@ -36,7 +36,7 @@ class ResolveVerifiedUserSendFailureScreenViewModelTests: XCTestCase {
     
     func testChangedIdentity() async throws {
         // Given a failure where a single user's identity has changed.
-        let userID = "@alice:matrix.org"
+        let userID = "@alice:ketals.online"
         viewModel = makeViewModel(with: .changedIdentity(users: [userID]))
         
         try await verifyResolving(userIDs: [userID])
@@ -44,7 +44,7 @@ class ResolveVerifiedUserSendFailureScreenViewModelTests: XCTestCase {
     
     func testMultipleChangedIdentities() async throws {
         // Given a failure where a multiple users have unverified devices.
-        let userIDs = ["@alice:matrix.org", "@bob:matrix.org", "@charlie:matrix.org"]
+        let userIDs = ["@alice:ketals.online", "@bob:ketals.online", "@charlie:ketals.online"]
         viewModel = makeViewModel(with: .changedIdentity(users: userIDs))
         
         try await verifyResolving(userIDs: userIDs)

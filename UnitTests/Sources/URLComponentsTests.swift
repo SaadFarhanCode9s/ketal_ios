@@ -11,7 +11,7 @@ import XCTest
 
 class URLComponentsTests: XCTestCase {
     func testAddFragmentQueryItems() {
-        guard let url = URL(string: "https://test.matrix.org"),
+        guard let url = URL(string: "https://test.ketals.online"),
               var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             XCTFail("URL invalid")
             return
@@ -22,11 +22,11 @@ class URLComponentsTests: XCTestCase {
         let fragmentQueryItems: [URLQueryItem] = [.init(name: "first", value: "1"), .init(name: "second", value: "2")]
         components.fragmentQueryItems = fragmentQueryItems
         
-        XCTAssertEqual(components.url?.absoluteString, "https://test.matrix.org#?first=1&second=2")
+        XCTAssertEqual(components.url?.absoluteString, "https://test.ketals.online#?first=1&second=2")
     }
     
     func testRemoveFragmentQueryItem() {
-        guard let url = URL(string: "https://test.matrix.org#random/data?first=1&second=2"),
+        guard let url = URL(string: "https://test.ketals.online#random/data?first=1&second=2"),
               var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             XCTFail("URL invalid")
             return
@@ -41,11 +41,11 @@ class URLComponentsTests: XCTestCase {
         
         components.fragmentQueryItems = fragmentQueryItems
         
-        XCTAssertEqual(components.url?.absoluteString, "https://test.matrix.org#random/data?second=2")
+        XCTAssertEqual(components.url?.absoluteString, "https://test.ketals.online#random/data?second=2")
     }
     
     func testAppendFragmentQueryItem() {
-        guard let url = URL(string: "https://test.matrix.org#/random/data?first=1&second=2"),
+        guard let url = URL(string: "https://test.ketals.online#/random/data?first=1&second=2"),
               var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             XCTFail("URL invalid")
             return
@@ -60,11 +60,11 @@ class URLComponentsTests: XCTestCase {
         
         components.fragmentQueryItems = fragmentQueryItems
         
-        XCTAssertEqual(components.url?.absoluteString, "https://test.matrix.org#/random/data?first=1&mr%20in%20between=hello&second=2")
+        XCTAssertEqual(components.url?.absoluteString, "https://test.ketals.online#/random/data?first=1&mr%20in%20between=hello&second=2")
     }
     
     func testChangeFragmentQueryItemValue() {
-        guard let url = URL(string: "https://test.matrix.org#/random/data?first=1&second=2"),
+        guard let url = URL(string: "https://test.ketals.online#/random/data?first=1&second=2"),
               var components = URLComponents(url: url, resolvingAgainstBaseURL: true) else {
             XCTFail("URL invalid")
             return
@@ -79,7 +79,7 @@ class URLComponentsTests: XCTestCase {
         
         components.fragmentQueryItems = fragmentQueryItems
         
-        XCTAssertEqual(components.url?.absoluteString, "https://test.matrix.org#/random/data?first=last&second=2")
+        XCTAssertEqual(components.url?.absoluteString, "https://test.ketals.online#/random/data?first=last&second=2")
     }
     
     func testElementCallParameters() {

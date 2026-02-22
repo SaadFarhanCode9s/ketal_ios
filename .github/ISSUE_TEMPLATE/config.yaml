@@ -1,8 +1,8 @@
 blank_issues_enabled: true
 contact_links:
- - name: Matrix Community Support
-   url: "https://matrix.to/#/#matrix:matrix.org"
+ - name: Ketal Community Support
+   url: "https://ketals.online/#/#ketal:ketals.online"
    about: General support questions can be asked here.
- - name: Matrix Security Policy
-   url: https://www.matrix.org/security-disclosure-policy/
+ - name: Ketal Security Policy
+   url: https://www.ketals.online/security-disclosure-policy/
    about: Learn more about our security disclosure policy.

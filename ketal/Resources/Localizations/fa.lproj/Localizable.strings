@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "ورود…";
 "screen_start_chat_join_room_by_address_room_found" = "اتاق مطابق پیدا شد";
 "screen_start_chat_join_room_by_address_room_not_found" = "اتاق پیدا نشد";
-"screen_start_chat_join_room_by_address_supporting_text" = "نمونه: ‪#room-name:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "نمونه: ‪#room-name:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Message not sent because %1$@’s verified identity was reset.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Message not sent because %1$@ has not verified all devices.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Message not sent because you have not verified one or more of your devices.";

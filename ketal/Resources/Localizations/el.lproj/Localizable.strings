@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Εισάγετε...";
 "screen_start_chat_join_room_by_address_room_found" = "Βρέθηκε η αντίστοιχη αίθουσα";
 "screen_start_chat_join_room_by_address_room_not_found" = "Η αίθουσα δεν βρέθηκε";
-"screen_start_chat_join_room_by_address_supporting_text" = "π.χ. #όνομα-αίθουσας:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "π.χ. #όνομα-αίθουσας:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Το μήνυμα δεν στάλθηκε γιατί έγινε επαναφορά της επαληθευμένης ταυτότητας του χρήστη %1$@.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Το μήνυμα δεν στάλθηκε επειδή ο χρήστης %1$@ δεν έχει επαληθεύσει όλες τις συσκευές.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Το μήνυμα δεν στάλθηκε επειδή δεν έχεις επαληθεύσει τουλάχιστον μία από τις συσκευές σου.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "If you are having issues with notifications, uploading the notification push rules can help us pinpoint the root cause. Note these rules can contain private information, such as your display name or keywords to be notified for.";
 "screen_bug_report_send_notification_settings_title" = "Send notification settings";
 "screen_bug_report_view_logs" = "Προβολή αρχείων καταγραφής";
-"screen_change_account_provider_matrix_org_subtitle" = "Το Matrix.org είναι ένας μεγάλος, δωρεάν διακομιστής στο δημόσιο δίκτυο Matrix για ασφαλή, αποκεντρωμένη επικοινωνία, που διευθύνεται από το Ίδρυμα Matrix.org.";
+"screen_change_account_provider_matrix_org_subtitle" = "Το ketals.online είναι ένας μεγάλος, δωρεάν διακομιστής στο δημόσιο δίκτυο Matrix για ασφαλή, αποκεντρωμένη επικοινωνία, που διευθύνεται από το Ίδρυμα ketals.online.";
 "screen_change_account_provider_other" = "Άλλο";
 "screen_change_account_provider_subtitle" = "Χρησιμοποίησε διαφορετικό πάροχο λογαριασμού, όπως τον δικό σου ιδιωτικό διακομιστή ή έναν εργασιακό λογαριασμό.";
 "screen_change_account_provider_title" = "Αλλαγή παρόχου λογαριασμού";

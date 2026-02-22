@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Ange …";
 "screen_start_chat_join_room_by_address_room_found" = "Matchande rum hittades";
 "screen_start_chat_join_room_by_address_room_not_found" = "Rummet hittades inte";
-"screen_start_chat_join_room_by_address_supporting_text" = "t.ex. #rumsnamn:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "t.ex. #rumsnamn:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Meddelandet skickades inte eftersom verifierad identitet för %1$@ återställdes.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Meddelandet skickades inte eftersom %1$@ inte har verifierat alla enheter.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Meddelandet skickades inte eftersom du inte har verifierat en eller flera av dina enheter.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "If you are having issues with notifications, uploading the notification push rules can help us pinpoint the root cause. Note these rules can contain private information, such as your display name or keywords to be notified for.";
 "screen_bug_report_send_notification_settings_title" = "Send notification settings";
 "screen_bug_report_view_logs" = "Se loggar";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org är en stor gratisserver på det offentliga Matrix-nätverket för säker, decentraliserad kommunikation, som drivs av Matrix.org Foundation.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online är en stor gratisserver på det offentliga Matrix-nätverket för säker, decentraliserad kommunikation, som drivs av ketals.online Foundation.";
 "screen_change_account_provider_other" = "Annan";
 "screen_change_account_provider_subtitle" = "Använd en annan kontoleverantör, till exempel din egen privata server eller ett jobbkonto.";
 "screen_change_account_provider_title" = "Byt kontoleverantör";

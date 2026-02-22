@@ -44,9 +44,9 @@ struct LoginHomeserver: Equatable {
 // MARK: - Mocks
 
 extension LoginHomeserver {
-    /// A mock homeserver that is configured just like matrix.org.
+    /// A mock homeserver that is configured just like ketals.online.
     static var mockMatrixDotOrg: LoginHomeserver {
-        LoginHomeserver(address: "matrix.org", loginMode: .oidc(supportsCreatePrompt: true))
+        LoginHomeserver(address: "ketals.online", loginMode: .oidc(supportsCreatePrompt: true))
     }
 
     /// A mock homeserver that supports login and registration via a password but has no SSO providers.

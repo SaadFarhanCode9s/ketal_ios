@@ -335,9 +335,9 @@ class RoomScreenViewModelTests: XCTestCase {
     
     func testKnockRequestBanner() async throws {
         ServiceLocator.shared.settings.knockingEnabled = true
-        let roomProxyMock = JoinedRoomProxyMock(.init(knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:matrix.org", displayName: "Alice", reason: "Hello World!")),
+        let roomProxyMock = JoinedRoomProxyMock(.init(knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:ketals.online", displayName: "Alice", reason: "Hello World!")),
                                                                                    // This one should be filtered
-                                                                                   KnockRequestProxyMock(.init(eventID: "2", userID: "@bob:matrix.org", isSeen: true))]),
+                                                                                   KnockRequestProxyMock(.init(eventID: "2", userID: "@bob:ketals.online", isSeen: true))]),
                                                       joinRule: .knock))
         let viewModel = RoomScreenViewModel(userSession: UserSessionMock(.init()),
                                             roomProxy: roomProxyMock,
@@ -351,7 +351,7 @@ class RoomScreenViewModelTests: XCTestCase {
         
         var deferred = deferFulfillment(viewModel.context.$viewState) { state in
             state.shouldSeeKnockRequests &&
-                state.unseenKnockRequests == [.init(displayName: "Alice", avatarURL: nil, userID: "@alice:matrix.org", reason: "Hello World!", eventID: "1")]
+                state.unseenKnockRequests == [.init(displayName: "Alice", avatarURL: nil, userID: "@alice:ketals.online", reason: "Hello World!", eventID: "1")]
         }
         try await deferred.fulfill()
                 
@@ -369,9 +369,9 @@ class RoomScreenViewModelTests: XCTestCase {
     
     func testKnockRequestBannerMarkAsSeen() async throws {
         ServiceLocator.shared.settings.knockingEnabled = true
-        let roomProxyMock = JoinedRoomProxyMock(.init(knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:matrix.org", displayName: "Alice", reason: "Hello World!")),
+        let roomProxyMock = JoinedRoomProxyMock(.init(knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:ketals.online", displayName: "Alice", reason: "Hello World!")),
                                                                                    // This one should be filtered
-                                                                                   KnockRequestProxyMock(.init(eventID: "2", userID: "@bob:matrix.org"))]),
+                                                                                   KnockRequestProxyMock(.init(eventID: "2", userID: "@bob:ketals.online"))]),
                                                       joinRule: .knock))
         let viewModel = RoomScreenViewModel(userSession: UserSessionMock(.init()),
                                             roomProxy: roomProxyMock,
@@ -385,8 +385,8 @@ class RoomScreenViewModelTests: XCTestCase {
         
         var deferred = deferFulfillment(viewModel.context.$viewState) { state in
             state.shouldSeeKnockRequests &&
-                state.unseenKnockRequests == [.init(displayName: "Alice", avatarURL: nil, userID: "@alice:matrix.org", reason: "Hello World!", eventID: "1"),
-                                              .init(displayName: nil, avatarURL: nil, userID: "@bob:matrix.org", reason: nil, eventID: "2")]
+                state.unseenKnockRequests == [.init(displayName: "Alice", avatarURL: nil, userID: "@alice:ketals.online", reason: "Hello World!", eventID: "1"),
+                                              .init(displayName: nil, avatarURL: nil, userID: "@bob:ketals.online", reason: nil, eventID: "2")]
         }
         try await deferred.fulfill()
         
@@ -419,7 +419,7 @@ class RoomScreenViewModelTests: XCTestCase {
     
     func testKnockRequestsBannerDoesNotAppearIfUserHasNoPermission() async throws {
         ServiceLocator.shared.settings.knockingEnabled = true
-        let roomProxyMock = JoinedRoomProxyMock(.init(knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:matrix.org", displayName: "Alice", reason: "Hello World!"))]),
+        let roomProxyMock = JoinedRoomProxyMock(.init(knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:ketals.online", displayName: "Alice", reason: "Hello World!"))]),
                                                       joinRule: .knock,
                                                       powerLevelsConfiguration: .init(canUserInvite: false)))
         let viewModel = RoomScreenViewModel(userSession: UserSessionMock(.init()),
@@ -433,7 +433,7 @@ class RoomScreenViewModelTests: XCTestCase {
         self.viewModel = viewModel
         
         let deferred = deferFulfillment(viewModel.context.$viewState) { state in
-            state.unseenKnockRequests == [.init(displayName: "Alice", avatarURL: nil, userID: "@alice:matrix.org", reason: "Hello World!", eventID: "1")] &&
+            state.unseenKnockRequests == [.init(displayName: "Alice", avatarURL: nil, userID: "@alice:ketals.online", reason: "Hello World!", eventID: "1")] &&
                 !state.shouldSeeKnockRequests
         }
         try await deferred.fulfill()

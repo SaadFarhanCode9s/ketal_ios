@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "输入...";
 "screen_start_chat_join_room_by_address_room_found" = "找到匹配的房间";
 "screen_start_chat_join_room_by_address_room_not_found" = "未找到房间";
-"screen_start_chat_join_room_by_address_supporting_text" = "例如 #room-name:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "例如 #room-name:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "消息未发送，因为%1$@的已验证身份已被重置。";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "消息未发送，因为%1$@尚未验证所有设备。";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "消息未发送，因为您有尚未验证的设备。";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "如果您遇到通知问题，上传通知设置可以帮助我们查明根本原因。";
 "screen_bug_report_send_notification_settings_title" = "发送通知设置";
 "screen_bug_report_view_logs" = "查看日志";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org 由 Matrix.org 基金会运营，是用于安全、去中心化的通信的公共 Matrix 网络上的大型免费服务器。";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online 由 ketals.online 基金会运营，是用于安全、去中心化的通信的公共 Matrix 网络上的大型免费服务器。";
 "screen_change_account_provider_other" = "其他";
 "screen_change_account_provider_subtitle" = "使用其他账户提供商，例如您自己的私人服务器或工作账户。";
 "screen_change_account_provider_title" = "更改账户提供方";

@@ -25,8 +25,8 @@ final class NotificationContentBuilderTests: XCTestCase {
     }
     
     func testDMMessageNotification() async {
-        let notificationItem = NotificationItemProxyMock(.init(roomID: "!test:matrix.org",
-                                                               receiverID: "@bob:matrix.org",
+        let notificationItem = NotificationItemProxyMock(.init(roomID: "!test:ketals.online",
+                                                               receiverID: "@bob:ketals.online",
                                                                senderDisplayName: "Alice",
                                                                roomDisplayName: "Alice",
                                                                roomJoinedMembers: 2,
@@ -46,13 +46,13 @@ final class NotificationContentBuilderTests: XCTestCase {
         XCTAssertNil(notificationContent.threadRootEventID)
         XCTAssertNotNil(notificationContent.sound)
         // Remember we remove the @ due to an iOS bug
-        XCTAssertEqual(notificationContent.threadIdentifier, "bob:matrix.org!test:matrix.org")
+        XCTAssertEqual(notificationContent.threadIdentifier, "bob:ketals.online!test:ketals.online")
         XCTAssertEqual(notificationContent.attachments, [])
     }
     
     func testDMMessageNotificationWithMention() async {
-        let notificationItem = NotificationItemProxyMock(.init(roomID: "!test:matrix.org",
-                                                               receiverID: "@bob:matrix.org",
+        let notificationItem = NotificationItemProxyMock(.init(roomID: "!test:ketals.online",
+                                                               receiverID: "@bob:ketals.online",
                                                                senderDisplayName: "Alice",
                                                                roomDisplayName: "Alice",
                                                                roomJoinedMembers: 2,
@@ -74,13 +74,13 @@ final class NotificationContentBuilderTests: XCTestCase {
         XCTAssertNil(notificationContent.threadRootEventID)
         XCTAssertNotNil(notificationContent.sound)
         // Remember we remove the @ due to an iOS bug
-        XCTAssertEqual(notificationContent.threadIdentifier, "bob:matrix.org!test:matrix.org")
+        XCTAssertEqual(notificationContent.threadIdentifier, "bob:ketals.online!test:ketals.online")
         XCTAssertEqual(notificationContent.attachments, [])
     }
     
     func testDMMessageNotificationWithThread() async {
-        let notificationItem = NotificationItemProxyMock(.init(roomID: "!test:matrix.org",
-                                                               receiverID: "@bob:matrix.org",
+        let notificationItem = NotificationItemProxyMock(.init(roomID: "!test:ketals.online",
+                                                               receiverID: "@bob:ketals.online",
                                                                senderDisplayName: "Alice",
                                                                roomDisplayName: "Alice",
                                                                roomJoinedMembers: 2,
@@ -102,13 +102,13 @@ final class NotificationContentBuilderTests: XCTestCase {
         XCTAssertNotNil(notificationContent.threadRootEventID)
         XCTAssertNotNil(notificationContent.sound)
         // Remember we remove the @ due to an iOS bug
-        XCTAssertEqual(notificationContent.threadIdentifier, "bob:matrix.org!test:matrix.orgthread")
+        XCTAssertEqual(notificationContent.threadIdentifier, "bob:ketals.online!test:matrix.orgthread")
         XCTAssertEqual(notificationContent.attachments, [])
     }
     
     func testDMMessageNotificationWithThreadAndMention() async {
-        let notificationItem = NotificationItemProxyMock(.init(roomID: "!test:matrix.org",
-                                                               receiverID: "@bob:matrix.org",
+        let notificationItem = NotificationItemProxyMock(.init(roomID: "!test:ketals.online",
+                                                               receiverID: "@bob:ketals.online",
                                                                senderDisplayName: "Alice",
                                                                roomDisplayName: "Alice",
                                                                roomJoinedMembers: 2,
@@ -130,13 +130,13 @@ final class NotificationContentBuilderTests: XCTestCase {
         XCTAssertNotNil(notificationContent.threadRootEventID)
         XCTAssertNotNil(notificationContent.sound)
         // Remember we remove the @ due to an iOS bug
-        XCTAssertEqual(notificationContent.threadIdentifier, "bob:matrix.org!test:matrix.orgthread")
+        XCTAssertEqual(notificationContent.threadIdentifier, "bob:ketals.online!test:matrix.orgthread")
         XCTAssertEqual(notificationContent.attachments, [])
     }
 
     func testRoomMessageNotification() async {
-        let notificationItem = NotificationItemProxyMock(.init(roomID: "!testroom:matrix.org",
-                                                               receiverID: "@bob:matrix.org",
+        let notificationItem = NotificationItemProxyMock(.init(roomID: "!testroom:ketals.online",
+                                                               receiverID: "@bob:ketals.online",
                                                                senderDisplayName: "Alice",
                                                                roomDisplayName: "General",
                                                                roomJoinedMembers: 5,
@@ -156,13 +156,13 @@ final class NotificationContentBuilderTests: XCTestCase {
         XCTAssertNil(notificationContent.threadRootEventID)
         XCTAssertNil(notificationContent.sound)
         // Remember we remove the @ due to an iOS bug
-        XCTAssertEqual(notificationContent.threadIdentifier, "bob:matrix.org!testroom:matrix.org")
+        XCTAssertEqual(notificationContent.threadIdentifier, "bob:ketals.online!testroom:ketals.online")
         XCTAssertEqual(notificationContent.attachments, [])
     }
     
     func testRoomMessageNotificationWithMention() async {
-        let notificationItem = NotificationItemProxyMock(.init(roomID: "!testroom:matrix.org",
-                                                               receiverID: "@bob:matrix.org",
+        let notificationItem = NotificationItemProxyMock(.init(roomID: "!testroom:ketals.online",
+                                                               receiverID: "@bob:ketals.online",
                                                                senderDisplayName: "Alice",
                                                                roomDisplayName: "General",
                                                                roomJoinedMembers: 5,
@@ -182,13 +182,13 @@ final class NotificationContentBuilderTests: XCTestCase {
         XCTAssertEqual(notificationContent.categoryIdentifier, NotificationConstants.Category.message)
         XCTAssertNil(notificationContent.threadRootEventID)
         XCTAssertNotNil(notificationContent.sound)
-        XCTAssertEqual(notificationContent.threadIdentifier, "bob:matrix.org!testroom:matrix.org")
+        XCTAssertEqual(notificationContent.threadIdentifier, "bob:ketals.online!testroom:ketals.online")
         XCTAssertEqual(notificationContent.attachments, [])
     }
 
     func testRoomMessageNotificationWithThread() async {
-        let notificationItem = NotificationItemProxyMock(.init(roomID: "!testroom:matrix.org",
-                                                               receiverID: "@bob:matrix.org",
+        let notificationItem = NotificationItemProxyMock(.init(roomID: "!testroom:ketals.online",
+                                                               receiverID: "@bob:ketals.online",
                                                                senderDisplayName: "Alice",
                                                                roomDisplayName: "General",
                                                                roomJoinedMembers: 5,
@@ -208,13 +208,13 @@ final class NotificationContentBuilderTests: XCTestCase {
         XCTAssertEqual(notificationContent.categoryIdentifier, NotificationConstants.Category.message)
         XCTAssertNotNil(notificationContent.threadRootEventID)
         XCTAssertNil(notificationContent.sound)
-        XCTAssertEqual(notificationContent.threadIdentifier, "bob:matrix.org!testroom:matrix.orgthread123")
+        XCTAssertEqual(notificationContent.threadIdentifier, "bob:ketals.online!testroom:matrix.orgthread123")
         XCTAssertEqual(notificationContent.attachments, [])
     }
 
     func testRoomMessageNotificationWithThreadAndMention() async {
-        let notificationItem = NotificationItemProxyMock(.init(roomID: "!testroom:matrix.org",
-                                                               receiverID: "@bob:matrix.org",
+        let notificationItem = NotificationItemProxyMock(.init(roomID: "!testroom:ketals.online",
+                                                               receiverID: "@bob:ketals.online",
                                                                senderDisplayName: "Alice",
                                                                roomDisplayName: "General",
                                                                roomJoinedMembers: 5,
@@ -233,7 +233,7 @@ final class NotificationContentBuilderTests: XCTestCase {
         XCTAssertEqual(notificationContent.categoryIdentifier, NotificationConstants.Category.message)
         XCTAssertNotNil(notificationContent.threadRootEventID)
         XCTAssertNotNil(notificationContent.sound)
-        XCTAssertEqual(notificationContent.threadIdentifier, "bob:matrix.org!testroom:matrix.orgthread123")
+        XCTAssertEqual(notificationContent.threadIdentifier, "bob:ketals.online!testroom:matrix.orgthread123")
         XCTAssertEqual(notificationContent.attachments, [])
     }
 }

@@ -117,13 +117,13 @@ class JoinRoomScreenViewModelTests: XCTestCase {
         let expectation = expectation(description: "Wait for the user to be ignored")
         clientProxy.ignoreUserClosure = { userID in
             defer { expectation.fulfill() }
-            XCTAssertEqual(userID, "@test:matrix.org")
+            XCTAssertEqual(userID, "@test:ketals.online")
             return .success(())
         }
         
         try await deferFulfillment(viewModel.context.$viewState) { $0.roomDetails != nil }.fulfill()
         
-        context.send(viewAction: .declineInviteAndBlock(userID: "@test:matrix.org"))
+        context.send(viewAction: .declineInviteAndBlock(userID: "@test:ketals.online"))
         
         try await deferFulfillment(viewModel.context.$viewState) { $0.bindings.alertInfo != nil }.fulfill()
         XCTAssertEqual(viewModel.context.alertInfo?.id, .declineInviteAndBlock)
@@ -139,8 +139,8 @@ class JoinRoomScreenViewModelTests: XCTestCase {
     func testDeclineAndBlockInviteInteraction() async throws {
         setupViewModel(mode: .invited)
         try await deferFulfillment(viewModel.context.$viewState) { $0.roomDetails != nil }.fulfill()
-        let deferredAction = deferFulfillment(viewModel.actionsPublisher) { $0 == .presentDeclineAndBlock(userID: "@test:matrix.org") }
-        context.send(viewAction: .declineInviteAndBlock(userID: "@test:matrix.org"))
+        let deferredAction = deferFulfillment(viewModel.actionsPublisher) { $0 == .presentDeclineAndBlock(userID: "@test:ketals.online") }
+        context.send(viewAction: .declineInviteAndBlock(userID: "@test:ketals.online"))
         try await deferredAction.fulfill()
     }
     

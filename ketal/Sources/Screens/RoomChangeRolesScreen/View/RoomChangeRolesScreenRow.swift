@@ -60,13 +60,13 @@ struct RoomChangeRolesScreenRow_Previews: PreviewProvider, TestablePreview {
                                      action: action)
                 .disabled(true)
             
-            RoomChangeRolesScreenRow(member: .init(withProxy: RoomMemberProxyMock(with: .init(userID: "@someone:matrix.org", membership: .join))),
+            RoomChangeRolesScreenRow(member: .init(withProxy: RoomMemberProxyMock(with: .init(userID: "@someone:ketals.online", membership: .join))),
                                      mediaProvider: MediaProviderMock(configuration: .init()),
                                      isSelected: false,
                                      action: action)
                 .disabled(true)
             
-            RoomChangeRolesScreenRow(member: .init(withProxy: RoomMemberProxyMock(with: .init(userID: "@someone:matrix.org", membership: .join))),
+            RoomChangeRolesScreenRow(member: .init(withProxy: RoomMemberProxyMock(with: .init(userID: "@someone:ketals.online", membership: .join))),
                                      mediaProvider: MediaProviderMock(configuration: .init()),
                                      isSelected: false,
                                      action: action)

@@ -430,7 +430,7 @@ class SecurityAndPrivacyScreenViewModelTests: XCTestCase {
         appSettings.spaceSettingsEnabled = true
         appSettings.knockingEnabled = true
         roomProxy = JoinedRoomProxyMock(.init(isEncrypted: false,
-                                              canonicalAlias: "#room:matrix.org",
+                                              canonicalAlias: "#room:ketals.online",
                                               members: .allMembersAsCreator,
                                               joinRule: joinRule,
                                               isVisibleInPublicDirectory: true))
@@ -438,7 +438,7 @@ class SecurityAndPrivacyScreenViewModelTests: XCTestCase {
         roomProxy.updateRoomDirectoryVisibilityReturnValue = .success(())
         
         viewModel = SecurityAndPrivacyScreenViewModel(roomProxy: roomProxy,
-                                                      clientProxy: ClientProxyMock(.init(userIDServerName: "matrix.org",
+                                                      clientProxy: ClientProxyMock(.init(userIDServerName: "ketals.online",
                                                                                          spaceServiceConfiguration: .init(topLevelSpaces: topLevelSpaces,
                                                                                                                           joinedParentSpaces: joinedParentSpaces))),
                                                       userIndicatorController: UserIndicatorControllerMock(),

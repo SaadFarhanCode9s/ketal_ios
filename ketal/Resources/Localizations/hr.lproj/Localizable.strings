@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Unos...";
 "screen_start_chat_join_room_by_address_room_found" = "Pronađena je odgovarajuća soba";
 "screen_start_chat_join_room_by_address_room_not_found" = "Soba nije pronađena";
-"screen_start_chat_join_room_by_address_supporting_text" = "npr. #naziv-sobe:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "npr. #naziv-sobe:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Poruka nije poslana jer je poništen potvrđeni identitet korisnika %1$@.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Poruka nije poslana jer %1$@ nije potvrdio sve uređaje.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Poruka nije poslana jer niste potvrdili jedan svoj uređaj ili više njih.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "Ako imate problema s obavijestima, prijenos pravila za slanje obavijesti može nam pomoći da utvrdimo uzrok. Imajte na umu da ta pravila mogu sadržavati privatne podatke, kao što su vaše ime za prikaz ili ključne riječi za koje želite primati obavijesti.";
 "screen_bug_report_send_notification_settings_title" = "Postavke slanja obavijesti";
 "screen_bug_report_view_logs" = "Prikaz zapisnika";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org velik je, besplatni poslužitelj na javnoj Matrixovoj mreži koji pruža sigurnu, decentraliziranu komunikaciju, a kojim upravlja zaklada Matrix.org.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online velik je, besplatni poslužitelj na javnoj Matrixovoj mreži koji pruža sigurnu, decentraliziranu komunikaciju, a kojim upravlja zaklada ketals.online.";
 "screen_change_account_provider_other" = "Ostalo";
 "screen_change_account_provider_subtitle" = "Koristite drugog davatelja računa, kao što je vlastiti privatni poslužitelj ili poslovni račun.";
 "screen_change_account_provider_title" = "Promijeni davatelja usluga računa";

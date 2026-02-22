@@ -183,20 +183,26 @@ struct RoomScreen: View {
             .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
         } else {
             HStack(spacing: 12) {
-                // Video call button: existing behaviour with camera enabled
+                // Video call button
                 Button {
                     context.send(viewAction: .displayCall)
                 } label: {
                     CompoundIcon(\.videoCallSolid)
+                        .padding(10)
+                        .background(Color.compound.bgActionSecondaryRest)
+                        .clipShape(Circle())
                 }
                 .accessibilityLabel(L10n.a11yStartCall)
                 .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
 
-                // Audio-only call button: starts a call with the camera disabled
+                // Audio-only call button
                 Button {
                     context.send(viewAction: .displayAudioCall)
                 } label: {
                     CompoundIcon(\.voiceCallSolid)
+                        .padding(10)
+                        .background(Color.compound.bgActionSecondaryRest)
+                        .clipShape(Circle())
                 }
                 .accessibilityLabel(L10n.actionCall)
             }

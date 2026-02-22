@@ -42,7 +42,7 @@ struct SpaceAddRoomsScreenSelectedItem_Previews: PreviewProvider, TestablePrevie
     static var previews: some View {
         SpaceAddRoomsScreenSelectedItem(room: .init(id: "",
                                                     title: "Selected Room",
-                                                    description: "#selected:matrix.org",
+                                                    description: "#selected:ketals.online",
                                                     avatar: .room(id: "",
                                                                   name: "Selected Room",
                                                                   avatarURL: .mockMXCAvatar)),

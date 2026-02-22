@@ -57,7 +57,7 @@ struct MentionSuggestionItemView_Previews: PreviewProvider, TestablePreview {
             .previewDisplayName("All users")
         MentionSuggestionItemView(mediaProvider: mockMediaProvider,
                                   item: .init(suggestionType: .room(.init(id: "room",
-                                                                          canonicalAlias: "#room:matrix.org",
+                                                                          canonicalAlias: "#room:ketals.online",
                                                                           name: "Room",
                                                                           avatar: .room(id: "room",
                                                                                         name: "Room", avatarURL: .mockMXCAvatar))),

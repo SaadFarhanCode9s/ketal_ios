@@ -197,7 +197,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
         // The empty # should trigger suggestions from any room with an alias
         deferred = deferFulfillment(service.suggestionsPublisher) { suggestions in
             suggestions == [.init(suggestionType: .room(.init(id: "2",
-                                                              canonicalAlias: "#foundation-and-empire:matrix.org",
+                                                              canonicalAlias: "#foundation-and-empire:ketals.online",
                                                               name: "Foundation and Empire",
                                                               avatar: .room(id: "2",
                                                                             name: "Foundation and Empire",
@@ -205,7 +205,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
                                   range: .init(),
                                   rawSuggestionText: ""),
                             .init(suggestionType: .room(.init(id: "6",
-                                                              canonicalAlias: "#prelude-foundation:matrix.org",
+                                                              canonicalAlias: "#prelude-foundation:ketals.online",
                                                               name: "Prelude to Foundation",
                                                               avatar: .room(id: "6",
                                                                             name: "Prelude to Foundation",
@@ -219,7 +219,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
         // Same but with the processTextMessage method
         deferred = deferFulfillment(service.suggestionsPublisher) { suggestions in
             suggestions == [.init(suggestionType: .room(.init(id: "2",
-                                                              canonicalAlias: "#foundation-and-empire:matrix.org",
+                                                              canonicalAlias: "#foundation-and-empire:ketals.online",
                                                               name: "Foundation and Empire",
                                                               avatar: .room(id: "2",
                                                                             name: "Foundation and Empire",
@@ -227,7 +227,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
                                   range: .init(location: 0, length: 1),
                                   rawSuggestionText: ""),
                             .init(suggestionType: .room(.init(id: "6",
-                                                              canonicalAlias: "#prelude-foundation:matrix.org",
+                                                              canonicalAlias: "#prelude-foundation:ketals.online",
                                                               name: "Prelude to Foundation",
                                                               avatar: .room(id: "6",
                                                                             name: "Prelude to Foundation",
@@ -240,7 +240,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
         
         deferred = deferFulfillment(service.suggestionsPublisher) { suggestions in
             suggestions == [.init(suggestionType: .room(.init(id: "6",
-                                                              canonicalAlias: "#prelude-foundation:matrix.org",
+                                                              canonicalAlias: "#prelude-foundation:ketals.online",
                                                               name: "Prelude to Foundation",
                                                               avatar: .room(id: "6",
                                                                             name: "Prelude to Foundation",
@@ -263,7 +263,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
         
         var deferred = deferFulfillment(service.suggestionsPublisher) { suggestions in
             suggestions == [.init(suggestionType: .room(.init(id: "6",
-                                                              canonicalAlias: "#prelude-foundation:matrix.org",
+                                                              canonicalAlias: "#prelude-foundation:ketals.online",
                                                               name: "Prelude to Foundation",
                                                               avatar: .room(id: "6",
                                                                             name: "Prelude to Foundation",
@@ -276,7 +276,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
         
         deferred = deferFulfillment(service.suggestionsPublisher) { suggestions in
             suggestions == [.init(suggestionType: .room(.init(id: "6",
-                                                              canonicalAlias: "#prelude-foundation:matrix.org",
+                                                              canonicalAlias: "#prelude-foundation:ketals.online",
                                                               name: "Prelude to Foundation",
                                                               avatar: .room(id: "6",
                                                                             name: "Prelude to Foundation",
@@ -289,7 +289,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
         
         deferred = deferFulfillment(service.suggestionsPublisher) { suggestions in
             suggestions == [.init(suggestionType: .room(.init(id: "6",
-                                                              canonicalAlias: "#prelude-foundation:matrix.org",
+                                                              canonicalAlias: "#prelude-foundation:ketals.online",
                                                               name: "Prelude to Foundation",
                                                               avatar: .room(id: "6",
                                                                             name: "Prelude to Foundation",
@@ -312,7 +312,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
         
         var deffered = deferFulfillment(service.suggestionsPublisher) { suggestions in
             suggestions == [.init(suggestionType: .room(.init(id: "6",
-                                                              canonicalAlias: "#prelude-foundation:matrix.org",
+                                                              canonicalAlias: "#prelude-foundation:ketals.online",
                                                               name: "Prelude to Foundation",
                                                               avatar: .room(id: "6",
                                                                             name: "Prelude to Foundation",
@@ -325,7 +325,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
         
         deffered = deferFulfillment(service.suggestionsPublisher) { suggestions in
             suggestions == [.init(suggestionType: .room(.init(id: "2",
-                                                              canonicalAlias: "#foundation-and-empire:matrix.org",
+                                                              canonicalAlias: "#foundation-and-empire:ketals.online",
                                                               name: "Foundation and Empire",
                                                               avatar: .room(id: "2",
                                                                             name: "Foundation and Empire",
@@ -333,7 +333,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
                                   range: .init(location: 9, length: 3),
                                   rawSuggestionText: "fo"),
                             .init(suggestionType: .room(.init(id: "6",
-                                                              canonicalAlias: "#prelude-foundation:matrix.org",
+                                                              canonicalAlias: "#prelude-foundation:ketals.online",
                                                               name: "Prelude to Foundation",
                                                               avatar: .room(id: "6",
                                                                             name: "Prelude to Foundation",
@@ -362,7 +362,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
         
         var deffered = deferFulfillment(service.suggestionsPublisher) { suggestions in
             suggestions == [.init(suggestionType: .room(.init(id: "6",
-                                                              canonicalAlias: "#prelude-foundation:matrix.org",
+                                                              canonicalAlias: "#prelude-foundation:ketals.online",
                                                               name: "Prelude to Foundation",
                                                               avatar: .room(id: "6",
                                                                             name: "Prelude to Foundation",
@@ -397,7 +397,7 @@ final class CompletionSuggestionServiceTests: XCTestCase {
         
         deferred = deferFulfillment(service.suggestionsPublisher) { suggestions in
             suggestions == [.init(suggestionType: .room(.init(id: "6",
-                                                              canonicalAlias: "#prelude-foundation:matrix.org",
+                                                              canonicalAlias: "#prelude-foundation:ketals.online",
                                                               name: "Prelude to Foundation",
                                                               avatar: .room(id: "6",
                                                                             name: "Prelude to Foundation",

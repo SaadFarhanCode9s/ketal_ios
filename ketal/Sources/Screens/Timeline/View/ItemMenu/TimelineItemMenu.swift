@@ -264,10 +264,10 @@ struct TimelineItemMenu_Previews: PreviewProvider, TestablePreview {
     static let (unencryptedItem, _) = makeActions(authenticity: .sentInClear(color: .red))
     static let (unknownFailureItem, _) = makeActions(deliveryStatus: .sendingFailed(.unknown))
     static let (identityChangedItem, _) = makeActions(deliveryStatus: .sendingFailed(.verifiedUser(.changedIdentity(users: [
-        "@alice:matrix.org"
+        "@alice:ketals.online"
     ]))))
     static let (unsignedDevicesItem, _) = makeActions(deliveryStatus: .sendingFailed(.verifiedUser(.hasUnsignedDevice(devices: [
-        "@alice:matrix.org": ["DEVICE1", "DEVICE2"]
+        "@alice:ketals.online": ["DEVICE1", "DEVICE2"]
     ]))))
     static let (ownUnsignedDevicesItem, _) = makeActions(deliveryStatus: .sendingFailed(.verifiedUser(.hasUnsignedDevice(devices: [
         RoomMemberProxyMock.mockMe.userID: ["DEVICE1"]

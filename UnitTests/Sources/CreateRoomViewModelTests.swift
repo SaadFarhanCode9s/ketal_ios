@@ -73,7 +73,7 @@ class CreateRoomScreenViewModelTests: XCTestCase {
     
     func testCreateSpace() async throws {
         setup(isSpace: true)
-        clientProxy = ClientProxyMock(.init(userIDServerName: "matrix.org",
+        clientProxy = ClientProxyMock(.init(userIDServerName: "ketals.online",
                                             userID: "@a:b.com",
                                             spaceServiceConfiguration: .init(spaceRoomLists: ["1": .init()])))
         clientProxy.roomForIdentifierClosure = { roomID in .joined(JoinedRoomProxyMock(.init(id: roomID))) }
@@ -322,7 +322,7 @@ class CreateRoomScreenViewModelTests: XCTestCase {
     private func setup(isSpace: Bool = false, spacesSelectionMode: CreateRoomScreenSpaceSelectionMode = .editableSpacesList(preSelectedSpace: nil)) {
         spaceService = SpaceServiceProxyMock(.init(editableSpaces: .mockJoinedSpaces2,
                                                    spaceRoomLists: ["1": .init()]))
-        clientProxy = ClientProxyMock(.init(userIDServerName: "matrix.org",
+        clientProxy = ClientProxyMock(.init(userIDServerName: "ketals.online",
                                             userID: "@a:b.com"))
         clientProxy.spaceService = spaceService
         clientProxy.roomForIdentifierClosure = { roomID in .joined(JoinedRoomProxyMock(.init(id: roomID))) }

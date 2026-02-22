@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Digite...";
 "screen_start_chat_join_room_by_address_room_found" = "Foi encontrada uma sala correspondente";
 "screen_start_chat_join_room_by_address_room_not_found" = "Sala não encontrada";
-"screen_start_chat_join_room_by_address_supporting_text" = "Por exemplo, #nome-da-sala:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "Por exemplo, #nome-da-sala:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Mensagem não enviada porque a identidade verificada de %1$@ foi redefinida.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "A mensagem não foi enviada porque %1$@ não verificou todos os dispositivos.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Mensagem não enviada porque você não verificou um ou mais dos seus dispositivos.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "Se estiver enfrentando problemas com as notificações, enviar as regras de notificações push pode ajudar-nos a descobrir o que está errado. Observe que as regras podem conter informações privadas, como o seu nome de exibição ou palavras chaves de notificação.";
 "screen_bug_report_send_notification_settings_title" = "Enviar configurações de notificação";
 "screen_bug_report_view_logs" = "Ver registros";
-"screen_change_account_provider_matrix_org_subtitle" = "O Matrix.org é um grande servidor gratuito na rede pública Matrix para comunicação segura e descentralizada, administrado pela Fundação Matrix.org.";
+"screen_change_account_provider_matrix_org_subtitle" = "O ketals.online é um grande servidor gratuito na rede pública Matrix para comunicação segura e descentralizada, administrado pela Fundação ketals.online.";
 "screen_change_account_provider_other" = "Outro";
 "screen_change_account_provider_subtitle" = "Use um provedor de conta diferente, como seu próprio servidor privado ou uma conta corporativa.";
 "screen_change_account_provider_title" = "Alterar provedor da conta";

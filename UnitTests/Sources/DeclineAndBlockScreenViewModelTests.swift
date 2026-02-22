@@ -20,8 +20,8 @@ class DeclineAndBlockScreenViewModelTests: XCTestCase {
     
     override func setUp() {
         clientProxy = ClientProxyMock(.init())
-        viewModel = DeclineAndBlockScreenViewModel(userID: "@alice:matrix.org",
-                                                   roomID: "!room:matrix.org",
+        viewModel = DeclineAndBlockScreenViewModel(userID: "@alice:ketals.online",
+                                                   roomID: "!room:ketals.online",
                                                    clientProxy: clientProxy,
                                                    userIndicatorController: UserIndicatorControllerMock())
     }
@@ -47,18 +47,18 @@ class DeclineAndBlockScreenViewModelTests: XCTestCase {
     func testDeclineBlockAndReport() async throws {
         let reason = "Test reason"
         clientProxy.roomForIdentifierClosure = { id in
-            XCTAssertEqual(id, "!room:matrix.org")
+            XCTAssertEqual(id, "!room:ketals.online")
             let roomProxyMock = InvitedRoomProxyMock(.init(id: id))
             roomProxyMock.rejectInvitationReturnValue = .success(())
             return .invited(InvitedRoomProxyMock(.init(id: id)))
         }
         clientProxy.reportRoomForIdentifierReasonClosure = { id, reasonValue in
-            XCTAssertEqual(id, "!room:matrix.org")
+            XCTAssertEqual(id, "!room:ketals.online")
             XCTAssertEqual(reasonValue, reason)
             return .success(())
         }
         clientProxy.ignoreUserClosure = { userId in
-            XCTAssertEqual(userId, "@alice:matrix.org")
+            XCTAssertEqual(userId, "@alice:ketals.online")
             return .success(())
         }
         

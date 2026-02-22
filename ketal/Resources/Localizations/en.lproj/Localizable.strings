@@ -763,7 +763,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Enter...";
 "screen_start_chat_join_room_by_address_room_found" = "Matching room found";
 "screen_start_chat_join_room_by_address_room_not_found" = "Room not found";
-"screen_start_chat_join_room_by_address_supporting_text" = "e.g. #room-name:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "e.g. #room-name:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Message not sent because %1$@’s verified identity was reset.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Message not sent because %1$@ has not verified all devices.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Message not sent because you have not verified one or more of your devices.";
@@ -833,7 +833,7 @@
 "screen_bug_report_send_notification_settings_description" = "If you are having issues with notifications, uploading the notification push rules can help us pinpoint the root cause. Note these rules can contain private information, such as your display name or keywords to be notified for.";
 "screen_bug_report_send_notification_settings_title" = "Send notification settings";
 "screen_bug_report_view_logs" = "View logs";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org is a large, free server on the public Matrix network for secure, decentralised communication, run by the Matrix.org Foundation.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online is a large, free server on the public Matrix network for secure, decentralised communication, run by the ketals.online Foundation.";
 "screen_change_account_provider_other" = "Other";
 "screen_change_account_provider_subtitle" = "Use a different account provider, such as your own private server or a work account.";
 "screen_change_account_provider_title" = "Change account provider";

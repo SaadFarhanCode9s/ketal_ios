@@ -241,11 +241,11 @@ struct SecurityAndPrivacyScreen_Previews: PreviewProvider, TestablePreview {
     static let publicViewModel = {
         AppSettings.resetAllSettings()
         return SecurityAndPrivacyScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(isEncrypted: false,
-                                                                                      canonicalAlias: "#room:matrix.org",
+                                                                                      canonicalAlias: "#room:ketals.online",
                                                                                       members: .allMembersAsCreator,
                                                                                       joinRule: .public,
                                                                                       isVisibleInPublicDirectory: true)),
-                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "matrix.org")),
+                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "ketals.online")),
                                                  userIndicatorController: UserIndicatorControllerMock(),
                                                  appSettings: AppSettings())
     }()
@@ -255,7 +255,7 @@ struct SecurityAndPrivacyScreen_Previews: PreviewProvider, TestablePreview {
         return SecurityAndPrivacyScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(isEncrypted: false,
                                                                                       members: .allMembersAsCreator,
                                                                                       joinRule: .public)),
-                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "matrix.org")),
+                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "ketals.online")),
                                                  userIndicatorController: UserIndicatorControllerMock(),
                                                  appSettings: AppSettings())
     }()
@@ -267,11 +267,11 @@ struct SecurityAndPrivacyScreen_Previews: PreviewProvider, TestablePreview {
         let space = [SpaceServiceRoom].mockSingleRoom[0]
         
         return SecurityAndPrivacyScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(isEncrypted: false,
-                                                                                      canonicalAlias: "#room:matrix.org",
+                                                                                      canonicalAlias: "#room:ketals.online",
                                                                                       members: .allMembersAsCreator,
                                                                                       joinRule: .restricted(rules: [.roomMembership(roomID: space.id)]),
                                                                                       isVisibleInPublicDirectory: true)),
-                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "matrix.org",
+                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "ketals.online",
                                                                                     spaceServiceConfiguration: .init(joinedParentSpaces: [space]))),
                                                  userIndicatorController: UserIndicatorControllerMock(),
                                                  appSettings: appSettings)
@@ -284,11 +284,11 @@ struct SecurityAndPrivacyScreen_Previews: PreviewProvider, TestablePreview {
         let spaces = [SpaceServiceRoom].mockJoinedSpaces
         
         return SecurityAndPrivacyScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(isEncrypted: false,
-                                                                                      canonicalAlias: "#room:matrix.org",
+                                                                                      canonicalAlias: "#room:ketals.online",
                                                                                       members: .allMembersAsCreator,
                                                                                       joinRule: .restricted(rules: spaces.map { .roomMembership(roomID: $0.id) }),
                                                                                       isVisibleInPublicDirectory: true)),
-                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "matrix.org",
+                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "ketals.online",
                                                                                     spaceServiceConfiguration: .init(joinedParentSpaces: spaces))),
                                                  userIndicatorController: UserIndicatorControllerMock(),
                                                  appSettings: appSettings)
@@ -300,11 +300,11 @@ struct SecurityAndPrivacyScreen_Previews: PreviewProvider, TestablePreview {
         appSettings.knockingEnabled = true
         
         return SecurityAndPrivacyScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(isEncrypted: false,
-                                                                                      canonicalAlias: "#room:matrix.org",
+                                                                                      canonicalAlias: "#room:ketals.online",
                                                                                       members: .allMembersAsCreator,
                                                                                       joinRule: .knock,
                                                                                       isVisibleInPublicDirectory: true)),
-                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "matrix.org")),
+                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "ketals.online")),
                                                  userIndicatorController: UserIndicatorControllerMock(),
                                                  appSettings: appSettings)
     }()
@@ -317,11 +317,11 @@ struct SecurityAndPrivacyScreen_Previews: PreviewProvider, TestablePreview {
         let space = [SpaceServiceRoom].mockSingleRoom[0]
         
         return SecurityAndPrivacyScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(isEncrypted: false,
-                                                                                      canonicalAlias: "#room:matrix.org",
+                                                                                      canonicalAlias: "#room:ketals.online",
                                                                                       members: .allMembersAsCreator,
                                                                                       joinRule: .knockRestricted(rules: [.roomMembership(roomID: space.id)]),
                                                                                       isVisibleInPublicDirectory: true)),
-                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "matrix.org",
+                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "ketals.online",
                                                                                     spaceServiceConfiguration: .init(joinedParentSpaces: [space]))),
                                                  userIndicatorController: UserIndicatorControllerMock(),
                                                  appSettings: appSettings)
@@ -335,11 +335,11 @@ struct SecurityAndPrivacyScreen_Previews: PreviewProvider, TestablePreview {
         let spaces = [SpaceServiceRoom].mockJoinedSpaces
         
         return SecurityAndPrivacyScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(isEncrypted: false,
-                                                                                      canonicalAlias: "#room:matrix.org",
+                                                                                      canonicalAlias: "#room:ketals.online",
                                                                                       members: .allMembersAsCreator,
                                                                                       joinRule: .knockRestricted(rules: spaces.map { .roomMembership(roomID: $0.id) }),
                                                                                       isVisibleInPublicDirectory: true)),
-                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "matrix.org",
+                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "ketals.online",
                                                                                     spaceServiceConfiguration: .init(joinedParentSpaces: spaces))),
                                                  userIndicatorController: UserIndicatorControllerMock(),
                                                  appSettings: appSettings)
@@ -349,11 +349,11 @@ struct SecurityAndPrivacyScreen_Previews: PreviewProvider, TestablePreview {
         AppSettings.resetAllSettings()
         return SecurityAndPrivacyScreenViewModel(roomProxy: JoinedRoomProxyMock(.init(isSpace: true,
                                                                                       isEncrypted: false,
-                                                                                      canonicalAlias: "#space:matrix.org",
+                                                                                      canonicalAlias: "#space:ketals.online",
                                                                                       members: .allMembersAsCreator,
                                                                                       joinRule: .public,
                                                                                       isVisibleInPublicDirectory: true)),
-                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "matrix.org")),
+                                                 clientProxy: ClientProxyMock(.init(userIDServerName: "ketals.online")),
                                                  userIndicatorController: UserIndicatorControllerMock(),
                                                  appSettings: AppSettings())
     }()

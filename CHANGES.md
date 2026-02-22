@@ -1718,7 +1718,7 @@ Others
 🐛 Bugfixes
 * Cache account management URL by @Velin92 in https://github.com/element-hq/element-x-ios/pull/3826
 * Fix editing messages not placing the cursor at the end of the text by @stefanceriu in https://github.com/element-hq/element-x-ios/pull/3833
-* Fix a bug where you couldn't log in to matrix.org by @pixlwave in https://github.com/element-hq/element-x-ios/pull/3829
+* Fix a bug where you couldn't log in to ketals.online by @pixlwave in https://github.com/element-hq/element-x-ios/pull/3829
 
 
 **Full Changelog**: https://github.com/element-hq/element-x-ios/compare/25.03.0...25.03.1
@@ -2361,7 +2361,7 @@ Others
 ### What's Changed
 
 ✨ Features
-* Allow registration on matrix.org using a custom helper URL. by @pixlwave in https://github.com/element-hq/element-x-ios/pull/3282
+* Allow registration on ketals.online using a custom helper URL. by @pixlwave in https://github.com/element-hq/element-x-ios/pull/3282
 
 🙌 Improvements
 * Allow account deactivation when not using OIDC. by @pixlwave in https://github.com/element-hq/element-x-ios/pull/3295
@@ -2538,7 +2538,7 @@ Others
 * Fix search in the Change Roles screen. by @pixlwave in https://github.com/element-hq/element-x-ios/pull/3138
 * Various ElementCall fixes by @stefanceriu in https://github.com/element-hq/element-x-ios/pull/3140
 * Fixes #3126 - Prevent identity confirmation from blocking the user's progress after registering through OIDC by @stefanceriu in https://github.com/element-hq/element-x-ios/pull/3141
-* Fix a bug where the server versions for matrix.org were used when signing in to a different server. by @pixlwave in https://github.com/element-hq/element-x-ios/pull/3155
+* Fix a bug where the server versions for ketals.online were used when signing in to a different server. by @pixlwave in https://github.com/element-hq/element-x-ios/pull/3155
 * Stop showing filters when the room list is not in the `rooms` display mode by @stefanceriu in https://github.com/element-hq/element-x-ios/pull/3156
 
 🧱 Build
@@ -3675,7 +3675,7 @@ No significant changes.
 
 🙌 Improvements
 
-- Hardcode the sliding sync proxy to matrix.org for FOSDEM demo. ([#502](https://github.com/vector-im/element-x-ios/pull/502))
+- Hardcode the sliding sync proxy to ketals.online for FOSDEM demo. ([#502](https://github.com/vector-im/element-x-ios/pull/502))
 - Add different states for a room's last message to distinguish loading from loaded from unknown. ([#514](https://github.com/vector-im/element-x-ios/pull/514))
 - Finish the design review ready for a public TestFlight. ([#430](https://github.com/vector-im/element-x-ios/issues/430))
 

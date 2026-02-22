@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Inserisci...";
 "screen_start_chat_join_room_by_address_room_found" = "Stanza trovata";
 "screen_start_chat_join_room_by_address_room_not_found" = "Stanza non trovata";
-"screen_start_chat_join_room_by_address_supporting_text" = "ad esempio #room -name:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "ad esempio #room -name:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Messaggio non inviato perché l'identità verificata di %1$@ è stata reimpostata.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Messaggio non inviato perché %1$@ non ha verificato tutti i dispositivi.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Messaggio non inviato perché non hai verificato uno o più dispositivi.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "Se riscontri problemi con le notifiche, caricare le regole per le notifiche push può aiutarci a individuare la causa principale. Tieni presente che queste regole possono contenere informazioni private, come il tuo nome visualizzato o le parole chiave per cui ricevere notifiche.";
 "screen_bug_report_send_notification_settings_title" = "Invia impostazioni di notifica";
 "screen_bug_report_view_logs" = "Visualizza i log";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org è un grande server gratuito nella rete pubblica Matrix per una comunicazione sicura e decentralizzata, gestito da Matrix.org Foundation.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online è un grande server gratuito nella rete pubblica Matrix per una comunicazione sicura e decentralizzata, gestito da ketals.online Foundation.";
 "screen_change_account_provider_other" = "Altro";
 "screen_change_account_provider_subtitle" = "Utilizza un provider di account diverso, ad esempio il tuo server privato o un account di lavoro.";
 "screen_change_account_provider_title" = "Cambia fornitore dell'account";

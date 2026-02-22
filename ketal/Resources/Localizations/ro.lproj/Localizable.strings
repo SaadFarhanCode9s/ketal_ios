@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Introduceți...";
 "screen_start_chat_join_room_by_address_room_found" = "S-a găsit o cameră";
 "screen_start_chat_join_room_by_address_room_not_found" = "Nu a putut fi găsită nici o cameră";
-"screen_start_chat_join_room_by_address_supporting_text" = "de exemplu #nume-camera:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "de exemplu #nume-camera:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Mesajul nu a fost trimis deoarece identitatea verificată a lui %1$@ s-a schimbat.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Mesajul nu a fost trimis deoarece %1$@ nu a verificat toate dispozitivele.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Mesajul nu a fost trimis deoarece nu ați verificat unul sau mai multe dispozitive.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "Dacă întâmpinați probleme cu notificările, încărcarea setărilor notificărilor ne poate ajuta să identificăm cauza principală.";
 "screen_bug_report_send_notification_settings_title" = "Trimiteți setările notificărilor";
 "screen_bug_report_view_logs" = "Vizualizați log-urile";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org este un server mare și gratuit din rețeaua publică Matrix pentru comunicații sigure și descentralizate, administrat de Fundația Matrix.org.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online este un server mare și gratuit din rețeaua publică Matrix pentru comunicații sigure și descentralizate, administrat de Fundația ketals.online.";
 "screen_change_account_provider_other" = "Altul";
 "screen_change_account_provider_subtitle" = "Utilizați un alt furnizor de cont, cum ar fi propriul server privat sau un cont de serviciu.";
 "screen_change_account_provider_title" = "Schimbați furnizorul contului";

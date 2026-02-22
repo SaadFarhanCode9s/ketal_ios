@@ -12,7 +12,7 @@ import MatrixRustSDK
 extension RoomPreviewProxyMock {
     struct Configuration {
         var roomID = "1"
-        var canonicalAlias = "#3-body-problem:matrix.org"
+        var canonicalAlias = "#3-body-problem:ketals.online"
         var name = "The Three-Body Problem - 三体"
         var topic: String? = "“Science and technology were the only keys to opening the door to the future, and people approached science with the faith and sincerity of elementary school students.”"
         var avatarURL = URL.mockMXCAvatar.absoluteString
@@ -87,7 +87,7 @@ extension RoomPreviewProxyMock {
         let roomMembershipDetails = RoomMembershipDetailsProxyMock()
         
         let mockMember = RoomMemberProxyMock()
-        mockMember.userID = "@bob:matrix.org"
+        mockMember.userID = "@bob:ketals.online"
         mockMember.displayName = "Billy Bob"
         mockMember.avatarURL = .mockMXCUserAvatar
         mockMember.membershipChangeReason = "Ain't nobody need no reason"

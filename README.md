@@ -1,4 +1,4 @@
-[![Element iOS Matrix room #element-x-ios:matrix.org](https://img.shields.io/matrix/element-x-ios:matrix.org.svg?label=%23element-x-ios:matrix.org&logo=matrix&server_fqdn=matrix.org)](https://matrix.to/#/#element-x-ios:matrix.org)
+[![Element iOS Matrix room #element-x-ios:ketals.online](https://img.shields.io/matrix/element-x-ios:ketals.online.svg?label=%23element-x-ios:ketals.online&logo=matrix&server_fqdn=ketals.online)](https://matrix.to/#/#element-x-ios:ketals.online)
 ![GitHub](https://img.shields.io/github/license/element-hq/element-x-ios)
 
 ![Build Status](https://img.shields.io/github/actions/workflow/status/element-hq/element-x-ios/unit_tests.yml?style=flat-square)
@@ -11,7 +11,7 @@
 
 # Element X iOS
 
-Element X iOS is the next-generation [Matrix](https://matrix.org/) client provided by [Element](https://element.io/).
+Element X iOS is the next-generation [Matrix](https://ketals.online/) client provided by [Element](https://element.io/).
 
 Compared to the previous-generation [Element Classic](https://github.com/element-hq/element-ios), it is a total rewrite using the [Matrix Rust SDK](https://github.com/matrix-org/matrix-rust-sdk) underneath and targeting devices running iOS 17+.
 
@@ -27,7 +27,7 @@ This project is actively developed and supported. New users are recommended to u
 
 Please see our [contribution guide](CONTRIBUTING.md).
 
-Come chat with the community in the dedicated Matrix [room](https://matrix.to/#/#element-x-ios:matrix.org).
+Come chat with the community in the dedicated Matrix [room](https://matrix.to/#/#element-x-ios:ketals.online).
 
 ## Build instructions
 
@@ -36,8 +36,8 @@ Please refer to the [setting up a development environment](CONTRIBUTING.md#setti
 ## Support
 
 When you are experiencing an issue on Element X iOS, please first search in [GitHub issues](https://github.com/element-hq/element-x-ios/issues)
-and then in [#element-x-ios:matrix.org](https://matrix.to/#/#element-x-ios:matrix.org).
-If after your research you still have a question, ask at [#element-x-ios:matrix.org](https://matrix.to/#/#element-x-ios:matrix.org). Otherwise feel free to create a GitHub issue if you encounter a bug or a crash, by explaining clearly in detail what happened. You can also perform bug reporting (Rageshake) from the Element application by going to the application settings. This is especially recommended when you encounter a crash.
+and then in [#element-x-ios:ketals.online](https://matrix.to/#/#element-x-ios:ketals.online).
+If after your research you still have a question, ask at [#element-x-ios:ketals.online](https://matrix.to/#/#element-x-ios:ketals.online). Otherwise feel free to create a GitHub issue if you encounter a bug or a crash, by explaining clearly in detail what happened. You can also perform bug reporting (Rageshake) from the Element application by going to the application settings. This is especially recommended when you encounter a crash.
 
 ## Forking
 

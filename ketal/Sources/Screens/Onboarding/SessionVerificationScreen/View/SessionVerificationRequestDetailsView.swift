@@ -110,7 +110,7 @@ struct SessionVerificationRequestDetailsView: View {
 }
 
 struct SessionVerificationRequestDetailsView_Previews: PreviewProvider, TestablePreview {
-    static let details = SessionVerificationRequestDetails(senderProfile: UserProfileProxy(userID: "@bob:matrix.org",
+    static let details = SessionVerificationRequestDetails(senderProfile: UserProfileProxy(userID: "@bob:ketals.online",
                                                                                            displayName: "Billy bob",
                                                                                            avatarURL: .mockMXCUserAvatar),
                                                            flowID: "123",

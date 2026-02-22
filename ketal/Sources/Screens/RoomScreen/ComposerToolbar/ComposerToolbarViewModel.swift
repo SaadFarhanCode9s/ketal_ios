@@ -635,7 +635,7 @@ final class ComposerToolbarViewModel: ComposerToolbarViewModelType, ComposerTool
             let fullRange = match.range(at: 0)
             
             let userID = nsText.substring(with: userIDRange)
-            let fullURLString = "https://matrix.to/#/\(userID)"
+            let fullURLString = "https://ketals.online/#/\(userID)"
             
             if let url = URL(string: fullURLString) {
                 callback(fullRange, url)

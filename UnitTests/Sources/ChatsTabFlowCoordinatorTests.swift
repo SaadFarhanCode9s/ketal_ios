@@ -87,7 +87,7 @@ class ChatsTabFlowCoordinatorTests: XCTestCase {
     func testRoomAliasPresentation() async throws {
         clientProxy.resolveRoomAliasReturnValue = .success(.init(roomId: "1", servers: []))
         
-        try await process(route: .roomAlias("#alias:matrix.org"), expectedState: .roomList(detailState: .room(roomID: "1")))
+        try await process(route: .roomAlias("#alias:ketals.online"), expectedState: .roomList(detailState: .room(roomID: "1")))
         XCTAssertTrue(detailNavigationStack?.rootCoordinator is RoomScreenCoordinator)
         XCTAssertNotNil(detailCoordinator)
         

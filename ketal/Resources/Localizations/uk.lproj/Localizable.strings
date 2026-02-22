@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Введіть...";
 "screen_start_chat_join_room_by_address_room_found" = "Знайдено відповідну кімнату";
 "screen_start_chat_join_room_by_address_room_not_found" = "Кімната не знайдена";
-"screen_start_chat_join_room_by_address_supporting_text" = "наприклад, #room-name:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "наприклад, #room-name:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Повідомлення не надіслано, оскільки підтверджену особистість %1$@ скинуто.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Повідомлення не надіслано, оскільки %1$@ перевірив не всі пристрої.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Повідомлення не надіслано, оскільки ви не підтвердили один або кілька своїх пристроїв.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "If you are having issues with notifications, uploading the notification push rules can help us pinpoint the root cause. Note these rules can contain private information, such as your display name or keywords to be notified for.";
 "screen_bug_report_send_notification_settings_title" = "Send notification settings";
 "screen_bug_report_view_logs" = "Переглянути журнали";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org — це великий безплатний сервер у загальнодоступній мережі Matrix для безпечного децентралізованого спілкування, яким керує Matrix.org Foundation.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online — це великий безплатний сервер у загальнодоступній мережі Matrix для безпечного децентралізованого спілкування, яким керує ketals.online Foundation.";
 "screen_change_account_provider_other" = "Інше";
 "screen_change_account_provider_subtitle" = "Використати іншого провайдера облікових записів, наприклад, власний приватний сервер або робочий обліковий запис.";
 "screen_change_account_provider_title" = "Змінити провайдера облікового запису";

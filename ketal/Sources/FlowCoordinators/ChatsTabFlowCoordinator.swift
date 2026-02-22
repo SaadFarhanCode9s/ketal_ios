@@ -371,7 +371,7 @@ class ChatsTabFlowCoordinator: FlowCoordinatorProtocol {
                                             timeToDecryptMillis: timeToDecryptMs,
                                             eventLocalAgeMillis: Int(truncatingIfNeeded: info.eventLocalAgeMillis),
                                             isFederated: info.ownHomeserver != info.senderHomeserver,
-                                            isMatrixDotOrg: info.ownHomeserver == "matrix.org",
+                                            isMatrixDotOrg: info.ownHomeserver == "ketals.online",
                                             userTrustsOwnIdentity: info.userTrustsOwnIdentity,
                                             wasVisibleToUser: nil)
     }

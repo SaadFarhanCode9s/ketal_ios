@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Sisene...";
 "screen_start_chat_join_room_by_address_room_found" = "Leidsime vastava jututoa";
 "screen_start_chat_join_room_by_address_room_not_found" = "Jututuba ei leidu";
-"screen_start_chat_join_room_by_address_supporting_text" = "nt. #jututoa-nimi:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "nt. #jututoa-nimi:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Sõnum on saatmata, kuna kasutaja %1$@ verifitseeritud identiteet on lähtestatud.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Sõnum on saatmata, kuna %1$@ pole verifitseerinud kõiki oma seadmeid.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Kuna sa pole üks või enamgi oma seadet verifitseerinud, siis sinu sõnum on saatmata.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "Kui sul teavitused ei toimi päris korralikult, siis teavituste seadistuste üleslaadimine võib aidata meil põhjuse tuvastada.";
 "screen_bug_report_send_notification_settings_title" = "Teavituste seadistuste saatmine";
 "screen_bug_report_view_logs" = "Vaata logisid";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org on suur ja tasuta koduserver Matrixi võrgus, mis on mõeldud turvalise ja hajutatud suhtluse jaoks. Selle serveri halduse eest vastutab Matrix.org Foundation.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online on suur ja tasuta koduserver Matrixi võrgus, mis on mõeldud turvalise ja hajutatud suhtluse jaoks. Selle serveri halduse eest vastutab ketals.online Foundation.";
 "screen_change_account_provider_other" = "Muu teenusepakkuja";
 "screen_change_account_provider_subtitle" = "Kasuta erinevat teenusepakkujat, milleks võib olla ka sinu oma server või töökoha hallatav server.";
 "screen_change_account_provider_title" = "Muuda teenusepakkujat";

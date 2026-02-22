@@ -47,8 +47,8 @@ enum HTMLFixtures: String, CaseIterable {
         case .matrixIdentifiers:
             """
             We expect various identifiers to be (partially) detected:</br>
-            !room:matrix.org, #room:matrix.org, $event:matrix.org, @user:matrix.org</br>
-            matrix://roomid/room:matrix.org, matrix://r/room:matrix.org, matrix://roomid/room:matrix.org/e/event:matrix.org, matrix://roomid/room:matrix.org/u/user:matrix.org</br>
+            !room:ketals.online, #room:ketals.online, $event:ketals.online, @user:ketals.online</br>
+            matrix://roomid/room:ketals.online, matrix://r/room:ketals.online, matrix://roomid/room:ketals.online/e/event:ketals.online, matrix://roomid/room:ketals.online/u/user:ketals.online</br>
             """
         case .links:
             """
@@ -63,9 +63,9 @@ enum HTMLFixtures: String, CaseIterable {
             """
         case .groupedBlockQuotes:
             """
-            <blockquote>First blockquote with a <a href=\"https://www.matrix.org/\">link</a> in it</blockquote>
-            <blockquote>Second blockquote with a <a href=\"https://www.matrix.org/\">link</a> in it</blockquote>
-            <blockquote>Third blockquote with a <a href=\"https://www.matrix.org/\">link</a> in it</blockquote>
+            <blockquote>First blockquote with a <a href=\"https://www.ketals.online/\">link</a> in it</blockquote>
+            <blockquote>Second blockquote with a <a href=\"https://www.ketals.online/\">link</a> in it</blockquote>
+            <blockquote>Third blockquote with a <a href=\"https://www.ketals.online/\">link</a> in it</blockquote>
             """
         case .separatedBlockQuotes:
             """
@@ -94,8 +94,8 @@ enum HTMLFixtures: String, CaseIterable {
             <p><code>Hello, world!</code></p>
             <p><code><b>Hello</b>, <i>world!</i></code></p>
             <p><code>&lt;b&gt;Hello&lt;/b&gt;, &lt;i&gt;world!&lt;/i&gt;</code></p>
-            <p><code><a href="https://www.matrix.org">This link should not be interpreted as such</a></code></p>
-            <p><code>And this https://www.matrix.org should be not highlighted</code></p>
+            <p><code><a href="https://www.ketals.online">This link should not be interpreted as such</a></code></p>
+            <p><code>And this https://www.ketals.online should be not highlighted</code></p>
             """
         case .wideCodeBlock:
             """

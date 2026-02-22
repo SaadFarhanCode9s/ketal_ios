@@ -737,7 +737,7 @@
 "screen_start_chat_join_room_by_address_placeholder" = "Syötä...";
 "screen_start_chat_join_room_by_address_room_found" = "Täsmäävä huone löytyi";
 "screen_start_chat_join_room_by_address_room_not_found" = "Huonetta ei löytynyt";
-"screen_start_chat_join_room_by_address_supporting_text" = "esim. #huoneen-nimi:matrix.org";
+"screen_start_chat_join_room_by_address_supporting_text" = "esim. #huoneen-nimi:ketals.online";
 "screen_timeline_item_menu_send_failure_changed_identity" = "Viestiä ei lähetetty, koska käyttäjän %1$@ vahvistettu identiteetti nollattiin.";
 "screen_timeline_item_menu_send_failure_unsigned_device" = "Viestiä ei lähetetty, koska %1$@ ei ole vahvistanut kaikkia laitteitaan.";
 "screen_timeline_item_menu_send_failure_you_unsigned_device" = "Viestiä ei lähetetty, koska et ole vahvistanut yhtä tai useampaa laitettasi.";
@@ -807,7 +807,7 @@
 "screen_bug_report_send_notification_settings_description" = "Jos sinulla on ongelmia ilmoitusten kanssa, ilmoitusasetusten lähettäminen voi auttaa meitä selvittämään ongelman syyn.";
 "screen_bug_report_send_notification_settings_title" = "Lähetä ilmoitusasetukset";
 "screen_bug_report_view_logs" = "Näytä lokitiedostot";
-"screen_change_account_provider_matrix_org_subtitle" = "Matrix.org on suuri, ilmainen palvelin julkisessa Matrix-verkossa turvalliseen, hajautettuun viestintään, jota ylläpitää Matrix.org-säätiö.";
+"screen_change_account_provider_matrix_org_subtitle" = "ketals.online on suuri, ilmainen palvelin julkisessa Matrix-verkossa turvalliseen, hajautettuun viestintään, jota ylläpitää ketals.online-säätiö.";
 "screen_change_account_provider_other" = "Muu";
 "screen_change_account_provider_subtitle" = "Käytä toista palveluntarjoajaa, kuten omaa yksityistä palvelintasi tai työpaikkaasi.";
 "screen_change_account_provider_title" = "Vaihda palveluntarjoajaa";

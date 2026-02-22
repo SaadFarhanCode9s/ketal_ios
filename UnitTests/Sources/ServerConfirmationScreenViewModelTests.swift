@@ -213,7 +213,7 @@ class ServerConfirmationScreenViewModelTests: XCTestCase {
         
         // Then the configuration should fail with an alert telling the user to download Element Pro.
         XCTAssertEqual(clientFactory.makeClientHomeserverAddressSessionDirectoriesPassphraseClientSessionDelegateAppSettingsAppHooksCallsCount, 1)
-        XCTAssertEqual(context.alertInfo?.id, .elementProRequired(serverName: "matrix.org"))
+        XCTAssertEqual(context.alertInfo?.id, .elementProRequired(serverName: "ketals.online"))
     }
     
     // MARK: - Picker mode
@@ -310,9 +310,9 @@ class ServerConfirmationScreenViewModelTests: XCTestCase {
                                 supportsPasswordLogin: Bool = true,
                                 restrictedFlow: Bool = false,
                                 requiresElementPro: Bool = false) {
-        var mode = ServerConfirmationScreenMode.confirmation("matrix.org")
+        var mode = ServerConfirmationScreenMode.confirmation("ketals.online")
         if restrictedFlow {
-            appSettings.override(accountProviders: ["matrix.org", "beta.matrix.org"],
+            appSettings.override(accountProviders: ["ketals.online", "beta.ketals.online"],
                                  allowOtherAccountProviders: false,
                                  hideBrandChrome: false,
                                  pushGatewayBaseURL: appSettings.pushGatewayBaseURL,
@@ -336,11 +336,11 @@ class ServerConfirmationScreenViewModelTests: XCTestCase {
         }
         
         // Manually create a configuration as the default homeserver address setting is immutable.
-        client = ClientSDKMock(configuration: .init(oidcLoginURL: supportsOIDC ? "https://account.matrix.org/authorize" : nil,
+        client = ClientSDKMock(configuration: .init(oidcLoginURL: supportsOIDC ? "https://account.ketals.online/authorize" : nil,
                                                     supportsOIDCCreatePrompt: supportsOIDCCreatePrompt,
                                                     supportsPasswordLogin: supportsPasswordLogin,
                                                     elementWellKnown: requiresElementPro ? "{\"version\":1,\"enforce_element_pro\":true}" : nil))
-        let configuration = AuthenticationClientFactoryMock.Configuration(homeserverClients: ["matrix.org": client])
+        let configuration = AuthenticationClientFactoryMock.Configuration(homeserverClients: ["ketals.online": client])
         
         clientFactory = AuthenticationClientFactoryMock(configuration: configuration)
         service = AuthenticationService(userSessionStore: UserSessionStoreMock(configuration: .init()),

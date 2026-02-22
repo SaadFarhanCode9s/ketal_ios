@@ -103,7 +103,7 @@ struct TimelineThreadSummaryView: View {
     
     private struct LoadingThreadView: View {
         var body: some View {
-            ThreadView(senderID: "@alice:matrix.org",
+            ThreadView(senderID: "@alice:ketals.online",
                        sender: nil,
                        plainBody: "Hello world",
                        formattedBody: nil,
@@ -163,7 +163,7 @@ struct TimelineThreadSummaryView_Previews: PreviewProvider, TestablePreview {
     
     static let attributedStringWithMention = {
         var attributedString = AttributedString("To be replaced")
-        attributedString.userID = "@alice:matrix.org"
+        attributedString.userID = "@alice:ketals.online"
         return attributedString
     }()
     
@@ -175,25 +175,25 @@ struct TimelineThreadSummaryView_Previews: PreviewProvider, TestablePreview {
     
     static let attributedStringWithRoomAliasMention = {
         var attributedString = AttributedString("to be replaced")
-        attributedString.roomAlias = "#room:matrix.org"
+        attributedString.roomAlias = "#room:ketals.online"
         return attributedString
     }()
     
     static let attributedStringWithRoomIDMention = {
         var attributedString = AttributedString("to be replaced")
-        attributedString.roomID = "!room:matrix.org"
+        attributedString.roomID = "!room:ketals.online"
         return attributedString
     }()
     
     static let attributedStringWithEventOnRoomIDMention = {
         var attributedString = AttributedString("to be replaced")
-        attributedString.eventOnRoomID = .init(roomID: "!room:matrix.org", eventID: "$event")
+        attributedString.eventOnRoomID = .init(roomID: "!room:ketals.online", eventID: "$event")
         return attributedString
     }()
     
     static let attributedStringWithEventOnRoomAliasMention = {
         var attributedString = AttributedString("to be replaced")
-        attributedString.eventOnRoomAlias = .init(alias: "#room:matrix.org", eventID: "$event")
+        attributedString.eventOnRoomAlias = .init(alias: "#room:ketals.online", eventID: "$event")
         return attributedString
     }()
     
@@ -205,18 +205,18 @@ struct TimelineThreadSummaryView_Previews: PreviewProvider, TestablePreview {
             
             TimelineThreadSummaryView(threadSummary: .error(message: "Error")),
             
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice McAliceFace"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice McAliceFace"),
                                                              latestEventContent: .message(.text(.init(body: "This is a very long, multi-lined, threaded message"))),
                                                              numberOfReplies: 42)),
             
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.notice(.init(body: "Hello world"))),
                                                              numberOfReplies: 42)),
             
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.audio(.init(filename: "audio.m4a",
                                                                                                        caption: "Some audio",
                                                                                                        duration: 0,
@@ -226,8 +226,8 @@ struct TimelineThreadSummaryView_Previews: PreviewProvider, TestablePreview {
                                                                                                        contentType: nil))),
                                                              numberOfReplies: 42)),
             
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.file(.init(filename: "file.txt",
                                                                                                       caption: "Some file",
                                                                                                       source: nil,
@@ -236,28 +236,28 @@ struct TimelineThreadSummaryView_Previews: PreviewProvider, TestablePreview {
                                                                                                       contentType: nil))),
                                                              numberOfReplies: 42)),
             
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.image(.init(filename: "image.jpg",
                                                                                                        caption: "Some image",
                                                                                                        imageInfo: .mockImage,
                                                                                                        thumbnailInfo: .mockThumbnail))),
                                                              numberOfReplies: 42)),
             
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.video(.init(filename: "video.mp4",
                                                                                                        caption: "Some video",
                                                                                                        videoInfo: .mockVideo,
                                                                                                        thumbnailInfo: .mockVideoThumbnail))),
                                                              numberOfReplies: 42)),
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.location(.init(body: ""))),
                                                              numberOfReplies: 42)),
             
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.voice(.init(filename: "voice-message.ogg",
                                                                                                        caption: "Some voice message",
                                                                                                        duration: 0,
@@ -267,38 +267,38 @@ struct TimelineThreadSummaryView_Previews: PreviewProvider, TestablePreview {
                                                                                                        contentType: nil))),
                                                              numberOfReplies: 42)),
             
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .poll(question: "Do you like polls?"),
                                                              numberOfReplies: 42)),
             
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .redacted,
                                                              numberOfReplies: 42)),
             
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.notice(.init(body: "", formattedBody: attributedStringWithMention))),
                                                              numberOfReplies: 42)),
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.notice(.init(body: "", formattedBody: attributedStringWithAtRoomMention))),
                                                              numberOfReplies: 42)),
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.notice(.init(body: "", formattedBody: attributedStringWithRoomAliasMention))),
                                                              numberOfReplies: 42)),
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.notice(.init(body: "", formattedBody: attributedStringWithRoomIDMention))),
                                                              numberOfReplies: 42)),
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.notice(.init(body: "", formattedBody: attributedStringWithEventOnRoomIDMention))),
                                                              numberOfReplies: 42)),
-            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:matrix.org",
-                                                             sender: .init(id: "@alice:matrix.org", displayName: "Alice"),
+            TimelineThreadSummaryView(threadSummary: .loaded(senderID: "@alice:ketals.online",
+                                                             sender: .init(id: "@alice:ketals.online", displayName: "Alice"),
                                                              latestEventContent: .message(.notice(.init(body: "", formattedBody: attributedStringWithEventOnRoomAliasMention))),
                                                              numberOfReplies: 42))
         ]

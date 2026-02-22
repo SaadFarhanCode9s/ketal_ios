@@ -797,9 +797,9 @@ class MockScreen: Identifiable {
             let timelineController = TimelineController(roomProxy: roomProxy,
                                                         timelineProxy: roomProxy.timeline,
                                                         initialFocussedEventID: nil,
-                                                        timelineItemFactory: RoomTimelineItemFactory(userID: "@alice:matrix.org",
+                                                        timelineItemFactory: RoomTimelineItemFactory(userID: "@alice:ketals.online",
                                                                                                      attributedStringBuilder: AttributedStringBuilder(mentionBuilder: MentionBuilder()),
-                                                                                                     stateEventStringBuilder: RoomStateEventStringBuilder(userID: "@alice:matrix.org")),
+                                                                                                     stateEventStringBuilder: RoomStateEventStringBuilder(userID: "@alice:ketals.online")),
                                                         mediaProvider: MediaProviderMock(configuration: .init()),
                                                         appSettings: ServiceLocator.shared.settings)
             

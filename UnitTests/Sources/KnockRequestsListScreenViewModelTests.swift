@@ -59,10 +59,10 @@ class KnockRequestsListScreenViewModelTests: XCTestCase {
     
     func testLoadedState() async throws {
         let roomProxyMock = JoinedRoomProxyMock(.init(members: [.mockAdmin],
-                                                      knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:matrix.org")),
-                                                                                   KnockRequestProxyMock(.init(eventID: "2", userID: "@bob:matrix.org")),
-                                                                                   KnockRequestProxyMock(.init(eventID: "3", userID: "@charlie:matrix.org")),
-                                                                                   KnockRequestProxyMock(.init(eventID: "4", userID: "@dan:matrix.org"))]),
+                                                      knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:ketals.online")),
+                                                                                   KnockRequestProxyMock(.init(eventID: "2", userID: "@bob:ketals.online")),
+                                                                                   KnockRequestProxyMock(.init(eventID: "3", userID: "@charlie:ketals.online")),
+                                                                                   KnockRequestProxyMock(.init(eventID: "4", userID: "@dan:ketals.online"))]),
                                                       ownUserID: RoomMemberProxyMock.mockAdmin.userID,
                                                       joinRule: .knock))
         viewModel = KnockRequestsListScreenViewModel(roomProxy: roomProxyMock,
@@ -135,10 +135,10 @@ class KnockRequestsListScreenViewModelTests: XCTestCase {
     }
     
     func testAcceptAll() async throws {
-        let roomProxyMock = JoinedRoomProxyMock(.init(knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:matrix.org")),
-                                                                                   KnockRequestProxyMock(.init(eventID: "2", userID: "@bob:matrix.org")),
-                                                                                   KnockRequestProxyMock(.init(eventID: "3", userID: "@charlie:matrix.org")),
-                                                                                   KnockRequestProxyMock(.init(eventID: "4", userID: "@dan:matrix.org"))]),
+        let roomProxyMock = JoinedRoomProxyMock(.init(knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:ketals.online")),
+                                                                                   KnockRequestProxyMock(.init(eventID: "2", userID: "@bob:ketals.online")),
+                                                                                   KnockRequestProxyMock(.init(eventID: "3", userID: "@charlie:ketals.online")),
+                                                                                   KnockRequestProxyMock(.init(eventID: "4", userID: "@dan:ketals.online"))]),
                                                       joinRule: .knock))
         viewModel = KnockRequestsListScreenViewModel(roomProxy: roomProxyMock,
                                                      mediaProvider: MediaProviderMock(),
@@ -182,10 +182,10 @@ class KnockRequestsListScreenViewModelTests: XCTestCase {
     func testLoadedStateBecomesEmptyIfTheJoinRuleIsNotKnocking() async throws {
         // If there is a sudden change in the rule, but the requests are still published, we want to hide all of them and show the empty view
         let roomProxyMock = JoinedRoomProxyMock(.init(members: [.mockAdmin],
-                                                      knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:matrix.org")),
-                                                                                   KnockRequestProxyMock(.init(eventID: "2", userID: "@bob:matrix.org")),
-                                                                                   KnockRequestProxyMock(.init(eventID: "3", userID: "@charlie:matrix.org")),
-                                                                                   KnockRequestProxyMock(.init(eventID: "4", userID: "@dan:matrix.org"))]),
+                                                      knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:ketals.online")),
+                                                                                   KnockRequestProxyMock(.init(eventID: "2", userID: "@bob:ketals.online")),
+                                                                                   KnockRequestProxyMock(.init(eventID: "3", userID: "@charlie:ketals.online")),
+                                                                                   KnockRequestProxyMock(.init(eventID: "4", userID: "@dan:ketals.online"))]),
                                                       ownUserID: RoomMemberProxyMock.mockAdmin.userID,
                                                       joinRule: .invite))
         viewModel = KnockRequestsListScreenViewModel(roomProxy: roomProxyMock,
@@ -203,10 +203,10 @@ class KnockRequestsListScreenViewModelTests: XCTestCase {
     
     func testLoadedStateBecomesEmptyIfPermissionsAreRemoved() async throws {
         // If there is a sudden change in permissions, and the user can't do any other action, we hide all the requests and shoe the empty view
-        let roomProxyMock = JoinedRoomProxyMock(.init(knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:matrix.org")),
-                                                                                   KnockRequestProxyMock(.init(eventID: "2", userID: "@bob:matrix.org")),
-                                                                                   KnockRequestProxyMock(.init(eventID: "3", userID: "@charlie:matrix.org")),
-                                                                                   KnockRequestProxyMock(.init(eventID: "4", userID: "@dan:matrix.org"))]),
+        let roomProxyMock = JoinedRoomProxyMock(.init(knockRequestsState: .loaded([KnockRequestProxyMock(.init(eventID: "1", userID: "@alice:ketals.online")),
+                                                                                   KnockRequestProxyMock(.init(eventID: "2", userID: "@bob:ketals.online")),
+                                                                                   KnockRequestProxyMock(.init(eventID: "3", userID: "@charlie:ketals.online")),
+                                                                                   KnockRequestProxyMock(.init(eventID: "4", userID: "@dan:ketals.online"))]),
                                                       joinRule: .knock,
                                                       powerLevelsConfiguration: .init(canUserInvite: false)))
         viewModel = KnockRequestsListScreenViewModel(roomProxy: roomProxyMock,
