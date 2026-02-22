@@ -684,7 +684,7 @@ class JoinedRoomProxy: JoinedRoomProxyProtocol {
     
     func matrixToPermalink() async -> Result<URL, RoomProxyError> {
         do {
-            let urlString = try await room.matrixToPermalink()
+            let urlString = try await room.matrixToPermalink().replacingOccurrences(of: "matrix.to", with: "element.ketals.online")
             
             guard let url = URL(string: urlString) else {
                 MXLog.error("Failed creating permalink for roomID: \(id), invalid permalink URL string: \(urlString)")
@@ -700,7 +700,7 @@ class JoinedRoomProxy: JoinedRoomProxyProtocol {
     
     func matrixToEventPermalink(_ eventID: String) async -> Result<URL, RoomProxyError> {
         do {
-            let urlString = try await room.matrixToEventPermalink(eventId: eventID)
+            let urlString = try await room.matrixToEventPermalink(eventId: eventID).replacingOccurrences(of: "matrix.to", with: "element.ketals.online")
             
             guard let url = URL(string: urlString) else {
                 MXLog.error("Failed creating permalink for eventID: \(eventID), invalid permalink URL string: \(urlString)")

@@ -34,7 +34,8 @@ extension RoomMemberProxyProtocol {
     }
     
     var permalink: URL? {
-        try? URL(string: matrixToUserPermalink(userId: userID))
+        let urlString = try? matrixToUserPermalink(userId: userID).replacingOccurrences(of: "matrix.to", with: "element.ketals.online")
+        return urlString.flatMap(URL.init(string:))
     }
     
     /// The name used for sorting the member alphabetically. This will be the displayname if,

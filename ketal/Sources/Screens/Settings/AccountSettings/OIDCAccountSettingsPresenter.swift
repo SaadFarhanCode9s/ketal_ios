@@ -47,7 +47,7 @@ class OIDCAccountSettingsPresenter: NSObject {
             continuation.finish()
         }
         
-        session.prefersEphemeralWebBrowserSession = false
+        session.prefersEphemeralWebBrowserSession = true
         session.presentationContextProvider = self
         session.additionalHeaderFields = [
             "X-Element-User-Agent": UserAgentBuilder.makeASCIIUserAgent()

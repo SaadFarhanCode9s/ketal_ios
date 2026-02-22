@@ -15,7 +15,11 @@ struct MatrixUserShareLink<Label: View>: View {
     
     init(userID: String, @ViewBuilder label: () -> Label) {
         self.label = label()
-        permalink = try? URL(string: matrixToUserPermalink(userId: userID))
+        if let rawPermalink = try? matrixToUserPermalink(userId: userID) {
+            permalink = URL(string: rawPermalink.replacingOccurrences(of: "matrix.to", with: "element.ketals.online"))
+        } else {
+            permalink = nil
+        }
     }
     
     var body: some View {

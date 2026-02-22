@@ -441,7 +441,7 @@ final class AppSettings {
     var spaceFiltersEnabled
     
     // Others
-    @UserPreference(key: UserDefaultsKeys.publicSearchEnabled, defaultValue: false, storageType: .userDefaults(store))
+    @UserPreference(key: UserDefaultsKeys.publicSearchEnabled, defaultValue: true, storageType: .userDefaults(store))
     var publicSearchEnabled
     
     @UserPreference(key: UserDefaultsKeys.fuzzyRoomListSearchEnabled, defaultValue: false, storageType: .userDefaults(store))
