@@ -156,7 +156,7 @@ struct SpaceScreen: View {
                         }
                         
                         if let permalink = context.viewState.permalink {
-                            ShareLink(item: permalink) {
+                            ShareLink(item: permalink, preview: SharePreview("Ketal", image: Image("KetalLogo"))) {
                                 Label(L10n.actionShare, icon: \.shareIos)
                             }
                         }

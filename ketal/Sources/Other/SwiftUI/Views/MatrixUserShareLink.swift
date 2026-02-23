@@ -24,7 +24,12 @@ struct MatrixUserShareLink<Label: View>: View {
     
     var body: some View {
         if let permalink {
-            ShareLink(item: L10n.inviteFriendsText(InfoPlistReader.main.bundleDisplayName, permalink.absoluteString)) {
+            ShareLink(
+                item: permalink,
+                subject: Text(L10n.inviteFriendsText(InfoPlistReader.main.bundleDisplayName, permalink.absoluteString)),
+                message: Text(L10n.inviteFriendsText(InfoPlistReader.main.bundleDisplayName, permalink.absoluteString)),
+                preview: SharePreview("Ketal", image: Image("KetalLogo"))
+            ) {
                 label
             }
         }

@@ -74,7 +74,7 @@ struct UserProfileScreen: View {
             }
             
             if let permalink = context.viewState.permalink {
-                ShareLink(item: permalink) {
+                ShareLink(item: permalink, preview: SharePreview("Ketal", image: Image("KetalLogo"))) {
                     CompoundIcon(\.shareIos)
                 }
                 .buttonStyle(FormActionButtonStyle(title: L10n.actionShare))
