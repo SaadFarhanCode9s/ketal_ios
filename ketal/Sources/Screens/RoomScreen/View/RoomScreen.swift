@@ -164,10 +164,23 @@ struct RoomScreen: View {
             }
         }
         
-        if !ProcessInfo.processInfo.isiOSAppOnMac {
-            ToolbarItem(placement: .primaryAction) {
-                if context.viewState.shouldShowCallButton {
-                    callButton
+        if !ProcessInfo.processInfo.isiOSAppOnMac, context.viewState.shouldShowCallButton {
+            if context.viewState.hasOngoingCall {
+                ToolbarItem(placement: .primaryAction) {
+                    JoinCallButton {
+                        context.send(viewAction: .displayCall)
+                    }
+                    .disabled(!context.viewState.canJoinCall)
+                    .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
+                }
+            } else {
+                ToolbarItem(placement: .primaryAction) {
+                    videoCallButton
+                        .disabled(!context.viewState.canJoinCall)
+                }
+                
+                ToolbarItem(placement: .primaryAction) {
+                    audioCallButton
                         .disabled(!context.viewState.canJoinCall)
                 }
             }
@@ -175,38 +188,29 @@ struct RoomScreen: View {
     }
     
     @ViewBuilder
-    private var callButton: some View {
-        if context.viewState.hasOngoingCall {
-            JoinCallButton {
-                context.send(viewAction: .displayCall)
-            }
-            .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
-        } else {
-            HStack(spacing: 12) {
-                // Video call button
-                Button {
-                    context.send(viewAction: .displayCall)
-                } label: {
-                    CompoundIcon(\.videoCallSolid)
-                        .padding(10)
-                        .background(Color.compound.bgActionSecondaryRest)
-                        .clipShape(Circle())
-                }
-                .accessibilityLabel(L10n.a11yStartCall)
-                .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
-
-                // Audio-only call button
-                Button {
-                    context.send(viewAction: .displayAudioCall)
-                } label: {
-                    CompoundIcon(\.voiceCallSolid)
-                        .padding(10)
-                        .background(Color.compound.bgActionSecondaryRest)
-                        .clipShape(Circle())
-                }
-                .accessibilityLabel(L10n.actionCall)
-            }
+    private var videoCallButton: some View {
+        Button {
+            context.send(viewAction: .displayCall)
+        } label: {
+            CompoundIcon(\.videoCallSolid)
+                .padding(10)
+                .background(Color.compound.bgActionSecondaryRest)
+                .clipShape(Circle())
         }
+        .accessibilityLabel(L10n.a11yStartCall)
+        .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
+    }
+    
+    private var audioCallButton: some View {
+        Button {
+            context.send(viewAction: .displayAudioCall)
+        } label: {
+            CompoundIcon(\.voiceCallSolid)
+                .padding(10)
+                .background(Color.compound.bgActionSecondaryRest)
+                .clipShape(Circle())
+        }
+        .accessibilityLabel(L10n.actionCall)
     }
 }
 
