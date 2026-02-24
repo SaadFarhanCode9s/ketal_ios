@@ -175,7 +175,7 @@ struct RoomScreen: View {
                 }
             } else {
                 ToolbarItem(placement: .primaryAction) {
-                    HStack(spacing: 8) {
+                    HStack(spacing: 12) {
                         videoCallButton
                             .disabled(!context.viewState.canJoinCall)
                         audioCallButton
@@ -188,44 +188,53 @@ struct RoomScreen: View {
     
     @ViewBuilder
     private var videoCallButton: some View {
-        Button {
+        CircularCallButton(action: {
             context.send(viewAction: .displayCall)
-        } label: {
+        }) {
             CompoundIcon(\.videoCallSolid, size: .small, relativeTo: .compound.bodySM)
-                .foregroundColor(.black)
-                .frame(width: 44, height: 44)
-                .background {
-                    Circle()
-                        .fill(.white)
-                        .shadow(color: .black.opacity(0.08),
-                                radius: 8,
-                                x: 0,
-                                y: 4)
-                }
         }
-        .buttonStyle(.plain)
         .accessibilityLabel(L10n.a11yStartCall)
         .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
     }
     
     private var audioCallButton: some View {
-        Button {
+        CircularCallButton(action: {
             context.send(viewAction: .displayAudioCall)
-        } label: {
+        }) {
             CompoundIcon(\.voiceCallSolid, size: .small, relativeTo: .compound.bodySM)
-                .foregroundColor(.black)
+        }
+        .accessibilityLabel(L10n.actionCall)
+    }
+}
+
+private struct CircularCallButton<Content: View>: View {
+    let action: () -> Void
+    @ViewBuilder let content: () -> Content
+    
+    @State private var isPressed = false
+    
+    var body: some View {
+        Button(action: action) {
+            content()
+                .foregroundStyle(.black)
                 .frame(width: 44, height: 44)
-                .background {
+                .background(
                     Circle()
-                        .fill(.white)
-                        .shadow(color: .black.opacity(0.08),
-                                radius: 8,
-                                x: 0,
-                                y: 4)
-                }
+                        .fill(Color(.systemGray6))
+                )
+                .shadow(color: .black.opacity(0.08),
+                        radius: 8,
+                        x: 0,
+                        y: 4)
+                .scaleEffect(isPressed ? 0.92 : 1.0)
         }
         .buttonStyle(.plain)
-        .accessibilityLabel(L10n.actionCall)
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 0)
+                .onChanged { _ in isPressed = true }
+                .onEnded { _ in isPressed = false }
+        )
+        .animation(.spring(response: 0.25, dampingFraction: 0.6), value: isPressed)
     }
 }
 
