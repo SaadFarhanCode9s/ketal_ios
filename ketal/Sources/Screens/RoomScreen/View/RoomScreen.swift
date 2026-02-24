@@ -175,13 +175,13 @@ struct RoomScreen: View {
                 }
             } else {
                 ToolbarItem(placement: .primaryAction) {
-                    HStack(spacing: 16) {
-                        videoCallButton
-                            .disabled(!context.viewState.canJoinCall)
-                        
-                        audioCallButton
-                            .disabled(!context.viewState.canJoinCall)
-                    }
+                    videoCallButton
+                        .disabled(!context.viewState.canJoinCall)
+                }
+                
+                ToolbarItem(placement: .primaryAction) {
+                    audioCallButton
+                        .disabled(!context.viewState.canJoinCall)
                 }
             }
         }
@@ -193,10 +193,13 @@ struct RoomScreen: View {
             context.send(viewAction: .displayCall)
         } label: {
             CompoundIcon(\.videoCallSolid)
-                .padding(10)
+                .frame(width: 36, height: 36)
                 .background(Color.compound.bgActionSecondaryRest)
                 .clipShape(Circle())
         }
+        .frame(width: 44, height: 44)
+        .contentShape(Rectangle())
+        .buttonStyle(.plain)
         .accessibilityLabel(L10n.a11yStartCall)
         .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
     }
@@ -206,10 +209,13 @@ struct RoomScreen: View {
             context.send(viewAction: .displayAudioCall)
         } label: {
             CompoundIcon(\.voiceCallSolid)
-                .padding(10)
+                .frame(width: 36, height: 36)
                 .background(Color.compound.bgActionSecondaryRest)
                 .clipShape(Circle())
         }
+        .frame(width: 44, height: 44)
+        .contentShape(Rectangle())
+        .buttonStyle(.plain)
         .accessibilityLabel(L10n.actionCall)
     }
 }
@@ -218,6 +224,7 @@ struct RoomScreen: View {
 
 struct RoomScreen_Previews: PreviewProvider, TestablePreview {
     static let viewModels = makeViewModels()
+    static let viewModelsNoCall = makeViewModels(hasOngoingCall: false)
     static let readOnlyViewModels = makeViewModels(canSendMessage: false)
     static let tombstonedViewModels = makeViewModels(hasSuccessor: true)
 
@@ -227,7 +234,14 @@ struct RoomScreen_Previews: PreviewProvider, TestablePreview {
                        timelineContext: viewModels.timeline.context,
                        composerToolbar: ComposerToolbar.mock())
         }
-        .previewDisplayName("Normal")
+        .previewDisplayName("Ongoing Call")
+        
+        NavigationStack {
+            RoomScreen(context: viewModelsNoCall.room.context,
+                       timelineContext: viewModelsNoCall.timeline.context,
+                       composerToolbar: ComposerToolbar.mock())
+        }
+        .previewDisplayName("Call Buttons Visible")
         
         NavigationStack {
             RoomScreen(context: readOnlyViewModels.room.context,
@@ -246,10 +260,10 @@ struct RoomScreen_Previews: PreviewProvider, TestablePreview {
         .snapshotPreferences(expect: tombstonedViewModels.room.context.$viewState.map(\.hasSuccessor))
     }
     
-    static func makeViewModels(canSendMessage: Bool = true, hasSuccessor: Bool = false) -> ViewModels {
+    static func makeViewModels(canSendMessage: Bool = true, hasSuccessor: Bool = false, hasOngoingCall: Bool = true) -> ViewModels {
         let roomProxyMock = JoinedRoomProxyMock(.init(id: "stable_id",
                                                       name: "Preview room",
-                                                      hasOngoingCall: true,
+                                                      hasOngoingCall: hasOngoingCall,
                                                       successor: hasSuccessor ? .init(roomId: UUID().uuidString, reason: nil) : nil,
                                                       powerLevelsConfiguration: .init(canUserSendMessage: canSendMessage)))
         let roomViewModel = RoomScreenViewModel.mock(roomProxyMock: roomProxyMock)
