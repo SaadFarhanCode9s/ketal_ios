@@ -175,14 +175,14 @@ struct RoomScreen: View {
                 }
             } else {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    videoCallButton
-                        .disabled(!context.viewState.canJoinCall)
+                    HStack(spacing: 8) {
+                        videoCallButton
+                            .disabled(!context.viewState.canJoinCall)
+                        audioCallButton
+                            .disabled(!context.viewState.canJoinCall)
+                    }
                 }
-                
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    audioCallButton
-                        .disabled(!context.viewState.canJoinCall)
-                }
+                .backportSharedBackgroundVisibility(.hidden)
             }
         }
     }
