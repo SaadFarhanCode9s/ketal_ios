@@ -172,6 +172,7 @@ struct RoomScreen: View {
                     }
                     .disabled(!context.viewState.canJoinCall)
                     .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
+                }
             } else {
                 ToolbarItem(placement: .primaryAction) {
                     HStack(spacing: 16) {
