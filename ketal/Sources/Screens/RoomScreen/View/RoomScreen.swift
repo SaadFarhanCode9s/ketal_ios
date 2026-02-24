@@ -175,12 +175,12 @@ struct RoomScreen: View {
                 }
             } else {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    audioCallButton
+                    videoCallButton
                         .disabled(!context.viewState.canJoinCall)
                 }
 
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    videoCallButton
+                    audioCallButton
                         .disabled(!context.viewState.canJoinCall)
                 }
             }
