@@ -172,16 +172,15 @@ struct RoomScreen: View {
                     }
                     .disabled(!context.viewState.canJoinCall)
                     .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
-                }
             } else {
                 ToolbarItem(placement: .primaryAction) {
-                    videoCallButton
-                        .disabled(!context.viewState.canJoinCall)
-                }
-                
-                ToolbarItem(placement: .primaryAction) {
-                    audioCallButton
-                        .disabled(!context.viewState.canJoinCall)
+                    HStack(spacing: 16) {
+                        videoCallButton
+                            .disabled(!context.viewState.canJoinCall)
+                        
+                        audioCallButton
+                            .disabled(!context.viewState.canJoinCall)
+                    }
                 }
             }
         }
