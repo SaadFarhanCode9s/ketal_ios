@@ -193,12 +193,20 @@ struct RoomScreen: View {
             context.send(viewAction: .displayCall)
         } label: {
             CompoundIcon(\.videoCallSolid)
-                .frame(width: 36, height: 36)
-                .background(Color.compound.bgActionSecondaryRest)
-                .clipShape(Circle())
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20, height: 20)
+                .foregroundStyle(.black)
+                .frame(width: 44, height: 44)
+                .background {
+                    Circle()
+                        .fill(Color(.systemGray6))
+                        .shadow(color: .black.opacity(0.08),
+                                radius: 8,
+                                x: 0,
+                                y: 4)
+                }
         }
-        .frame(width: 44, height: 44)
-        .contentShape(Rectangle())
         .buttonStyle(.plain)
         .accessibilityLabel(L10n.a11yStartCall)
         .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
@@ -209,12 +217,20 @@ struct RoomScreen: View {
             context.send(viewAction: .displayAudioCall)
         } label: {
             CompoundIcon(\.voiceCallSolid)
-                .frame(width: 36, height: 36)
-                .background(Color.compound.bgActionSecondaryRest)
-                .clipShape(Circle())
+                .resizable()
+                .scaledToFit()
+                .frame(width: 20, height: 20)
+                .foregroundStyle(.black)
+                .frame(width: 44, height: 44)
+                .background {
+                    Circle()
+                        .fill(Color(.systemGray6))
+                        .shadow(color: .black.opacity(0.08),
+                                radius: 8,
+                                x: 0,
+                                y: 4)
+                }
         }
-        .frame(width: 44, height: 44)
-        .contentShape(Rectangle())
         .buttonStyle(.plain)
         .accessibilityLabel(L10n.actionCall)
     }
