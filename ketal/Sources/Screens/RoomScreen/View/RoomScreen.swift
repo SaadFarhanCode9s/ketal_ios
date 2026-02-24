@@ -192,11 +192,8 @@ struct RoomScreen: View {
         Button {
             context.send(viewAction: .displayCall)
         } label: {
-            CompoundIcon(\.videoCallSolid)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 20, height: 20)
-                .foregroundStyle(.black)
+            CompoundIcon(\.videoCallSolid, size: .small, relativeTo: .compound.bodySM)
+                .foregroundColor(.black)
                 .frame(width: 44, height: 44)
                 .background {
                     Circle()
@@ -216,11 +213,8 @@ struct RoomScreen: View {
         Button {
             context.send(viewAction: .displayAudioCall)
         } label: {
-            CompoundIcon(\.voiceCallSolid)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 20, height: 20)
-                .foregroundStyle(.black)
+            CompoundIcon(\.voiceCallSolid, size: .small, relativeTo: .compound.bodySM)
+                .foregroundColor(.black)
                 .frame(width: 44, height: 44)
                 .background {
                     Circle()
