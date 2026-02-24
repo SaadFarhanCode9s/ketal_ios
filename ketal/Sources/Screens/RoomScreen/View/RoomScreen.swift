@@ -175,69 +175,62 @@ struct RoomScreen: View {
                 }
             } else {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    HStack(spacing: 12) {
-                        videoCallButton
-                            .disabled(!context.viewState.canJoinCall)
-                        audioCallButton
-                            .disabled(!context.viewState.canJoinCall)
-                    }
+                    videoCallButton
+                        .disabled(!context.viewState.canJoinCall)
                 }
-                .backportSharedBackgroundVisibility(.hidden)
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    audioCallButton
+                        .disabled(!context.viewState.canJoinCall)
+                }
             }
         }
     }
     
     @ViewBuilder
     private var videoCallButton: some View {
-        CircularCallButton(action: {
+        CircularCallButton(systemIcon: "video.fill", action: {
             context.send(viewAction: .displayCall)
-        }) {
-            CompoundIcon(\.videoCallSolid, size: .medium, relativeTo: .compound.bodyMD)
-                .scaleEffect(1.1)
-        }
+        })
         .accessibilityLabel(L10n.a11yStartCall)
         .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
     }
     
     private var audioCallButton: some View {
-        CircularCallButton(action: {
+        CircularCallButton(systemIcon: "phone.fill", action: {
             context.send(viewAction: .displayAudioCall)
-        }) {
-            CompoundIcon(\.voiceCallSolid, size: .medium, relativeTo: .compound.bodyMD)
-                .scaleEffect(1.1)
-        }
+        })
         .accessibilityLabel(L10n.actionCall)
     }
 }
 
-private struct CircularCallButton<Content: View>: View {
+private struct CircularCallButton: View {
+    let systemIcon: String
     let action: () -> Void
-    @ViewBuilder let content: () -> Content
-    
-    @State private var isPressed = false
     
     var body: some View {
         Button(action: action) {
-            content()
-                .foregroundStyle(.black)
-                .frame(width: 40, height: 40)
-                .background(
-                    Circle()
-                        .fill(Color.compound.bgSubtlePrimary)
-                )
-                .shadow(color: .black.opacity(0.08),
-                        radius: 6,
+            ZStack {
+                // The shadow is applied to the background Circle
+                Circle()
+                    .fill(Color.white)
+                    .frame(width: 34, height: 34)
+                    // These parameters match the soft look in your reference image
+                    .shadow(
+                        color: Color.black.opacity(0.12),
+                        radius: 8,
                         x: 0,
-                        y: 2)
-                .scaleEffect(isPressed ? 0.92 : 1.0)
+                        y: 4
+                    )
+                
+                Image(systemName: systemIcon)
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundStyle(.black)
+            }
         }
         .buttonStyle(.plain)
-        .simultaneousGesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { _ in isPressed = true }
-                .onEnded { _ in isPressed = false }
-        )
-        .animation(.spring(response: 0.25, dampingFraction: 0.6), value: isPressed)
+        // Helps ensure the VM recognizes the circular interactive area
+        .contentShape(Circle())
     }
 }
 
