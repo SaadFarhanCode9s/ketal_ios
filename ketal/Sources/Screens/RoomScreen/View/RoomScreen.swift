@@ -166,7 +166,7 @@ struct RoomScreen: View {
         
         if !ProcessInfo.processInfo.isiOSAppOnMac, context.viewState.shouldShowCallButton {
             if context.viewState.hasOngoingCall {
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     JoinCallButton {
                         context.send(viewAction: .displayCall)
                     }
@@ -174,7 +174,7 @@ struct RoomScreen: View {
                     .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
                 }
             } else {
-                ToolbarItem(placement: .primaryAction) {
+                ToolbarItem(placement: .navigationBarTrailing) {
                     HStack(spacing: 12) {
                         videoCallButton
                             .disabled(!context.viewState.canJoinCall)
