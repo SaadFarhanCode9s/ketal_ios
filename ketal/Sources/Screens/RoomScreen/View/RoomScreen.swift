@@ -175,14 +175,14 @@ struct RoomScreen: View {
                 }
             } else {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    videoCallButton
-                        .disabled(!context.viewState.canJoinCall)
+                    HStack(spacing: 12) {
+                        videoCallButton
+                            .disabled(!context.viewState.canJoinCall)
+                        audioCallButton
+                            .disabled(!context.viewState.canJoinCall)
+                    }
                 }
-
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    audioCallButton
-                        .disabled(!context.viewState.canJoinCall)
-                }
+                .backportSharedBackgroundVisibility(.hidden)
             }
         }
     }
@@ -193,6 +193,7 @@ struct RoomScreen: View {
             context.send(viewAction: .displayCall)
         }) {
             CompoundIcon(\.videoCallSolid, size: .medium, relativeTo: .compound.bodyMD)
+                .scaleEffect(1.1)
         }
         .accessibilityLabel(L10n.a11yStartCall)
         .accessibilityIdentifier(A11yIdentifiers.roomScreen.joinCall)
@@ -203,6 +204,7 @@ struct RoomScreen: View {
             context.send(viewAction: .displayAudioCall)
         }) {
             CompoundIcon(\.voiceCallSolid, size: .medium, relativeTo: .compound.bodyMD)
+                .scaleEffect(1.1)
         }
         .accessibilityLabel(L10n.actionCall)
     }
@@ -218,15 +220,15 @@ private struct CircularCallButton<Content: View>: View {
         Button(action: action) {
             content()
                 .foregroundStyle(.black)
-                .frame(width: 44, height: 44)
+                .frame(width: 40, height: 40)
                 .background(
                     Circle()
-                        .fill(Color(white: 0.98))
+                        .fill(Color.compound.bgSubtlePrimary)
                 )
                 .shadow(color: .black.opacity(0.08),
-                        radius: 10,
+                        radius: 6,
                         x: 0,
-                        y: 4)
+                        y: 2)
                 .scaleEffect(isPressed ? 0.92 : 1.0)
         }
         .buttonStyle(.plain)
