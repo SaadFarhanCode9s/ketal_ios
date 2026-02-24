@@ -175,13 +175,12 @@ struct RoomScreen: View {
                 }
             } else {
                 ToolbarItem(placement: .primaryAction) {
-                    videoCallButton
-                        .disabled(!context.viewState.canJoinCall)
-                }
-                
-                ToolbarItem(placement: .primaryAction) {
-                    audioCallButton
-                        .disabled(!context.viewState.canJoinCall)
+                    HStack(spacing: 8) {
+                        videoCallButton
+                            .disabled(!context.viewState.canJoinCall)
+                        audioCallButton
+                            .disabled(!context.viewState.canJoinCall)
+                    }
                 }
             }
         }
@@ -197,7 +196,7 @@ struct RoomScreen: View {
                 .frame(width: 44, height: 44)
                 .background {
                     Circle()
-                        .fill(Color(.systemGray6))
+                        .fill(.white)
                         .shadow(color: .black.opacity(0.08),
                                 radius: 8,
                                 x: 0,
@@ -218,7 +217,7 @@ struct RoomScreen: View {
                 .frame(width: 44, height: 44)
                 .background {
                     Circle()
-                        .fill(Color(.systemGray6))
+                        .fill(.white)
                         .shadow(color: .black.opacity(0.08),
                                 radius: 8,
                                 x: 0,
